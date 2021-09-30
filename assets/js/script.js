@@ -62,13 +62,12 @@ document.addEventListener('click', (e) => {
 
 });
 
+//opens sidebar from main nav
+function openNav(){
+    document.getElementById("grocerylist").style.cssText = "width:250px; transition:1";
+}
 
-/* Set the width of the side navigation to 250px */
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-  }
-  
-  /* Set the width of the side navigation to 0 */
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
+//close sidebar
+function closeNav(){
+  document.getElementById("grocerylist").style.width = "0";
+}

@@ -15,23 +15,30 @@
             <!--logo?-->
             <div class="navbar-menu navbar-end" id="nav-links">
                 <a class ="navbar-item">Your Recipes</a>
-                <a class = "navbar-item">Grocerylist</a> <!--gottA MAKE THIS LINK TO THE SLIDE OUT GROCERY LIST -->
+                <a class = "navbar-item" id = "list" onclick="openNav()">Grocerylist</a> <!--gottA MAKE THIS LINK TO THE SLIDE OUT GROCERY LIST -->
             </div>
  
         </nav>
-    </header>
-
-<!--slide out grocery list area-->
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    
-</div>
-
-<!-- Use any element to open the sidenav -->
-<span onclick="openNav()">open</span>
-
-
-
+ 
+        
+     <div id="grocerylist" class="grocerylist">
+ 
+      
+       <button onclick="closeNav()">close</button>
+ 
+         <label class="checkbox" id="checkbox">
+           <input type = "radio" name = "ingredient">
+           <!--checkboxes use js to append on the fly-->
+         </label>
+         <label class="checkbox" id="checkbox">
+           <input type = "radio" name = "ingredient">
+           <!--checkboxes use js to append on the fly-->
+         </label>
+         <label class="checkbox" id="checkbox">
+           <input type = "radio" name = "ingredient">
+           <!--checkboxes use js to append on the fly-->
+         </label>
+     </div>
 
 
     <section class="section">
