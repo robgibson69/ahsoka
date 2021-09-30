@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    /*  border: 1px solid black;*/
+}
+
+.flex-container {
+    display: flex;
+}
+
+#searchBtn {
+    margin-left: .3rem;
+}
+
+#searchOutput {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+
+#searchOutput * {
+    width: 50%;
+}
+
+.bulma-control-extend {
+    @extend %control;
+    background: mediumblue;
+    color: white;
+}
