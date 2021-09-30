@@ -1,8 +1,8 @@
-// this is a javascript file
-
 const searchByIngredient = (searchString) => {
 
-    searchString == '' ? searchString = 'toast' : null;
+    if (!searchString) {
+        searchString = $('#ingredientSearch').val().trim();
+    }
 
     fetch("https://themealdb.p.rapidapi.com/filter.php?i=" + searchString, {
             "method": "GET",
@@ -16,9 +16,10 @@ const searchByIngredient = (searchString) => {
                 response.json()
                     .then((data) => {
                         console.log(data);
+                        displayMeals(data.meals);
                     })
             } else {
-                alert("ERROR!");
+                console.error(err);
             }
         })
         .catch(err => {
@@ -26,3 +27,37 @@ const searchByIngredient = (searchString) => {
         });
 
 }
+
+const displayMeals = (meals) => {
+    if (meals) {
+        meals.forEach(meal => {
+
+            let name = meal.strMeal;
+            let img = meal.strMealThumb;
+            let id = meal.idMeal;
+
+            let title = $('<h3>').text(name);
+            let pic = $('<img>').attr('src', img);
+
+            let card = $('<div>').addClass('meal-container')
+                .attr('data-mealID', id)
+                .append(title).append(pic);
+
+            //console.log($('#searchOutput'))
+            $('#searchOutput').append(card);
+        });
+        console.log('done meal output')
+    }
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('.meal-container')) {
+        alert('recipe clicked');
+        return;
+    } else if (e.target.id === "searchBtn") {
+        searchByIngredient();
+    } else {
+        // alert(e.target.id);
+    }
+
+});
