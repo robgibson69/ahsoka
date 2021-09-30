@@ -1,8 +1,10 @@
 const searchByIngredient = (searchString) => {
 
     if (!searchString) {
-        searchString = $('#ingredientSearch').val().trim();
+        searchString = $('#ingredientSearch').val().replace(/\s/g, '');
     }
+
+    searchString = encodeURI(searchString);
 
     fetch("https://themealdb.p.rapidapi.com/filter.php?i=" + searchString, {
             "method": "GET",
@@ -43,16 +45,14 @@ const displayMeals = (meals) => {
                 .attr('data-mealID', id)
                 .append(title).append(pic);
 
-            //console.log($('#searchOutput'))
             $('#searchOutput').append(card);
         });
-        console.log('done meal output')
     }
 }
 
 document.addEventListener('click', (e) => {
-    if (e.target.matches('.meal-container')) {
-        alert('recipe clicked');
+    if (e.target.closest('div').matches('.meal-container')) {
+        alert('recipe clicked ' + $(e.target).closest('div').attr('data-mealID'));
         return;
     } else if (e.target.id === "searchBtn") {
         searchByIngredient();
