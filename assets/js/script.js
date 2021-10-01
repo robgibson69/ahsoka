@@ -87,16 +87,31 @@ const displayRecipe = (meal) => {
     //console.log(measure);
 
     /****** OUTPUT DATA TO MODAL */
+    /*
+        <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Modal title</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success">Save changes</button>
+          <button class="button">Cancel</button>
+        </footer>
+      </div>
+    </div>
+    */
 
-    let modal = $('<div>').attr('id', 'recipeModal');
 
-    let title = $('<h1>').text(name);
+    let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
+
     let pic = $('<img>').attr('src', image);
     let link = $('<a>').attr('href', source).text(source);
     let tube = $('<div>').attr('id', 'player');
-    //let tube = $('<iframe>').innerHTML = `
-    //<iframe width="560" height="315" src="` + video + `" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-
 
     let ingredientList = $('<ul>').addClass('ingredient-list');
 
@@ -113,7 +128,22 @@ const displayRecipe = (meal) => {
         ingredientList.append(item);
     }
 
-    modal.append(title, link, pic, tube, ingredientList)
+    modalContent.append(link, pic, tube, ingredientList);
+
+    let modal = $('<div>').addClass('modal is-active');
+    let modalBG = $('<div>').addClass('modal-background')
+    let modalCard = $('<div>').addClass('modal-card').append(
+
+        $('<div>').addClass('modal-card-head').append(
+            $('<p>').addClass('modal-card-title').text(name),
+            $('<button>').addClass('delete').attr('aria-label', 'close')
+        ),
+        modalContent
+    )
+
+
+    modal.append(modalBG, modalCard);
+
     $('body').append(modal);
 
 
