@@ -18,6 +18,7 @@ const searchByIngredient = (searchString) => {
                 response.json()
                     .then((data) => {
                         //console.log(data);
+                        if (!data.meals) { alert('No Results Found') }
                         displayMeals(data.meals);
                     })
             } else {
@@ -78,13 +79,48 @@ const displayRecipe = (meal) => {
         for (let i = 1; i < 21; i++) {
             if (meal['str' + opt + i] !== "") {
                 c ? measure.push(meal['str' + opt + i]) : ingredient.push(meal['str' + opt + i]);
+                // on first run builds ingredient aray on second it buids the measure array
             }
         }
     }
+    //console.log(ingredient);
+    //console.log(measure);
 
-    console.log(ingredient);
-    console.log(measure);
+    /****** OUTPUT DATA TO MODAL */
 
+    let modal = $('<div>').attr('id', 'recipeModal');
+
+    let title = $('<h1>').text(name);
+    let pic = $('<img>').attr('src', image);
+    let link = $('<a>').attr('href', source).text(source);
+    let tube = $('<div>').attr('id', 'player');
+    //let tube = $('<iframe>').innerHTML = `
+    //<iframe width="560" height="315" src="` + video + `" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+
+    let ingredientList = $('<ul>').addClass('ingredient-list');
+
+    for (let i = 0; i < ingredient.length; i++) {
+        let item = $('<li>')
+            .addClass('ingredient-item')
+            .text(ingredient[i])
+            .append(
+                $('<span>')
+                .addClass('ingredient-measure')
+                .text(measure[i])
+            );
+
+        ingredientList.append(item);
+    }
+
+    modal.append(title, link, pic, tube, ingredientList)
+    $('body').append(modal);
+
+
+    YouTubePlayer(video); // this is not wrking and i dont know
+
+
+    /************ */
 }
 
 const displayMeals = (meals) => {
@@ -112,6 +148,57 @@ const displayMeals = (meals) => {
 
         });
     }
+}
+
+const YouTubePlayer = (src) => {
+
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '390',
+            width: '640',
+            videoId: src,
+            playerVars: {
+                'playsinline': 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }
+
+    function stopVideo() {
+        player.stopVideo();
+    }
+
 }
 
 $('#ingredientSearch').on('keypress', (e) => {
