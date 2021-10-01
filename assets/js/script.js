@@ -108,10 +108,13 @@ const displayRecipe = (meal) => {
             );
             
                 // let grocerylist = []
-                // if ($(item).prop('checked')){
+                // $(list).click(function(){
+                //     if ($('<input type="checkbox">').is(':checked')){
                 //     grocerylist.push(item);
                 //     localStorage.setItem('ingredients', JSON.stringify(grocerylist));
-                // };
+                // }
+                // });
+                
 
         ingredientList.append(item);
     }
