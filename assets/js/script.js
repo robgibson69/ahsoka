@@ -17,7 +17,8 @@ const searchByIngredient = (searchString) => {
             if (response.ok) {
                 response.json()
                     .then((data) => {
-                        console.log(data);
+                        //console.log(data);
+                        if (!data.meals) { alert('No Results Found') }
                         displayMeals(data.meals);
                     })
             } else {
@@ -28,6 +29,113 @@ const searchByIngredient = (searchString) => {
             console.error(err);
         });
 
+}
+
+const fetchRecipe = (idNum) => {
+
+    if (idNum !== '') {
+
+        fetch("https://themealdb.p.rapidapi.com/lookup.php?i=" + idNum, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                    "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                        .then((data) => {
+                            // console.log(data);
+                            displayRecipe(data.meals[0]);
+                        })
+                } else {
+                    console.error(err);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+
+    }
+
+}
+
+const displayRecipe = (meal) => {
+
+    let name = meal.strMeal;
+    let image = meal.strMealThumb;
+    let source = meal.strSource;
+    let video = meal.strYoutube;
+
+    let recipe = meal.strInstructions;
+
+    let ingredient = [];
+    let measure = [];
+
+    let opt = '';
+    for (let c = 0; c < 2; c++) { //run a loop twice// once for ingredients and once for measure
+        c ? opt = 'Measure' : opt = 'Ingredient' // when c is 1 opt = Measure/when c is 0 opt = ingredient
+        for (let i = 1; i < 21; i++) {
+            if (meal['str' + opt + i] !== "") {
+                c ? measure.push(meal['str' + opt + i]) : ingredient.push(meal['str' + opt + i]);
+                // on first run builds ingredient aray on second it buids the measure array
+            }
+        }
+    }
+
+    /****** OUTPUT DATA TO MODAL */
+
+    let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
+
+    let pic = $('<img>').attr('src', image);
+    let link = $('<a>').attr('href', source).text(source);
+    let tube = $('<div>').attr('id', 'player');
+
+    let instructions = $('<p>').text(recipe);
+
+    let ingredientList = $('<ul>').addClass('ingredient-list');
+
+    for (let i = 0; i < ingredient.length; i++) {
+        let item = $('<li>')
+            .append(
+                $('input type="checkbox"')
+                .addClass('ingredient-item')
+                .text(ingredient[i])
+                .append(
+                     $('<span>')
+                        .addClass('ingredient-measure')
+                        .text(measure[i])
+            )
+            );
+         
+
+        ingredientList.append(item);
+    }
+
+    modalContent.append(link, pic, tube, ingredientList, instructions);
+
+    let modal = $('<div>').addClass('modal is-active');
+    let modalBG = $('<div>').addClass('modal-background')
+    let modalCard = $('<div>').addClass('modal-card big-modal').append(
+
+        $('<div>').addClass('modal-card-head').append(
+            $('<p>').addClass('modal-card-title').text(name),
+            $('<button>').addClass('delete').attr('aria-label', 'close')
+        ),
+        modalContent
+    )
+
+
+    modal.append(modalBG, modalCard);
+
+    $('body').append(modal);
+
+
+    YouTubePlayer(video); // this is not wrking and i dont know
+
+
+    /************ */
 }
 
 const displayMeals = (meals) => {
@@ -47,19 +155,79 @@ const displayMeals = (meals) => {
 
             $('#searchOutput').append(card);
         });
+
+        $('.meal-container').on('click', (e) => {
+            let id = $(e.target).closest('div').attr('data-mealID');
+
+            fetchRecipe(id);
+
+        });
     }
 }
 
+const YouTubePlayer = (src) => {
+
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '390',
+            width: '640',
+            videoId: src,
+            playerVars: {
+                'playsinline': 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }
+
+    function stopVideo() {
+        player.stopVideo();
+    }
+
+}
+
+$('#ingredientSearch').on('keypress', (e) => {
+    if (e.key === 'Enter') {
+        $('#searchBtn').click();
+    }
+});
+
 document.addEventListener('click', (e) => {
-    if (e.target.closest('div').matches('.meal-container')) {
-        alert('recipe clicked ' + $(e.target).closest('div').attr('data-mealID'));
-        return;
-    } else if (e.target.id === "searchBtn") {
+    if (e.target.id === "searchBtn") {
         searchByIngredient();
     } else {
         // alert(e.target.id);
     }
-
 });
 
 //opens sidebar from main nav
@@ -71,30 +239,3 @@ function openNav(){
 function closeNav(){
   document.getElementById("grocerylist").style.width = "0";
 }
-
-
-//collect all the ingredients that we dont have (checks)
-
-//to do that we need to display
-//strIngredient
-var individualIngredient = [];
-function grocerylis(){
-    //get ingredient array
-    if (ingredient === "checked"){
-    
-    //foreach ingredient save to local storage
-
-    //if ingredient array is selected 
-   var checkedIngredients = $("input:checkbox[name=type]:checked").each(function(){
-        ingredient.push($(this).val());
-    });
-    document.grocerylist.append(individualIngredient);
-}
-    //foreach ingredient save to local storage
-    
-    
-};
-
-  //make them input checklist elements
-
-  //append them to grocerylist
