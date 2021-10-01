@@ -77,12 +77,21 @@ function closeNav(){
 
 //to do that we need to display
 //strIngredient
+var individualIngredient = [];
 function grocerylis(){
     //get ingredient array
+    if (ingredient === "checked"){
+    
+    //foreach ingredient save to local storage
+
     //if ingredient array is selected 
    var checkedIngredients = $("input:checkbox[name=type]:checked").each(function(){
-        yourArray.push($(this).val());
+        ingredient.push($(this).val());
     });
+    document.grocerylist.append(individualIngredient);
+}
+    //foreach ingredient save to local storage
+    
     
 };
 
