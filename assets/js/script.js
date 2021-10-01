@@ -94,10 +94,10 @@ const displayRecipe = (meal) => {
 
     let instructions = $('<p>').text(recipe);
 
-    let ingredientList = $('<input type="checkbox">').addClass('ingredient-list');
+    let ingredientList = $('<div>').addClass('ingredient-list');
 
     for (let i = 0; i < ingredient.length; i++) {
-        let item = $('<label>')
+        let item = $('<input type="checkbox">')
             .addClass('ingredient-item')
             .text(ingredient[i])
             .append(
