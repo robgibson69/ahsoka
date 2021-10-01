@@ -75,14 +75,15 @@ const displayRecipe = (meal) => {
     let opt = '';
     for (let c = 0; c < 2; c++) { //run a loop twice// once for ingredients and once for measure
         c ? opt = 'Measure' : opt = 'Ingredient' // when c is 1 opt = Measure/when c is 0 opt = ingredient
-        for (let i = 0; i < 20; i++) {
+        for (let i = 1; i < 21; i++) {
             if (meal['str' + opt + i] !== "") {
                 c ? measure.push(meal['str' + opt + i]) : ingredient.push(meal['str' + opt + i]);
             }
         }
     }
 
-    alert(ingredient);
+    console.log(ingredient);
+    console.log(measure);
 
 }
 
