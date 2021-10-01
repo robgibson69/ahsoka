@@ -71,3 +71,21 @@ function openNav(){
 function closeNav(){
   document.getElementById("grocerylist").style.width = "0";
 }
+
+
+//collect all the ingredients that we dont have (checks)
+
+//to do that we need to display
+//strIngredient
+function grocerylis(){
+    //get ingredient array
+    //if ingredient array is selected 
+   var checkedIngredients = $("input:checkbox[name=type]:checked").each(function(){
+        yourArray.push($(this).val());
+    });
+    
+};
+
+  //make them input checklist elements
+
+  //append them to grocerylist
