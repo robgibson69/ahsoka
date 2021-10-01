@@ -113,10 +113,9 @@ const displayMeals = (meals) => {
     }
 }
 
-
 $('#ingredientSearch').on('keypress', (e) => {
     if (e.key === 'Enter') {
-        document.querySelector('#city-search-button').click();
+        $('#searchBtn').click();
     }
 });
 
@@ -126,5 +125,4 @@ document.addEventListener('click', (e) => {
     } else {
         // alert(e.target.id);
     }
-
 });
