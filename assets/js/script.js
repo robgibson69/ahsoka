@@ -98,6 +98,7 @@ const displayRecipe = (meal) => {
 
     for (let i = 0; i < ingredient.length; i++) {
         let item = $('<input type="checkbox">')
+    
             .addClass('ingredient-item')
             .text(ingredient[i])
             .append(
@@ -105,9 +106,16 @@ const displayRecipe = (meal) => {
                 .addClass('ingredient-measure')
                 .text(measure[i])
             );
+            
+                // let grocerylist = []
+                // if ($(item).prop('checked')){
+                //     grocerylist.push(item);
+                //     localStorage.setItem('ingredients', JSON.stringify(grocerylist));
+                // };
 
         ingredientList.append(item);
     }
+   
 
     modalContent.append(link, pic, tube, ingredientList, instructions);
 
