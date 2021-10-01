@@ -46,7 +46,7 @@ const fetchRecipe = (idNum) => {
                 if (response.ok) {
                     response.json()
                         .then((data) => {
-                            console.log(data);
+                            // console.log(data);
                             displayRecipe(data.meals[0]);
                         })
                 } else {
@@ -68,7 +68,7 @@ const displayRecipe = (meal) => {
     let source = meal.strSource;
     let video = meal.strYoutube;
 
-    let recipe = meal.Instructions;
+    let recipe = meal.strInstructions;
 
     let ingredient = [];
     let measure = [];
@@ -83,8 +83,6 @@ const displayRecipe = (meal) => {
             }
         }
     }
-    //console.log(ingredient);
-    //console.log(measure);
 
     /****** OUTPUT DATA TO MODAL */
 
@@ -115,7 +113,7 @@ const displayRecipe = (meal) => {
 
     let modal = $('<div>').addClass('modal is-active');
     let modalBG = $('<div>').addClass('modal-background')
-    let modalCard = $('<div>').addClass('modal-card').append(
+    let modalCard = $('<div>').addClass('modal-card big-modal').append(
 
         $('<div>').addClass('modal-card-head').append(
             $('<p>').addClass('modal-card-title').text(name),
