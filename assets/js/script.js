@@ -111,7 +111,7 @@ const displayRecipe = (meal) => {
 
     modalContent.append(link, pic, tube, ingredientList, instructions);
 
-    let modal = $('<div>').addClass('modal is-active');
+    let modal = $('<div>').addClass('modal is-active').attr('id', 'recipeModal');
     let modalBG = $('<div>').addClass('modal-background')
     let modalCard = $('<div>').addClass('modal-card big-modal').append(
 
@@ -127,11 +127,39 @@ const displayRecipe = (meal) => {
 
     $('body').append(modal);
 
-
+    /*
     YouTubePlayer(video); // this is not wrking and i dont know
-
+    */
 
     /************ */
+    //need an event listener for the modal close
+    $('#recipeModal').on('click', 'button.delete', () => {
+        $('#recipeModal').removeClass('is-active');
+    })
+
+    /************ */
+
+    let ingredientListChkBox = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', 'test');
+
+    //console.log(ingredientList[0])
+
+    for (let i = 0; i < ingredient.length; i++) {
+        let item = $('<label>')
+            .attr('for', 'test')
+            .addClass('ingredient-item')
+            .text(ingredient[i])
+            .append(
+                $('<span>')
+                .addClass('ingredient-measure')
+                .text(measure[i])
+            );
+        ingredientListChkBox.append(item);
+    }
+
+    modalCard.append(ingredientListChkBox);
+    console.log(ingredientListChkBox)
+
+
 }
 
 const displayMeals = (meals) => {
