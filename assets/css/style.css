@@ -5,13 +5,23 @@
 }
 
 header {
+    padding: 35px 30px;
+
     background-color: lightblue;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 35px 30px;
-    /* position: sticky; */
+    position: sticky;
 }
+
+header h1 {
+    margin-left: ;
+    font-weight: bold;
+    font-size: 26px;
+    color: black;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
 
 header nav ul li {
     margin: 10 15px;
@@ -22,25 +32,26 @@ header nav ul li {
     align-items: center;
     list-style: none;  
   }
+
+  header nav {
+  margin: 7px 0;
+}
   
-/* .flex-container {
+/* .mySlides {
     
     display: flex;
 } */
 
-/* .slide-section {
-    width: 100%;
-    height: auto;
 
-} */
-.container {
+.slide-section{
     max-width: 1000px;
     position: relative;
     margin: auto;
+    display: inline-flex;
   }
 
   .mySlides {
-      display: none;
+      /* display: none; */
   }
 
   .prev, .next {
