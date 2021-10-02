@@ -42,15 +42,15 @@ header a {
 
 main {
     background-color: black;
+    height: auto;
 }
 
 .recipe-generator {
     background-color: darkgrey;
-    border: 1px solid black;
+    border: 3px solid purple;
     color: wheat;
-    padding: 50px;
+    /* padding: 50px; *
     text-align: center;
-    text-decoration: none;
     /* display: inline-block; */
     font-size: 16px;
     margin: 4px 2px;
