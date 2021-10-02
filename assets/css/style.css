@@ -1,93 +1,82 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing:border-box;
+    /*  border: 1px solid black;*/
 }
-html, body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    line-height: 1.7;
-    background-color: black;
-}
-header {
-    padding: 35px 30px;
 
-    background-color: lightblue;
+header {
+    padding: 10px 25px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    background-color: #086684;
     position: sticky;
 }
 
+
+
 header h1 {
-    margin-left: ;
-    font-weight: bold;
-    font-size: 26px;
-    color: black;
-    margin: 0;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
+  font-weight: bold;
+  font-size: 10px;
+  color: black;
+  margin: 0;
+}
 
 header nav ul li {
-    margin: 10 15px;
-    font-size: 1.55vw;
     display: inline-block;
     flex-wrap: wrap;
+    flex-wrap: wrap;
     justify-content: space-between;
+    font-size: 10px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 10px;
     align-items: center;
-    list-style: none;  
-  }
-
-  header nav {
-  margin: 7px 0;
-}
-  
-/* .mySlides {
-    
-    display: flex;
-} */
-
-.slide-section {
-    height: 100%;
-    display: inline-flex;
-    transform: translate(0);
-    transition: 0.3s ease-out;
-    cursor: grab;
+    list-style: none;
 
 }
 
-.slides {
-    max-height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    user-select: none;
+header a {
+    color: black;
 }
 
-.slides img {
-    max-width: 100%;
-    max-height: 60%;
+main {
+    background-color: black;
 }
 
 
 
-  
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 footer {
-    position: absolute;
-    bottom: 0;
-    background-color: rebeccapurple;
-    width: 100%;
-    /* padding: 40px 35px; */
-    /* flex-wrap: wrap;
-    justify-content: space-between; */
-  }
-  
+  background-color: palevioletred;
+  width: 100%;
+  height: 50px;
+  flex-wrap: wrap;  
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+}
+
+footer a {
+    color: black;
+    left: 25px;
+    
+}
 
 
 
@@ -99,7 +88,33 @@ footer {
 
 
 
-/* #searchBtn {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.flex-container {
+    display: flex;
+}
+
+#searchBtn {
     margin-left: .3rem;
 }
 
@@ -112,11 +127,8 @@ footer {
 
 #searchOutput * {
     width: 50%;
-} */
-
-.slide-section  {
-    margin-top: 10px;
 }
+
 .bulma-control-extend {
     @extend %control;
     background: mediumblue;
