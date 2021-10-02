@@ -149,6 +149,7 @@ let video = meal.strYoutube;
 let recipe = meal.strInstructions;
 
 let ingredient = [];
+let checkedItem = [];
 let measure = [];
 
 let opt = '';
@@ -194,16 +195,6 @@ let ingredientList = $('<ul>').addClass('ingredient-list');
 
 ingredientList = $('<div>').addClass('ingredient-list');
 
-let addIngredientBtn = $('<button>').text('Add to Grocery List').addClass('addList');
-
-$(addIngredientBtn).click(function() {
-    // if($('<input>').prop(":checked")){
-        console.log("Checkbox is checked.");
-    // }
-    // localStorage.setItem("ingredients", JSON.stringify("#ingredient[i]"))
-});
-
-
 for (let i = 0; i < ingredient.length; i++) {
     let box = $("<div class='ingredient-checklist-holder'>")
     let chkBoxItem = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', ingredient[i]);
@@ -218,11 +209,30 @@ for (let i = 0; i < ingredient.length; i++) {
             .text(measure[i])
         );
 
+        function needCheck(){
+             if($().prop('checked')){ //need to figure out what selector to use to get the unique id for checkbox
+                console.log("Checkbox is checked."); //add the ingredient[i] to li tag with that as class
+
+                //let listItem = $('<ul>).addClass=('grocerylist')
+                //append <li> to ul and on to grocerylist div in popout 
+             }
+            
+        }
+
     box.append(chkBoxItem, item);
     ingredientList.append(box);
 
 }
 
+let addIngredientBtn = $('<button>').text('Add to Grocery List').addClass('addList');
+
+$(addIngredientBtn).click(function() {
+        needCheck();
+        
+
+    // localStorage.setItem("grocerylist", JSON.stringify("checked items in grocerylist"))
+
+});
 
 
 modalContent.append(link, pic, tube, ingredientList, addIngredientBtn, instructions);
