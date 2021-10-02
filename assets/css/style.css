@@ -40,8 +40,9 @@ header a {
     color: black;
 }
 
-main {
+.section {
     background-color: black;
+    width: 100%;
     height: auto;
 }
 
@@ -49,16 +50,17 @@ main {
     background-color: darkgrey;
     border: 3px solid purple;
     color: wheat;
-    /* padding: 50px; *
+     /* padding: 50px;  */
     text-align: center;
     /* display: inline-block; */
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 40px 175px;
     cursor: pointer;
     height: 200px;
     width: 200px;
     border-radius: 50%;
     transition: 0.4s;
+    left: 42;
 }
 
 .recipe-generator:hover {
