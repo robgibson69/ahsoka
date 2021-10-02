@@ -8,6 +8,16 @@
     display: flex;
 }
 
+section div.container {
+    margin-bottom: 2rem;
+}
+
+section div.container:nth-child(n+2) {
+    /* n+2 skips ?just the first container? it works though */
+    border-top: 2px solid #333;
+    padding-top: .5rem;
+}
+
 #searchBtn {
     margin-left: .3rem;
 }

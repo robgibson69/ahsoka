@@ -30,6 +30,24 @@ const searchByIngredient = (searchString) => {
 
 }
 
+const searchRandomMeal = () => {
+
+    fetch("https://themealdb.p.rapidapi.com/random.php", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+
+}
+
 const displayMeals = (meals) => {
     if (meals) {
         meals.forEach(meal => {
@@ -56,6 +74,8 @@ document.addEventListener('click', (e) => {
         return;
     } else if (e.target.id === "searchBtn") {
         searchByIngredient();
+    } else if (e.target.id === "randoBtn") {
+        searchRandomMeal();
     } else {
         // alert(e.target.id);
     }
