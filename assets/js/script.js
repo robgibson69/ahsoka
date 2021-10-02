@@ -40,7 +40,15 @@ const searchRandomMeal = () => {
             }
         })
         .then(response => {
-            console.log(response);
+            if (response.ok) {
+                response.json()
+                    .then((data) => {
+                        console.log(data);
+                        displayMeals(data.meals);
+                    })
+            } else {
+                console.error(err);
+            }
         })
         .catch(err => {
             console.error(err);
