@@ -1,12 +1,110 @@
 * {
     margin: 0;
     padding: 0;
-    /*  border: 1px solid black;*/
+    box-sizing:border-box;
 }
 
-.flex-container {
+header {
+    background-color: lightblue;
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 35px 30px;
+    /* position: sticky; */
 }
+
+header nav ul li {
+    margin: 10 15px;
+    font-size: 1.55vw;
+    display: inline-block;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;  
+  }
+  
+/* .flex-container {
+    
+    display: flex;
+} */
+
+/* .slide-section {
+    width: 100%;
+    height: auto;
+
+} */
+.container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
+
+  .mySlides {
+      display: none;
+  }
+
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+
+  @-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+
+
+footer {
+    position: absolute;
+    bottom: 0;
+    background-color: rebeccapurple;
+    width: 100%;
+    /* padding: 40px 35px; */
+    /* flex-wrap: wrap;
+    justify-content: space-between; */
+  }
+  
+
+
+
+
+
+
+
+
+
+
 
 #searchBtn {
     margin-left: .3rem;
@@ -23,6 +121,9 @@
     width: 50%;
 }
 
+.container  {
+    margin-top: 10px;
+}
 .bulma-control-extend {
     @extend %control;
     background: mediumblue;
