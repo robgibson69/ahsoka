@@ -43,7 +43,7 @@ const searchRandomMeal = () => {
             if (response.ok) {
                 response.json()
                     .then((data) => {
-                        console.log(data);
+                        //console.log(data);
                         displayMeals(data.meals);
                     })
             } else {
@@ -64,7 +64,7 @@ const displayMeals = (meals) => {
             let img = meal.strMealThumb;
             let id = meal.idMeal;
 
-            let title = $('<h3>').text(name);
+            let title = $('<h2>').text(name);
             let pic = $('<img>').attr('src', img);
 
             let card = $('<div>').addClass('meal-container')

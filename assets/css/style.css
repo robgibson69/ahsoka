@@ -29,8 +29,29 @@ section div.container:nth-child(n+2) {
     text-align: center;
 }
 
-#searchOutput * {
-    width: 50%;
+.meal-container {
+    width: 30%;
+    background-color: #fff;
+}
+
+.meal-container h2 {
+    border: 1px solid #333;
+    /*  background-color: rgba(250, 235, 215, .6);*/
+    background: linear-gradient(90deg, rgba(250, 235, 215, 0) 0%, rgba(250, 235, 215, .6) 10%, rgba(250, 235, 215, .6) 50%, rgba(250, 235, 215, .6) 90%, rgba(250, 235, 215, 0) 100%);
+    position: relative;
+    top: 33%;
+    width: 90%;
+    margin-left: 5%;
+    border-left: 0;
+    border-right: 0;
+    padding: .1rem 3rem;
+}
+
+.meal-container img {
+    cursor: pointer;
+    border-radius: 50%;
+    border: .6rem solid #333;
+    z-index: -2;
 }
 
 .bulma-control-extend {
