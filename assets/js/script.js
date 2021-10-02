@@ -197,7 +197,7 @@ ingredientList = $('<div>').addClass('ingredient-list');
 
 for (let i = 0; i < ingredient.length; i++) {
     let box = $("<div class='ingredient-checklist-holder'>")
-    let chkBoxItem = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', ingredient[i]);
+    let chkBoxItem = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', 'food').attr('name', 'food').attr('value', ingredient[i]);
     let item = $('<label>')
         .attr('for', ingredient[i])
         .addClass('ingredient-item')
@@ -208,31 +208,36 @@ for (let i = 0; i < ingredient.length; i++) {
             .addClass('ingredient-measure')
             .text(measure[i])
         );
-
-        function needCheck(){
-             if($().prop('checked')){ //need to figure out what selector to use to get the unique id for checkbox
-                console.log("Checkbox is checked."); //add the ingredient[i] to li tag with that as class
-
-                //let listItem = $('<ul>).addClass=('grocerylist')
-                //append <li> to ul and on to grocerylist div in popout 
-             }
-            
-        }
-
+        // item.join(
+        //     '<br/>'
+        // )
+    console.log(ingredient[i]);
     box.append(chkBoxItem, item);
     ingredientList.append(box);
+    
 
 }
 
+   // function needCheck(){
+  
+     //need to f igure out what selector to use to get the unique id for checkbox
+        //add the ingredient[i] to li tag with that as class
+
+        //let listItem = $('<ul>).addClass=('grocerylist')
+        //append <li> to ul and on to grocerylist div in popout 
+    //  
+     
+// }
+
 let addIngredientBtn = $('<button>').text('Add to Grocery List').addClass('addList');
 
-$(addIngredientBtn).click(function() {
-        needCheck();
+// $(addIngredientBtn).click(function() {
+//         needCheck();
         
 
-    // localStorage.setItem("grocerylist", JSON.stringify("checked items in grocerylist"))
+//     // localStorage.setItem("grocerylist", JSON.stringify("checked items in grocerylist"))
 
-});
+// });
 
 
 modalContent.append(link, pic, tube, ingredientList, addIngredientBtn, instructions);
@@ -252,6 +257,17 @@ let modalCard = $('<div>').addClass('modal-card big-modal').append(
 modal.append(modalBG, modalCard);
 
 $('body').append(modal);
+
+
+$(".addList").click(function(){
+    // console.log("Clicked by User")
+    var groceryList = [];
+$.each($("input[name='food']:checked"), function(){
+        groceryList.push($(this).val());
+    });
+   console.log(groceryList)
+    localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+})
 
 /*
 YouTubePlayer(video); // this is not wrking and i dont know
