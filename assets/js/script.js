@@ -1,4 +1,74 @@
+/* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
+const meals = [{
+        strMeal: 'Burger',
+        strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+        idMeal: '69420'
+    }]
+    /************ */
+const mealRecipe = {
+
+        strMeal: 'Burger',
+        strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+        strSource: 'www.not_a_real_recipe_dot_com.org',
+        strYoutube: 'www.not_a_real_youTube_dot_com.org',
+
+        strInstructions: "Cook the patty and then put it between two half buns",
+
+        strIngredient1: "Hamburger Buns",
+        strIngredient2: "Ground Beef",
+        strIngredient3: "Mustard",
+        strIngredient4: "Ketchup",
+        strIngredient5: "Lettuce",
+        strIngredient6: "Tomato",
+        strIngredient7: "Pickles",
+        strIngredient8: "Onion",
+        strIngredient9: '',
+        strIngredient10: '',
+        strIngredient11: '',
+        strIngredient12: '',
+        strIngredient13: '',
+        strIngredient14: '',
+        strIngredient15: '',
+        strIngredient16: '',
+        strIngredient17: '',
+        strIngredient18: '',
+        strIngredient19: '',
+        strIngredient20: '',
+
+        strMeasure1: "1 bag",
+        strMeasure2: "1 pound",
+        strMeasure3: "1 tblspoon",
+        strMeasure4: "1 tblspoon",
+        strMeasure5: "3 leaves",
+        strMeasure6: "1 ripe one",
+        strMeasure7: "2 should do",
+        strMeasure8: "chop up half toss the rest away",
+        strMeasure9: '',
+        strMeasure10: '',
+        strMeasure11: '',
+        strMeasure12: '',
+        strMeasure13: '',
+        strMeasure14: '',
+        strMeasure15: '',
+        strMeasure16: '',
+        strMeasure17: '',
+        strMeasure18: '',
+        strMeasure19: '',
+        strMeasure20: '',
+
+    }
+    /****************** */
+
 const searchByIngredient = (searchString) => {
+
+    /****** */
+    // testing without api call
+    displayMeals(meals);
+    return;
+    // testing without api call
+    /***** */
+
+
 
     if (!searchString) {
         searchString = $('#ingredientSearch').val().replace(/\s/g, '');
@@ -32,6 +102,14 @@ const searchByIngredient = (searchString) => {
 }
 
 const fetchRecipe = (idNum) => {
+
+    /****** */
+    // testing without api call
+    displayRecipe(mealRecipe);
+    return;
+    // testing without api call
+    /***** */
+
 
     if (idNum !== '') {
 
@@ -85,11 +163,9 @@ const displayRecipe = (meal) => {
     }
 
     /****** OUTPUT DATA TO MODAL */
-
     // Disable body scroll
     document.body.style.position = 'fixed';
     document.body.style.top = `-${window.scrollY}px`;
-
 
     let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
 
@@ -134,8 +210,10 @@ const displayRecipe = (meal) => {
         ingredientList.append(box);
     }
 
+    let addIngredientBtn = $('<button>').text('Add to Grocery List');
 
-    modalContent.append(link, pic, tube, ingredientList, instructions);
+
+    modalContent.append(link, pic, tube, ingredientList, addIngredientBtn, instructions);
 
     let modal = $('<div>').addClass('modal is-active').attr('id', 'recipeModal');
     let modalBG = $('<div>').addClass('modal-background')
