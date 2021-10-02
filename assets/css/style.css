@@ -154,6 +154,14 @@ footer h3 {
     width: 50%;
 }
 
+.ingredient-item span {
+    margin-left: 1rem;
+}
+
+.big-modal {
+    width: calc(100vw - 320px);
+}
+
 .bulma-control-extend {
     @extend %control;
     background: mediumblue;
