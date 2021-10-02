@@ -86,6 +86,11 @@ const displayRecipe = (meal) => {
 
     /****** OUTPUT DATA TO MODAL */
 
+    // Disable body scroll
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${window.scrollY}px`;
+
+
     let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
 
     let pic = $('<img>').attr('src', image);
@@ -96,9 +101,28 @@ const displayRecipe = (meal) => {
 
     let ingredientList = $('<ul>').addClass('ingredient-list');
 
+    /*  for (let i = 0; i < ingredient.length; i++) {
+          let item = $('<li>')
+              .addClass('ingredient-item')
+              .text(ingredient[i])
+              .append(
+                  $('<span>')
+                  .addClass('ingredient-measure')
+                  .text(measure[i])
+              );
+
+          ingredientList.append(item);
+      }
+      */
+
+    ingredientList = $('<div>').addClass('ingredient-list');
     for (let i = 0; i < ingredient.length; i++) {
-        let item = $('<li>')
+        let box = $("<div class='ingredient-checklist-holder'>")
+        let chkBoxItem = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', ingredient[i]);
+        let item = $('<label>')
+            .attr('for', ingredient[i])
             .addClass('ingredient-item')
+            .addClass('checkbox')
             .text(ingredient[i])
             .append(
                 $('<span>')
@@ -106,8 +130,10 @@ const displayRecipe = (meal) => {
                 .text(measure[i])
             );
 
-        ingredientList.append(item);
+        box.append(chkBoxItem, item);
+        ingredientList.append(box);
     }
+
 
     modalContent.append(link, pic, tube, ingredientList, instructions);
 
@@ -135,30 +161,14 @@ const displayRecipe = (meal) => {
     //need an event listener for the modal close
     $('#recipeModal').on('click', 'button.delete', () => {
         $('#recipeModal').removeClass('is-active');
+        //enable body scroll
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
     })
 
     /************ */
-
-    let ingredientListChkBox = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', 'test');
-
-    //console.log(ingredientList[0])
-
-    for (let i = 0; i < ingredient.length; i++) {
-        let item = $('<label>')
-            .attr('for', 'test')
-            .addClass('ingredient-item')
-            .text(ingredient[i])
-            .append(
-                $('<span>')
-                .addClass('ingredient-measure')
-                .text(measure[i])
-            );
-        ingredientListChkBox.append(item);
-    }
-
-    modalCard.append(ingredientListChkBox);
-    console.log(ingredientListChkBox)
-
 
 }
 
