@@ -1,4 +1,4 @@
-var groceryList = JSON.parse(localStorage.getItem("grocerylist"));
+var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
 
 const displayGroceryList = () => {
 

@@ -454,7 +454,6 @@ const displayRecipe = (meal) => {
 
     let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
 
-
     modalContent.append(link, pic, ingredientList, addIngredientBtn, instructions);
 
     let modal = $('<div>').addClass('modal is-active').attr('id', 'recipeModal');
@@ -473,11 +472,6 @@ const displayRecipe = (meal) => {
     $('body').append(modal);
 
     listenForIngredientClicks();
-
-    //need an event listener for the modal close
-
-    /************ */
-
 }
 
 const displayFavRecipes = () => {
