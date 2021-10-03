@@ -426,8 +426,13 @@ const displayRecipe = (meal) => {
     let ingredientList = $('<div>').addClass('ingredient-list');
 
     for (let i = 0; i < ingredient.length; i++) {
-        let box = $("<div class='ingredient-checklist-holder'>")
-        let chkBoxItem = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', ingredient[i]);
+        let box = $("<div class='ingredient-checklist-holder'>");
+        let chkBoxItem = $('<input>')
+            .addClass('checkbox')
+            .attr('type', 'checkbox')
+            .attr('name', 'food')
+            .attr('id', ingredient[i]);
+
         let item = $('<label>')
             .attr('for', ingredient[i])
             .addClass('ingredient-item')
@@ -444,6 +449,8 @@ const displayRecipe = (meal) => {
     }
 
     let addIngredientBtn = $('<button>').text('Select All');
+
+    listenForIngredientClicks();
 
     modalContent.append(link, pic, ingredientList, addIngredientBtn, instructions);
 
@@ -516,10 +523,9 @@ document.addEventListener('click', (e) => {
         displayFavRecipes();
         /*  */
     } else if (e.target.id === "grocery-nav") {
-        //hide the searchbar
-        $('#searchBar').hide();
-        //more code to come
-        /*  */
+
+        openNav()
+            /*  */
 
     } else {
         //DO NOTHING
