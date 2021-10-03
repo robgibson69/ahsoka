@@ -21,7 +21,7 @@ const displayGroceryList = () => {
 
 const listenForIngredientClicks = () => {
 
-    $(".ingredient-checklist-holder").click(function() {
+    $('.addList').click(function() {
         // console.log("Clicked by User")
         // var groceryList = [];
         $.each($("input[name='food']:checked"), function() {

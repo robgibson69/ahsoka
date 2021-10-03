@@ -431,7 +431,8 @@ const displayRecipe = (meal) => {
             .addClass('checkbox')
             .attr('type', 'checkbox')
             .attr('name', 'food')
-            .attr('id', ingredient[i]);
+            .attr('id', ingredient[i])
+            .attr('value', ingredient[i]);
 
         let item = $('<label>')
             .attr('for', ingredient[i])
@@ -448,9 +449,8 @@ const displayRecipe = (meal) => {
         ingredientList.append(box);
     }
 
-    let addIngredientBtn = $('<button>').text('Select All');
-
-    listenForIngredientClicks();
+    let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
+    
 
     modalContent.append(link, pic, ingredientList, addIngredientBtn, instructions);
 
@@ -469,7 +469,7 @@ const displayRecipe = (meal) => {
 
     $('body').append(modal);
 
-
+    listenForIngredientClicks()
     //need an event listener for the modal close
     $('#recipeModal').on('click', 'button.delete', () => {
             $('#recipeModal').removeClass('is-active');
