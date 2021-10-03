@@ -186,8 +186,10 @@ const fetchRecipe = (idNum) => {
 
     /****** */
     // testing without api call
-    displayRecipe(mealRecipe);
-    return;
+    if (!makeAPICalls) {
+        displayRecipe(mealRecipe);
+        return;
+    }
     // testing without api call
     /***** */
 
@@ -316,7 +318,6 @@ const displayMeals = (meals, size) => {
 
 const fetchIngredients = (idNum) => {
 
-
     /****** */
     // testing without api call
     if (!makeAPICalls) {
@@ -352,6 +353,7 @@ const fetchIngredients = (idNum) => {
 
     }
 }
+
 const outputIngredients = (meal) => {
     let ingredient = [];
     let measure = [];
