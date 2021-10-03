@@ -1,6 +1,6 @@
 var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
 
-const displayGroceryList = () => {
+/*const displayGroceryList = () => {
 
     //clear existing list
     // need to make a container for the list seperate from the buttons so this will work
@@ -17,7 +17,7 @@ const displayGroceryList = () => {
         $('#grocerylist').append("EMPTY");
     }
 
-}
+}*/
 
 const listenForIngredientClicks = () => {
 
