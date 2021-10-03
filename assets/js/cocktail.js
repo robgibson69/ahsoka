@@ -46,62 +46,74 @@ const data = {
 }
 
 
-// ******  GET RANDOM COCKTAIL  ****** //
+
+
+//  ******  URL FOR 1 RANDOM COCKTAIL  ******  //
 var getRandCocktail = function() {
-    // fetch("https://the-cocktail-db.p.rapidapi.com/random.php", {
-    //     "method": "GET",
-    //     "headers": {
-    //         "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
-    //         "x-rapidapi-key": "9fbe0f4555msh10b0fd4cdc4f9abp142f2djsn3d0f0dff927e"
-    //     }
-    // })
-    //     // if repsonse is ok send data to displayCocktailData(drink)
-    //     .then(function(response) {
-    //         if (response.ok) {
-    //             response.json().then(function(data) {
-           console.log(data.drinks);
-               displayCocktailData(data.drinks);
-                // })
-        //     // if there is a response error
-        //     } else {
-        //         console.error("Response Failed");
-        //         alert("Bad Response");
-        //     }
-        // })
+    getCocktails("https://the-cocktail-db.p.rapidapi.com/random.php")
+};
+
+
+//  ****** URL FOR 10 RANDOM COCKTAILS  ******  //
+var get10RandCocktail = function() {
+    getCocktails('https://the-cocktail-db.p.rapidapi.com/randomselection.php')
+};
+
+//  ****** GET THE COCKTAIL(S)  ******  //
+var getCocktails = function(fetchURL) {
+    fetch(fetchURL, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
+            "x-rapidapi-key": "9fbe0f4555msh10b0fd4cdc4f9abp142f2djsn3d0f0dff927e"
+        }
+    })
+        // if repsonse is ok send data to displayCocktailData(drink)
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                displayCocktailData(data.drinks);
+                })
+            // if there is a response error
+            } else {
+                console.error("Response Failed");
+                alert("Bad Response");
+            }
+        })
         
-        // // if there is a fetch error
-        // .catch(err => {
-        //     console.error("Fetch Failed");
-        //     alert("Failed to get information. Make sure you are connected to the internet.");
-        // });
+        // if there is a fetch error
+        .catch(err => {
+            console.error("Fetch Failed");
+            alert("Failed to get information. Make sure you are connected to the internet.");
+        });
 };
 
 
 //  ****** DISPLAY COCKTAIL DATA  ****** //
 var displayCocktailData = function(drinks) {
-    const result = data.drinks.map(el => {
+    const myDrinks = data.drinks.map(el => {  // create new array 'myDrinks' and remap old JSON data
         let details = { // default object
-            "strIngredients": [],
-            "strMeasures": []
+            "strIngredients": [],   // array in array
+            "strMeasures": []       // array in array
         }
         Object.keys(el).forEach(key => {
-           if(key.startsWith('strIngredient')){
+           if(key.startsWith('strIngredient')){     // search for keys that start with strIngredient and put them in new array 'strIngredients'
                if(el[key]) // prevent ""
                    details.strIngredients.push(el[key])
-           } else if(key.startsWith('strMeasure')) {
+           } else if(key.startsWith('strMeasure')) {    // search for keys that start with strMeasures and put them in new array 'strMeasures'
                if(el[key]) // prevent ""
                    details.strMeasures.push(el[key])
            } else {
-               details[key]=el[key]
+               details[key]=el[key]     // add the rest of the keys/values to the new myDrinks array
            }
         })
         
         return details
     })
     
-    console.log(result);
-    console.log(result[0].strDrink);
-    console.log(result[0]);
+    console.log(myDrinks);
+    console.log(myDrinks[0].strDrink);
+    console.log(myDrinks[0]);
 
 };
 
