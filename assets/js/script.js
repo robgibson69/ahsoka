@@ -504,6 +504,7 @@ document.addEventListener('click', (e) => {
         $('#searchBar').show();
         // clear out previous results
         $('#searchOutput').empty();
+        addLogoToIngSearch();
 
     } else if (e.target.id === "fav-nav") {
         //hide the searchbar
@@ -515,8 +516,12 @@ document.addEventListener('click', (e) => {
         /*  */
     } else if (e.target.id === "grocery-nav") {
 
-        openNav()
-            /*  */
+        if (parseInt(document.getElementById("grocerylist").style.left) > -1)
+            closeNav();
+        else
+            openNav();
+
+        /*  */
 
     } else if (e.target.id === 'meal-modal-close') {
         $('#recipeModal').remove();

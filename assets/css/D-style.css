@@ -1,0 +1,8 @@
+#grocerylist {
+    padding-top: 0;
+}
+
+#grocery-list-close {
+    float: right;
+    margin: .2rem;
+}

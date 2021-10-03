@@ -13,6 +13,7 @@ header {
     background-color: lightblue;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #searchBar.container {
@@ -29,13 +30,6 @@ header {
     justify-content: space-around;
     text-align: center;
     height: 100%;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-#searchOutput::-webkit-scrollbar {
-    display: none;
 }
 
 .meal-container {
@@ -80,11 +74,6 @@ input.checkbox {
     line-break: strict;
 }
 
-.bulma-control-extend {
-    background: mediumblue;
-    color: white;
-}
-
 
 /***** ALL NEW BELOW HERE *****/
 
@@ -99,10 +88,9 @@ header {
     padding: 0 .2rem;
 }
 
-#header-logo {
-    position: relative;
-    top: 1rem;
-    z-index: -1;
+#header-logo img {
+    padding-top: .2rem;
+    height: 40px;
 }
 
 nav {
@@ -127,6 +115,13 @@ main {
     height: 100%;
     color: black;
     padding-top: .2rem;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 #main-col-div {
