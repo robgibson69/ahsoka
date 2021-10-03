@@ -1,4 +1,6 @@
 /* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
+makeAPICalls = false; //switch to true to make API calls
+
 const meals = [{
             strMeal: 'Burger',
             strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
@@ -97,15 +99,21 @@ const mealRecipe = {
     /****************** */
 
 const searchByIngredient = (searchString) => {
+
     /****** */
     // testing without api call
-    displayMeals(meals);
-    return;
+    if (!makeAPICalls) {
+        displayMeals(meals);
+        return;
+    }
     // testing without api call
     /***** */
 
     if (!searchString) {
-        searchString = $('#ingredientSearch').val().replace(/\s/g, '');
+        searchString = $('#ingredientSearch').val() //get a value from the searchbar
+        let terms = searchString.split(/[ ,\.]+/); // splits search terms by comma an period or white space
+        searchString = terms.join(','); // makes a nice comma seperated list for apicall
+        //console.log(searchString)
     }
 
     searchString = encodeURI(searchString);
@@ -122,7 +130,11 @@ const searchByIngredient = (searchString) => {
                 response.json()
                     .then((data) => {
                         console.log(data);
-                        displayMeals(data.meals);
+                        if (data.meals) {
+                            displayMeals(data.meals);
+                        } else {
+                            alert('No matches Found');
+                        }
                     })
             } else {
                 console.error(err);
@@ -137,8 +149,10 @@ const searchByIngredient = (searchString) => {
 const searchRandomMeal = () => {
     /****** */
     // testing without api call
-    displayMeals([meals[0]]);
-    return;
+    if (!makeAPICalls) {
+        displayMeals([meals[0]]);
+        return;
+    }
     // testing without api call
     /***** */
 
@@ -166,13 +180,24 @@ const searchRandomMeal = () => {
 
 }
 
+const calcMaxMealSize = (availableHeight) => {
+    let maxSize = 0;
+    // find available width of screen
+    // screen.width
+    // find available height of container
+    // comes from calling function
+    //set to 80% of available size showing entire meal
+    maxSize = parseInt(Math.min(availableHeight, screen.width) * .8);
+    //console.log(availableHeight, screen.width, maxSize)
+    return maxSize;
+}
 const displayMeals = (meals, size) => {
     if (meals) {
         let oneMeal = true;
         if (meals.length > 1) {
             oneMeal = false;
-            $('div.row.info').hide();
-        } else { $('div.row.info').show(); }
+            $('#info-columns').hide();
+        } else { $('#info-columns').show(); }
 
         /******* CALCULATE WHAT THE MAX HEIGHT OF OUTPUT CONTAINER SHOULD BE*/
         let bodyRect = document.body.getBoundingClientRect(),
@@ -203,10 +228,18 @@ const displayMeals = (meals, size) => {
         /******* SET HEIGHT OF OUTPUT CONTAINER */
         $('#searchOutput').css('max-height', maxHeight + 'px');
         /** SET THE SIZE OF THE MEAL CONTAINERS */
-        size ? null : size = 80;
-        $('.meal-container')
-            .css('width', size + 'vw')
-            .css('height', size + 'vw');
+        if (size) { // if size is provided set the size to that %width
+            $('.meal-container')
+                .css('width', size + 'vw')
+                .css('height', size + 'vw');
+
+        } else { // calc max available size in px
+            size = calcMaxMealSize(maxHeight);
+            $('.meal-container')
+                .css('width', size + 'px')
+                .css('height', size + 'px');
+        }
+
         /********* */
         /*  */
         if (oneMeal) {
@@ -228,8 +261,10 @@ const fetchIngredients = (idNum) => {
 
     /****** */
     // testing without api call
-    outputIngredients(mealRecipe); //idNum
-    return;
+    if (!makeAPICalls) {
+        outputIngredients(mealRecipe); //idNum
+        return;
+    }
     // testing without api call
     /***** */
 
@@ -275,7 +310,9 @@ const outputIngredients = (meal) => {
     }
 
     let ingredientList = $('<div>').addClass('ingredient-list').append(
-        $('<h2>').text('Ingredients:')
+        $('<span>').text('Ingredients:'),
+        $('<button>').text('Select All').attr('id', 'select-all-btn')
+
     );
 
     for (let i = 0; i < ingredient.length; i++) {
@@ -285,31 +322,39 @@ const outputIngredients = (meal) => {
             .attr('for', ingredient[i])
             .addClass('ingredient-item')
             .addClass('checkbox')
-            .text(ingredient[i])
-            .append(
-                $('<span>')
-                .addClass('ingredient-measure')
-                .text(measure[i])
-            );
+            .append(chkBoxItem)
+            .append(ingredient[i])
 
-        box.append(chkBoxItem, item);
+        .append(
+            $("<div style='display:inline-block'>")
+            .addClass('ingredient-measure')
+            .text(measure[i])
+        );
+
+        box.append(item);
         ingredientList.append(box);
     }
-    ingredientList.append(
-        $('<button>').text('add all to list'),
-        $('<button>').text('add selected to list')
-    )
 
-    $('#left-column').empty();
-    $('#left-column').append(ingredientList);
+    /******* CALCULATE WHAT THE HEIGHT OF LEFT-COLUMN CONTAINER IS */
+    container = document.getElementById('left-column').getBoundingClientRect(),
+
+        $('#left-column').empty();
+    $('#left-column')
+        .append(ingredientList)
+        // keep height consitent it will change even though it should be locked in with the flexbox settings
+        .css('max-height', (container.bottom - container.top));
+
+
 }
 
 const fetchRecipe = (idNum) => {
 
     /****** */
     // testing without api call
-    displayRecipe(mealRecipe);
-    return;
+    if (!makeAPICalls) {
+        displayRecipe(mealRecipe);
+        return;
+    }
     // testing without api call
     /***** */
 
@@ -398,7 +443,7 @@ const displayRecipe = (meal) => {
         ingredientList.append(box);
     }
 
-    let addIngredientBtn = $('<button>').text('Add to Grocery List');
+    let addIngredientBtn = $('<button>').text('Select All');
 
     modalContent.append(link, pic, ingredientList, addIngredientBtn, instructions);
 
@@ -430,9 +475,10 @@ const displayRecipe = (meal) => {
         /************ */
 
 }
+
 const displayFavRecipes = () => {
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
-    displayMeals(meals, 46)
+    displayMeals(meals, 46) // at size 46% width of screen // aka 2 per row with some spacing
 }
 
 $('#ingredientSearch').on('keypress', (e) => {
@@ -440,6 +486,7 @@ $('#ingredientSearch').on('keypress', (e) => {
         $('#searchBtn').click();
     }
 });
+
 document.addEventListener('click', (e) => {
     if (e.target.id === "searchBtn") {
         //search by ingredient search button was pressed
@@ -451,6 +498,9 @@ document.addEventListener('click', (e) => {
         $('#searchOutput').empty();
         //search random
         searchRandomMeal();
+        // center meal container
+        $('#searchOutput').css('align-items', 'center')
+
     } else if (e.target.id === "ingredient-nav") {
         //searchbar is displayed
         $('#searchBar').show();

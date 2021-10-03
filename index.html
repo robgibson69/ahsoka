@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Mock-up</title>
+    <title>Pantry Remover : clear your cupboards!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 
@@ -12,35 +12,32 @@
     <link rel="stylesheet" href="./assets/css/M-style.css">
     <link rel="stylesheet" href="./assets/css/R-style.css">
     <link rel="stylesheet" href="./assets/css/L-style.css">
+    <link rel="stylesheet" href="./assets/css/D-style.css">
     <!-- WE CAN MERGE THEM ALL IN THE END OR LEAVE SEPERATE-->
 
 </head>
 
 <body>
-
-
-    <div class="row header">
-        <header>
-            <div id="#header-logo">
-                LOGO
-            </div>
-            <nav>
-                <span class='nav-item' id='ingredient-nav'>
+    <header>
+        <div id="#header-logo">
+            LOGO
+        </div>
+        <nav>
+            <span class='nav-item' id='ingredient-nav'>
                         Search by Ingredient
                     </span>
-                <span class='nav-item' id='randoBtn'>
+            <span class='nav-item' id='randoBtn'>
                         Random Recipe
                     </span>
-                <span class='nav-item' id='fav-nav'>
+            <span class='nav-item' id='fav-nav'>
                         Fav Recipes
                     </span>
-                <span class='nav-item' id='grocery-nav'>
+            <span class='nav-item' id='grocery-nav'>
                         Grocery list
                     </span>
-            </nav>
-        </header>
+        </nav>
+    </header>
 
-    </div>
 
     <!-- SEARCH RESULTS / MAIN CONTENT -->
 
@@ -48,20 +45,22 @@
         <!-- DUMMY DATA GOES HERE -->
         <!-- REAL DATA WILL BE GENERATED DYNAMICALLY THROUGH API CALLS-->
 
-        <div>
-            <div id='searchBar' class="container">
-                <div class="flex-container">
-                    <input id="ingredientSearch" class="input is-primary" type="text" placeholder="list your ingredient(s)">
-                    <button id="searchBtn" class="button is-primary">
+        <div id='searchBar' class="container">
+            <div class="flex-container">
+                <input id="ingredientSearch" class="input is-primary" type="text" placeholder="list your ingredient(s)">
+                <button id="searchBtn" class="button is-primary">
                     Search
                   </button>
-                </div>
-            </div>
-
-            <div id="searchOutput" class='container'>
-
             </div>
         </div>
+
+        <div id="searchOutput" class='container'>
+            <!-- DATA GOES HERE -->
+            <!-- DATA WILL BE GENERATED DYNAMICALLY THROUGH API CALLS-->
+            <!-- CLEAR CONTENT::  $('#searchOutput').empty()   -->
+            <!-- INSERT DATA WITH::  $('#searchOutput').append( createdElement )   -->
+        </div>
+
 
         <!-- END OF DUMMY DATA -->
     </main>
@@ -75,44 +74,44 @@
     <!-- END OF RESULTS / MAIN CONTENT -->
 
 
-    <div class='row info'>
-        <!-- EXTRA INFO COLUMNS -->
 
-        <section id='info-columns'>
+    <!-- EXTRA INFO COLUMNS -->
 
-            <!-- LEFT COLUMN -->
-            <div id='left-column'>
+    <section id='info-columns'>
 
-                LEFT SIDE
+        <!-- LEFT COLUMN -->
+        <div id='left-column'>
 
-            </div>
+            LEFT SIDE
 
-            <!-- END OF LEFT COLUMN -->
+        </div>
 
-            <!-- ANOTHER BORDER ELEMENT -->
-            <div id='mid-col-div'>
-                line
-            </div>
-            <!-- END OF BORDER ELEMENT -->
+        <!-- END OF LEFT COLUMN -->
 
-            <!-- RIGHT COLUMN -->
+        <!-- ANOTHER BORDER ELEMENT -->
+        <div id='mid-col-div'>
+            line
+        </div>
+        <!-- END OF BORDER ELEMENT -->
 
-            <div id='right-column'>
+        <!-- RIGHT COLUMN -->
 
-                RIGHT SIDE
+        <div id='right-column'>
 
-            </div>
+            RIGHT SIDE
 
-            <!-- END OF RIGHT COLUMN -->
+        </div>
 
-        </section>
+        <!-- END OF RIGHT COLUMN -->
 
-        <!-- END OF EXTRA INFO COLUMNS-->
-    </div>
+    </section>
+
+    <!-- END OF EXTRA INFO COLUMNS-->
+
 
 
     <!-- FOOTER -->
-    <footer class="row foot">
+    <footer>
         HERE IS WHERE A FOOTER GOES
     </footer>
 
@@ -127,6 +126,7 @@
     <script src="./assets/js/M-script.js"></script>
     <script src="./assets/js/R-script.js"></script>
     <script src="./assets/js/L-script.js"></script>
+    <script src="./assets/js/D-script.js"></script>
     <!-- WE CAN MERGE THEM ALL IN THE END OR LEAVE SEPERATE-->
 </body>
 
