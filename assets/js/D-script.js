@@ -70,9 +70,7 @@ $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
 
         if (el.style.order == '2') {
             alert('remove ' + $(el).children('input').attr('id'))
-            console.log(el)
         }
-
 
     });
 
