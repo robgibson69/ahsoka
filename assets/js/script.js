@@ -297,23 +297,6 @@ const displayMeals = (meals, size) => {
 
         });
     }
-
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    var done = false;
-
-    function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-            setTimeout(stopVideo, 6000);
-            done = true;
-        }
-    }
-
-    function stopVideo() {
-        player.stopVideo();
-    }
-
 }
 
 const fetchIngredients = (idNum) => {
@@ -480,7 +463,7 @@ const displayRecipe = (meal) => {
 
         $('<div>').addClass('modal-card-head').append(
             $('<p>').addClass('modal-card-title').text(name),
-            $('<button>').addClass('delete').attr('aria-label', 'close')
+            $('<button>').attr('id', 'meal-modal-close').addClass('delete').attr('aria-label', 'close')
         ),
         modalContent
     )
@@ -489,17 +472,11 @@ const displayRecipe = (meal) => {
 
     $('body').append(modal);
 
-    listenForIngredientClicks()
-        //need an event listener for the modal close
-    $('#recipeModal').on('click', 'button.delete', () => {
-            $('#recipeModal').removeClass('is-active');
-            //enable body scroll
-            const scrollY = document.body.style.top;
-            document.body.style.position = '';
-            document.body.style.top = '';
-            window.scrollTo(0, parseInt(scrollY || '0') * -1);
-        })
-        /************ */
+    listenForIngredientClicks();
+
+    //need an event listener for the modal close
+
+    /************ */
 
 }
 
@@ -547,9 +524,16 @@ document.addEventListener('click', (e) => {
         openNav()
             /*  */
 
+    } else if (e.target.id === 'meal-modal-close') {
+        $('#recipeModal').remove();
+        //enable body scroll
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
     } else {
         //DO NOTHING
-        // alert(e.target.id);
+        //alert(e.target.id);
     }
 
 
