@@ -1,11 +1,18 @@
 * {
     margin: 0;
     padding: 0;
-    /*  border: 1px solid black;*/
+    box-sizing: border-box;
+    /*  border: 1px solid black; */
 }
 
 .flex-container {
     display: flex;
+}
+
+header {
+    background-color: lightblue;
+    display: flex;
+    justify-content: space-between;
 }
 
 #searchBtn {
@@ -17,10 +24,50 @@
     flex-wrap: wrap;
     justify-content: space-around;
     text-align: center;
+    height: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-#searchOutput * {
-    width: 50%;
+#searchOutput::-webkit-scrollbar {
+    display: none;
+}
+
+section div.container {
+    margin: 0;
+}
+
+.meal-container {
+    margin-top: 1rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: .6rem solid #333;
+}
+
+.meal-container h2 {
+    border: 1px solid #333;
+    background-color: rgba(250, 235, 215, .6);
+    background: linear-gradient(90deg, rgba(250, 235, 215, 0) 0%, rgba(250, 235, 215, .6) 10%, rgba(250, 235, 215, .6) 50%, rgba(250, 235, 215, .6) 90%, rgba(250, 235, 215, 0) 100%);
+    position: relative;
+    top: 33%;
+    width: 90%;
+    margin-left: 5%;
+    border-left: 0;
+    border-right: 0;
+    padding: .1rem 3rem;
+}
+
+.meal-container img {
+    cursor: pointer;
+    z-index: -2;
+}
+
+.ingredient-item,
+.ingredient-measure {
+    margin-left: .5rem;
 }
 
 .bulma-control-extend {
@@ -28,6 +75,126 @@
     background: mediumblue;
     color: white;
 }
+
+
+/***** ALL NEW BELOW HERE *****/
+
+body {
+    background-color: rgb(56, 56, 116);
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+header {
+    padding: 0 .2rem;
+}
+
+#header-logo {
+    position: relative;
+    top: 1rem;
+    z-index: -1;
+}
+
+nav {
+    width: moz-fit-content;
+    width: fit-content;
+    float: right;
+}
+
+.nav-item {
+    margin: 0 .2rem;
+    cursor: pointer;
+    font-size: .7rem;
+}
+
+.nav-item:hover {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+main {
+    text-align: center;
+    height: 100%;
+    color: black;
+    padding-top: .2rem;
+}
+
+#main-col-div {
+    margin: 0 auto;
+    width: 98%;
+    height: .3rem;
+    background-color: #333;
+    color: #333;
+    overflow: hidden;
+}
+
+#info-columns {
+    display: flex;
+    height: 100%;
+}
+
+#left-column,
+#right-column {
+    flex: 1 1 50%;
+    padding: .2rem 1rem;
+    height: 100%;
+    font-size: .8rem;
+}
+
+#mid-col-div {
+    width: .3rem;
+    background-color: #333;
+    color: #333;
+    overflow: hidden;
+}
+
+footer {
+    background-color: cornflowerblue;
+    position: static;
+    padding: 0;
+}
+
+
+/* BELOW HERE IS FLEXBOX SETTINGS FOR MAKING THE PAGE TAKE UP THE VERTICAL CONTENT OF THE SCREEN  */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.row.header {
+    flex: 0 1 auto;
+    /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+    /*fit to content*/
+}
+
+main {
+    flex: 1 1 32%;
+    /*fill 45% space*/
+}
+
+.row.info {
+    flex: 1 1 auto;
+    /*fill available space*/
+}
+
+.row.foot {
+    flex: 0 1 auto;
+    /*fit to content*/
+}
+
+/* SIDE BAR STYLING */
 
 .grocerylist {
     height: 100%; /* 100% Full-height */
@@ -48,10 +215,4 @@
     font-size: 25px;
     color: white;
     display: block;
-  }
-
-
-  @media screen and (max-height: 450px) {
-    .grocerylist {padding-top: 15px;}
-    .grocerylist button {font-size: 18px;}
   }
