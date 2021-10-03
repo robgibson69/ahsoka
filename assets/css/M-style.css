@@ -1,0 +1,33 @@
+/* SIDE BAR STYLING */
+
+#grocerylist {
+    height: 100%;
+    /* 100% Full-height */
+    width: 250px;
+    /* 0 width - change this with JavaScript */
+    /* sorry im an ass and think we should slide its position and not change its width so i changed it -dave */
+    position: absolute;
+    /* Stay in place and take it out of normal DOM Flow*/
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
+    left: -250px;
+    /* here is where it is slid off screen */
+    background-color: grey;
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+}
+
+#grocerylist label {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+}
