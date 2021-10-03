@@ -40,10 +40,41 @@ header a {
     color: black;
 }
 
+<<<<<<< HEAD
 main {
     background-color: black;
 }
 
+=======
+.section {
+    background-color: black;
+    width: 100%;
+    height: auto;
+}
+
+.recipe-generator {
+    background-color: darkgrey;
+    border: 3px solid purple;
+    color: wheat;
+     /* padding: 50px;  */
+    text-align: center;
+    /* display: inline-block; */
+    font-size: 16px;
+    margin: 40px 175px;
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    transition: 0.4s;
+    left: 42;
+}
+
+.recipe-generator:hover {
+
+}
+
+
+>>>>>>> feature/skelton
 
 
 
@@ -63,7 +94,11 @@ main {
 
 
 footer {
+<<<<<<< HEAD
   background-color: palevioletred;
+=======
+  background-color: #086684;
+>>>>>>> feature/skelton
   width: 100%;
   height: 50px;
   flex-wrap: wrap;  
@@ -74,11 +109,20 @@ footer {
 
 footer a {
     color: black;
+<<<<<<< HEAD
     left: 25px;
     
 }
 
 
+=======
+    left: 25px; 
+}
+
+footer h3 {
+    color: red;
+}
+>>>>>>> feature/skelton
 
 
 
