@@ -72,7 +72,7 @@ var getCocktails = function(fetchURL) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                displayCocktailData(data.drinks);
+                parseCocktailData(data.drinks);
                 })
             // if there is a response error
             } else {
@@ -90,7 +90,7 @@ var getCocktails = function(fetchURL) {
 
 
 //  ****** DISPLAY COCKTAIL DATA  ****** //
-var displayCocktailData = function(drinks) {
+var parseCocktailData = function(drinks) {
     const myDrinks = data.drinks.map(el => {  // create new array 'myDrinks' and remap old JSON data
         let details = { // default object
             "strIngredients": [],   // array in array
@@ -111,11 +111,34 @@ var displayCocktailData = function(drinks) {
         return details
     })
     
-    console.log(myDrinks);
-    console.log(myDrinks[0].strDrink);
-    console.log(myDrinks[0]);
+    // console.log(myDrinks);
+    // console.log(myDrinks[0].strDrink);
+    // console.log(myDrinks[0]);
+
+    displayCocktails(myDrinks);
 
 };
 
+const displayCocktails = (myDrinks) => {
 
-displayCocktailData(); 
+    let drinkModal = $('<div>').addClass('modal is-active').attr('id', 'drinkModal');
+    let modalBack = $('<div>').addClass('modal-background');
+    let modalCard = $('<div>').addClass('modal-card big-modal').append(
+        $('<div>').addClass('modal-card-head').append(
+            $('<p>').addClass('modal-card-title').text(myDrinks[0].strDrink),
+            $('<button>').attr('id', 'drink-modal-close').addClass('delete').attr('aria-label', 'close')
+        ),
+        $('<div>').addClass('modal-card-foot').append(
+            $('<button>').attr('id', 'drink-modal-close').addClass('button is-link').text('Close')
+
+        )
+    )
+    
+    modalBack.append(modalCard);
+    drinkModal.append(modalBack);
+    $('body').append(drinkModal);
+};
+
+
+
+parseCocktailData(); 
