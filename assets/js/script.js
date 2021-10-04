@@ -235,6 +235,7 @@ const calcMaxMealSize = (availableHeight) => {
 }
 
 const displayMeals = (meals, size) => {
+    $('#searchOutput').empty();
     if (meals) {
         let oneMeal = true;
         if (meals.length > 1) {
@@ -486,6 +487,12 @@ $('#ingredientSearch').on('keypress', (e) => {
 });
 
 document.addEventListener('click', (e) => {
+
+    if ($('#add-grocery-item').css('opacity') == 1) {
+        $('#add-grocery-item').val('').css('opacity', '0').hide();
+        return;
+    }
+
     if (e.target.id === "searchBtn") {
         //search by ingredient search button was pressed
         searchByIngredient();
@@ -522,6 +529,10 @@ document.addEventListener('click', (e) => {
             openNav();
 
         /*  */
+
+    } else if (e.target.id === 'grocery-list-add') {
+
+        $('#add-grocery-item').css('opacity', 1).show().focus();
 
     } else if (e.target.id === 'meal-modal-close') {
         $('#recipeModal').remove();

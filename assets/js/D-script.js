@@ -26,19 +26,38 @@ const displayGroceryList = () => {
 
     // clear existing list
     $('#grocerylist-list').empty();
+    $('#add-grocery-item').val('').css('opacity', '0').hide();
 
     if (groceryList) {
 
         for (let i = 0; i < groceryList.length; i++) {
-            var chkBox = $('<input>').addClass('checkbox grocery-list-item').attr('type', 'checkbox').attr('id', groceryList[i]);
-            var label = $('<label>')
-                .attr('for', groceryList[i])
+
+            //makes the grocery item into an object with a status for collected 
+            if (groceryList[i].status === undefined) {
+                let tmp = groceryList[i];
+                groceryList[i] = {
+                    name: tmp,
+                    status: 0
+                }
+            }
+
+            let chkBox = $('<input>').addClass('checkbox grocery-list-item').attr('type', 'checkbox').attr('id', i);
+            let label = $('<label>')
                 .addClass('grocery-list-item checkbox')
-                .text(groceryList[i])
+                .attr('for', i)
+                .text(groceryList[i].name);
+
+            let itemOrder = 0;
+            if (groceryList[i].status) {
+                itemOrder = 2;
+                chkBox.attr('checked', '')
+            }
 
             $('#grocerylist-list').append(
-                $("<div class='cont'>").append(chkBox, label).css('order', '0')
+                $("<div class='cont'>").append(chkBox, label).css('order', itemOrder)
             );
+
+
         }
         let removeBtn = $('<button>')
             .addClass('button is-danger is-small')
@@ -55,13 +74,55 @@ const displayGroceryList = () => {
     }
 }
 
+const addGroceryItem = () => {
+    if ($('#add-grocery-item').val()) {
+
+        let item = $('#add-grocery-item').val();
+        groceryList.push(item);
+        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+        displayGroceryList();
+    } else {
+        $('#add-grocery-item').val('').css('opacity', '0').hide();
+    }
+}
+
+$('#add-grocery-item').on('keypress', (e) => {
+    if (e.key === 'Enter') {
+        addGroceryItem();
+    }
+});
+
+$('#grocery-list-remove').on('click', (e) => {
+
+    $("div.cont").each((idx, el) => {
+
+        $(el).children('label').addClass('deletable');
+
+    });
+
+});
 
 $('#grocerylist-list').on('click', 'input.checkbox', (e) => {
 
-    if (e.target.closest('.cont').style.order == '0')
+    let idx = $(e.target).attr('id');
+
+    if ($(e.target).next('.deletable')[0]) {
+        groceryList.splice(idx, 1);
+        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+        displayGroceryList();
+
+    } else if (e.target.closest('.cont').style.order == '0') {
         e.target.closest('.cont').style.order = '2';
-    else
+
+        groceryList[idx].status = 1;
+
+    } else {
         e.target.closest('.cont').style.order = '0';
+
+        groceryList[idx].status = 0;
+    }
+
+    localStorage.setItem("grocerylist", JSON.stringify(groceryList));
 });
 
 $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
@@ -69,7 +130,10 @@ $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
     $("div.cont").each((idx, el) => {
 
         if (el.style.order == '2') {
-            alert('remove ' + $(el).children('input').attr('id'))
+            let idx = $(el).children('input').attr('id');
+            $(el).remove();
+            groceryList.splice(idx, 1);
+            localStorage.setItem("grocerylist", JSON.stringify(groceryList));
         }
 
     });
