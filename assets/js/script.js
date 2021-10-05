@@ -130,8 +130,8 @@ const searchByIngredient = (searchString) => {
                 response.json()
                     .then((data) => {
                         //console.log(data);
-                        if (!data.meals) { alert('No Results Found') }
-                        console.log(data);
+                        if (!data.meals) { alert('No Results Found'); return }
+                        //  console.log(data);
                         if (data.meals) {
                             displayMeals(data.meals);
                         } else {
@@ -494,8 +494,12 @@ document.addEventListener('click', (e) => {
     }
 
     if (e.target.id === "searchBtn") {
-        //search by ingredient search button was pressed
-        searchByIngredient();
+
+        $(e.target).siblings('input').attr('placeholder').match(/ingredient/g) ?
+            //search by ingredient search button was pressed
+            searchByIngredient() :
+            searchByRecipe();
+
     } else if (e.target.id === "randoBtn") {
         //hide the searchbar
         $('#searchBar').hide();
@@ -506,12 +510,27 @@ document.addEventListener('click', (e) => {
         // center meal container
         $('#searchOutput').css('align-items', 'center')
 
-    } else if (e.target.id === "ingredient-nav") {
+    } else if (e.target.id === "ingredient-nav" || e.target.id === "recipe-nav") {
         //searchbar is displayed
-        $('#searchBar').show();
+        $('#searchBar').show()
+        $('#ingredientSearch').focus();
         // clear out previous results
         $('#searchOutput').empty();
         addLogoToIngSearch();
+
+        $('#info-columns').show();
+        addRightCol();
+        $('#left-column').empty();
+
+        if (e.target.id === "recipe-nav") {
+            $('#ingredientSearch').attr('placeholder', 'search for recipe').removeClass('is-primary').addClass('is-info');
+            $('#searchBtn').removeClass('is-primary').addClass('is-info');
+        } else {
+            $('#ingredientSearch').attr('placeholder', 'list your ingredient(s)').addClass('is-primary').removeClass('is-info');
+            $('#searchBtn').addClass('is-primary').removeClass('is-info');
+        }
+
+
 
     } else if (e.target.id === "fav-nav") {
         //hide the searchbar
