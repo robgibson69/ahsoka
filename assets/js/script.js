@@ -1,5 +1,5 @@
 /* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
-makeAPICalls = false; //switch to true to make API calls
+makeAPICalls = true; //switch to true to make API calls
 
 const meals = [{
             strMeal: 'Burger',
@@ -355,13 +355,16 @@ const outputIngredients = (meal) => {
 
     let ingredientList = $('<div>').addClass('ingredient-list').append(
         $('<span>').text('Ingredients:'),
-        $('<button>').text('Select All').attr('id', 'select-all-btn')
+        $('<button>').text('Select All').addClass('addList').attr('id', 'select-all-btn')
 
     );
 
     for (let i = 0; i < ingredient.length; i++) {
         let box = $("<div class='ingredient-checklist-holder'>")
-        let chkBoxItem = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', ingredient[i]);
+        let chkBoxItem = $('<input>')
+            .addClass('checkbox')
+            .attr('type', 'checkbox')
+            .attr('id', ingredient[i]);
         let item = $('<label>')
             .attr('for', ingredient[i])
             .addClass('ingredient-item')
@@ -434,8 +437,8 @@ const displayRecipe = (meal) => {
         let chkBoxItem = $('<input>')
             .addClass('checkbox')
             .attr('type', 'checkbox')
-            .attr('name', 'food')
             .attr('id', ingredient[i])
+            .attr('class', 'food')
             .attr('value', ingredient[i]);
 
         let item = $('<label>')

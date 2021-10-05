@@ -2,7 +2,6 @@
 const addLogoToIngSearch = () => {
     $('#searchOutput').append($("<div id='LOGO'>").text(' '));
 
-    console.log($('#searchOutput').children());
 };
 addLogoToIngSearch();
 
@@ -36,6 +35,24 @@ addRightCol();
 
 
 /***** GROCERYLIST */
+const listenForIngredientClicks = () => {
+
+    $('.addList').click(function() {
+
+        $.each($("input[class='food']"), function() {
+            groceryList.push($(this).val());
+            this.checked = true;
+        });
+        //console.log(groceryList)
+        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+    })
+
+    $('.food').click((e) => {
+        if (e.target.checked) groceryList.push($(e.target).val());
+        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+    })
+
+}
 
 const displayGroceryList = () => {
 

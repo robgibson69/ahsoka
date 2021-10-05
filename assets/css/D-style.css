@@ -46,7 +46,7 @@ label.grocery-list-item::before {
     content: '⛔ ';
 }
 
-input:checked+label::before {
+#grocerylist-list input:checked+label::before {
     /* content: url('https://www.svgrepo.com/show/48638/check.svg'); */
     content: '✅ ';
 }
