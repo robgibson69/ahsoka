@@ -1,5 +1,5 @@
 /* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
-makeAPICalls = false; //switch to true to make API calls
+makeAPICalls = true; //switch to true to make API calls
 
 const meals = [{
             strMeal: 'Burger',
@@ -130,8 +130,8 @@ const searchByIngredient = (searchString) => {
                 response.json()
                     .then((data) => {
                         //console.log(data);
-                        if (!data.meals) { alert('No Results Found') }
-                        console.log(data);
+                        if (!data.meals) { alert('No Results Found'); return }
+                        //  console.log(data);
                         if (data.meals) {
                             displayMeals(data.meals);
                         } else {
@@ -355,13 +355,16 @@ const outputIngredients = (meal) => {
 
     let ingredientList = $('<div>').addClass('ingredient-list').append(
         $('<span>').text('Ingredients:'),
-        $('<button>').text('Select All').attr('id', 'select-all-btn')
+        $('<button>').text('Select All').addClass('addList').attr('id', 'select-all-btn')
 
     );
 
     for (let i = 0; i < ingredient.length; i++) {
         let box = $("<div class='ingredient-checklist-holder'>")
-        let chkBoxItem = $('<input>').addClass('checkbox').attr('type', 'checkbox').attr('id', ingredient[i]);
+        let chkBoxItem = $('<input>')
+            .addClass('checkbox')
+            .attr('type', 'checkbox')
+            .attr('id', ingredient[i]);
         let item = $('<label>')
             .attr('for', ingredient[i])
             .addClass('ingredient-item')
@@ -435,8 +438,8 @@ const displayRecipe = (meal) => {
         let chkBoxItem = $('<input>')
             .addClass('checkbox')
             .attr('type', 'checkbox')
-            .attr('name', 'food')
             .attr('id', ingredient[i])
+            .attr('class', 'food')
             .attr('value', ingredient[i]);
 
         let item = $('<label>')
@@ -455,7 +458,7 @@ const displayRecipe = (meal) => {
     }
 
     let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
-    let addFavouriteBtn = $ ('<button>').text('Add To Favourites').addClass('fave');
+    let addFavouriteBtn = $('<button>').text('Add To Favourites').addClass('fave');
 
     modalContent.append(link, pic, ingredientList, addIngredientBtn, addFavouriteBtn, instructions);
 
@@ -477,16 +480,7 @@ const displayRecipe = (meal) => {
     listenForIngredientClicks();
     addFavourite(meal);
 }
-// const addFavourite = (meal) => {   
-// var faveList = [];
-// $('.fave').click(function(){
-    
-//     faveList.push(meal);
-//     console.log(faveList); 
-//     localStorage.setItem('favorites',JSON.stringify(faveList));
 
-// })
-// };
 
 const displayFavRecipes = (faveList) => {
     // if(faveList ===! ''){
@@ -508,8 +502,12 @@ document.addEventListener('click', (e) => {
     }
 
     if (e.target.id === "searchBtn") {
-        //search by ingredient search button was pressed
-        searchByIngredient();
+
+        $(e.target).siblings('input').attr('placeholder').match(/ingredient/g) ?
+            //search by ingredient search button was pressed
+            searchByIngredient() :
+            searchByRecipe();
+
     } else if (e.target.id === "randoBtn") {
         //hide the searchbar
         $('#searchBar').hide();
@@ -520,12 +518,27 @@ document.addEventListener('click', (e) => {
         // center meal container
         $('#searchOutput').css('align-items', 'center')
 
-    } else if (e.target.id === "ingredient-nav") {
+    } else if (e.target.id === "ingredient-nav" || e.target.id === "recipe-nav") {
         //searchbar is displayed
-        $('#searchBar').show();
+        $('#searchBar').show()
+        $('#ingredientSearch').focus();
         // clear out previous results
         $('#searchOutput').empty();
         addLogoToIngSearch();
+
+        $('#info-columns').show();
+        addRightCol();
+        $('#left-column').empty();
+
+        if (e.target.id === "recipe-nav") {
+            $('#ingredientSearch').attr('placeholder', 'search for recipe').removeClass('is-primary').addClass('is-info');
+            $('#searchBtn').removeClass('is-primary').addClass('is-info');
+        } else {
+            $('#ingredientSearch').attr('placeholder', 'list your ingredient(s)').addClass('is-primary').removeClass('is-info');
+            $('#searchBtn').addClass('is-primary').removeClass('is-info');
+        }
+
+
 
     } else if (e.target.id === "fav-nav") {
         //hide the searchbar

@@ -19,19 +19,26 @@ var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
 
 }*/
 
+/*
 const listenForIngredientClicks = () => {
 
     $('.addList').click(function() {
-        // console.log("Clicked by User")
-        // var groceryList = [];
-        $.each($("input[name='food']:checked"), function() {
+
+        $.each($("input[class='food']:checked"), function() {
             groceryList.push($(this).val());
         });
-        console.log(groceryList)
+        //console.log(groceryList)
+        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+    })
+
+    $('.food').click((e) => {
+        groceryList.push($(e.target).val());
         localStorage.setItem("grocerylist", JSON.stringify(groceryList));
     })
 
 }
+
+*/
 
 //opens sidebar from main nav
 function openNav() {

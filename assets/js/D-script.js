@@ -1,14 +1,7 @@
 /*** CHANGES TO PAGE  */
 const addLogoToIngSearch = () => {
-    $('#searchOutput').append(
-        $('<div>')
-        .css('max-width', '800px')
-        .css('width', '100%')
-        .css('margin-top', '5rem')
-        .css('background-image', "url('./assets/images/logo1.png')")
-        .css('background-size', 'contain')
-        .css('background-repeat', 'no-repeat')
-    );
+    $('#searchOutput').append($("<div id='LOGO'>").text(' '));
+
 };
 addLogoToIngSearch();
 
@@ -17,10 +10,61 @@ $('#header-logo')
     .append("<img src='./assets/images/logo1.png'>")
     .css("img{ height:80px;}")
 
+
+
+// ADD NAV BUTTONS TO LOWER RIGHT COLUMN
+const addRightCol = (elOut) => {
+
+    elOut ? null : elOut = $('#right-column');
+    elOut.empty();
+    /*
+        $('nav .nav-item').each((i, el) => {
+            //console.log(el)
+            $(el).clone().addClass('button is-info').appendTo(elOut);
+        });
+    */
+    $("<div class='nav-item button is-primary'>").text('Search Ingredients').attr('id', 'ingredient-nav').appendTo(elOut);
+    $("<div class='nav-item button is-info'>").text('Search Recipe').attr('id', 'recipe-nav').appendTo(elOut);
+    $("<div class='nav-item button is-pink'>").text('Random').attr('id', 'randoBtn').appendTo(elOut);
+    $("<div class='nav-item button is-warning'>").text('Grocery List').attr('id', 'grocery-nav').appendTo(elOut);
+
+
+}
+addRightCol();
 /*   END OF CHANGES TO PAGE */
 
 
 /***** GROCERYLIST */
+const listenForIngredientClicks = () => {
+
+    $('.addList').click(function() {
+
+        $.each($("input[class='food']"), function() {
+            groceryList.push($(this).val());
+            this.checked = true;
+        });
+        //console.log(groceryList)
+        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+    })
+
+    $('.food').click((e) => {
+        if (e.target.checked) groceryList.push($(e.target).val());
+        else {
+            // check grocerylist for target.val()
+            $(groceryList).each((i, item) => {
+                if (item.name === $(e.target).val()) {
+                    alert('found in list');
+                    //remove if found
+                    groceryList.splice(i, 1); // remove
+
+                }
+            });
+
+        }
+        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+    })
+
+}
 
 const displayGroceryList = () => {
 
@@ -141,3 +185,49 @@ $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
 });
 
 /** END OF GROCERY LIST */
+
+
+const searchByRecipe = (searchString) => {
+
+    /****** */
+    // testing without api call
+    if (!makeAPICalls) {
+        displayMeals(meals);
+        return;
+    }
+    // testing without api call
+    /***** */
+
+    if (!searchString) {
+        searchString = $('#ingredientSearch').val() //get a value from the searchbar
+        $('#ingredientSearch').val('');
+    }
+
+    fetch("https://themealdb.p.rapidapi.com/search.php?s=" + searchString, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                response.json()
+                    .then((data) => {
+
+                        if (!data.meals) { alert('No Results Found'); return; }
+                        // console.log(data);
+                        if (data.meals) {
+                            displayMeals(data.meals);
+                        } else {
+                            alert('No matches Found');
+                        }
+                    })
+            } else {
+                console.error(err);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
