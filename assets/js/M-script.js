@@ -36,11 +36,24 @@ const listenForIngredientClicks = () => {
 //opens sidebar from main nav
 function openNav() {
     displayGroceryList();
-    document.getElementById("grocerylist").style.left = "0";
+    $("#grocerylist").style.left = "0";
 
 }
 
 //close sidebar
 function closeNav() {
-    document.getElementById("grocerylist").style.left = "-250px";
+    $("#grocerylist").style.left = "-250px";
 }
+
+
+const addFavourite = (meal) => {   
+    var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
+    $('.fave').click(function(){
+        
+        faveList.push(meal);
+        console.log(faveList); 
+        localStorage.setItem('favourites',JSON.stringify(faveList));
+    
+    })
+    };
+

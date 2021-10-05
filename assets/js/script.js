@@ -9,37 +9,37 @@ const meals = [{
         {
             strMeal: 'Burger',
             strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
+            idMeal: '69421'
         },
         {
             strMeal: 'Burger',
             strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
+            idMeal: '69422'
         },
         {
             strMeal: 'Burger',
             strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
+            idMeal: '69423'
         },
         {
             strMeal: 'Burger',
             strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
+            idMeal: '69424'
         },
         {
             strMeal: 'Burger',
             strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
+            idMeal: '69425'
         },
         {
             strMeal: 'Burger',
             strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
+            idMeal: '69426'
         },
         {
             strMeal: 'Burger',
             strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
+            idMeal: '69427'
         },
     ]
     /************ */
@@ -49,7 +49,7 @@ const mealRecipe = {
         strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
         strSource: 'www.not_a_real_recipe_dot_com.org',
         strYoutube: 'www.not_a_real_youTube_dot_com.org',
-        idMeal: '69420',
+        idMeal: '69421',
 
         strInstructions: "Cook the patty and then put it between two half buns",
 
@@ -208,7 +208,7 @@ const fetchRecipe = (idNum) => {
                     response.json()
                         .then((data) => {
                             // console.log(data);
-                            displayRecipe(data.meals[0]);
+                            displayRecipe(data.meals[1]);
                         })
                 } else {
                     console.error(err);
@@ -390,13 +390,14 @@ const outputIngredients = (meal) => {
 
 
 }
-
+var faveList = [];
 const displayRecipe = (meal) => {
 
     let name = meal.strMeal;
     let image = meal.strMealThumb;
     let source = meal.strSource;
     let video = meal.strYoutube;
+    let id = meal.idMeal
 
     let recipe = meal.strInstructions;
 
@@ -454,8 +455,9 @@ const displayRecipe = (meal) => {
     }
 
     let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
+    let addFavouriteBtn = $ ('<button>').text('Add To Favourites').addClass('fave');
 
-    modalContent.append(link, pic, ingredientList, addIngredientBtn, instructions);
+    modalContent.append(link, pic, ingredientList, addIngredientBtn, addFavouriteBtn, instructions);
 
     let modal = $('<div>').addClass('modal is-active').attr('id', 'recipeModal');
     let modalBG = $('<div>').addClass('modal-background')
@@ -473,8 +475,18 @@ const displayRecipe = (meal) => {
     $('body').append(modal);
 
     listenForIngredientClicks();
+    addFavourite(meal);
 }
+// const addFavourite = (meal) => {   
+// var faveList = [];
+// $('.fave').click(function(){
+    
+//     faveList.push(meal);
+//     console.log(faveList); 
+//     localStorage.setItem('favorites',JSON.stringify(faveList));
 
+// })
+// };
 const displayFavRecipes = () => {
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
     displayMeals(meals, 46) // at size 46% width of screen // aka 2 per row with some spacing
@@ -523,7 +535,7 @@ document.addEventListener('click', (e) => {
         /*  */
     } else if (e.target.id === "grocery-nav") {
 
-        if (parseInt(document.getElementById("grocerylist").style.left) > -1)
+        if (parseInt($("#grocerylist").style.left) > -1)
             closeNav();
         else
             openNav();
