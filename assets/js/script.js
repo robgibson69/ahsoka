@@ -480,7 +480,7 @@ const displayRecipe = (meal) => {
 
 const displayFavRecipes = () => {
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
-    displayMeals(meals, 46) // at size 46% width of screen // aka 2 per row with some spacing
+    displayMeals(favList, 46) // at size 46% width of screen // aka 2 per row with some spacing
 }
 
 $('#ingredientSearch').on('keypress', (e) => {

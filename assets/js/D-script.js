@@ -49,6 +49,18 @@ const listenForIngredientClicks = () => {
 
     $('.food').click((e) => {
         if (e.target.checked) groceryList.push($(e.target).val());
+        else {
+            // check grocerylist for target.val()
+            $(groceryList).each((i, item) => {
+                if (item.name === $(e.target).val()) {
+                    alert('found in list');
+                    //remove if found
+                    groceryList.splice(i, 1); // remove
+
+                }
+            });
+
+        }
         localStorage.setItem("grocerylist", JSON.stringify(groceryList));
     })
 
