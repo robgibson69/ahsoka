@@ -1,5 +1,5 @@
 var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
-
+// var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
 /*const displayGroceryList = () => {
 
     //clear existing list
@@ -47,7 +47,6 @@ function closeNav() {
 
 
 const addFavourite = (meal) => {   
-    var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
     $('.fave').click(function(){
         
         faveList.push(meal);

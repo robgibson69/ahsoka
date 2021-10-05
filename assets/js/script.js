@@ -97,7 +97,7 @@ const mealRecipe = {
 
     }
     /****************** */
-
+var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
 const searchByIngredient = (searchString) => {
 
     /****** */
@@ -234,7 +234,7 @@ const calcMaxMealSize = (availableHeight) => {
     return maxSize;
 }
 
-const displayMeals = (meals, size) => {
+const displayMeals = (faveList, size) => {
     $('#searchOutput').empty();
     if (meals) {
         let oneMeal = true;
@@ -390,7 +390,7 @@ const outputIngredients = (meal) => {
 
 
 }
-var faveList = [];
+
 const displayRecipe = (meal) => {
 
     let name = meal.strMeal;
@@ -487,9 +487,11 @@ const displayRecipe = (meal) => {
 
 // })
 // };
-const displayFavRecipes = () => {
+
+const displayFavRecipes = (faveList) => {
+    // if(faveList ===! ''){
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
-    displayMeals(meals, 46) // at size 46% width of screen // aka 2 per row with some spacing
+    displayMeals(faveList, 46) // at size 46% width of screen // aka 2 per row with some spacing
 }
 
 $('#ingredientSearch').on('keypress', (e) => {
