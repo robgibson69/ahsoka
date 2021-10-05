@@ -1,3 +1,5 @@
+var drinkContainerEl = document.querySelector('#modal');
+
 const data = {
     "drinks": [
         {
@@ -121,22 +123,38 @@ var parseCocktailData = function(drinks) {
 
 const displayCocktails = (myDrinks) => {
 
+    let modalDetails = $('<div>').attr('id', 'drinkDetails').addClass('modal-card-body').text("This is my text");
+
+
+
+    // put together header, footer and the card for the modal and append the above content.
     let drinkModal = $('<div>').addClass('modal is-active').attr('id', 'drinkModal');
     let modalBack = $('<div>').addClass('modal-background');
-    let modalCard = $('<div>').addClass('modal-card big-modal').append(
+    let modalCard = $('<div>').addClass('modal-card').append(
         $('<div>').addClass('modal-card-head').append(
             $('<p>').addClass('modal-card-title').text(myDrinks[0].strDrink),
             $('<button>').attr('id', 'drink-modal-close').addClass('delete').attr('aria-label', 'close')
         ),
-        $('<div>').addClass('modal-card-foot').append(
-            $('<button>').attr('id', 'drink-modal-close').addClass('button is-link').text('Close')
 
+        modalDetails,
+
+        $('<div>').addClass('modal-card-foot').append(
+            $('<button>').attr('id', 'drink-modal-close').addClass('button is-link').text('Close'),
         )
     )
     
+    $(this).data("target");
+            $("html").addClass("is-clipped");
+
+
+
     modalBack.append(modalCard);
     drinkModal.append(modalBack);
-    $('body').append(drinkModal);
+    // drinkContainerEl.addClass('is-active');
+    // drinkContainerEl.append(drinkModal);
+
+    //$('body').append(drinkModal);
+
 };
 
 
