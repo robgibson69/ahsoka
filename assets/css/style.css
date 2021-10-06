@@ -110,6 +110,14 @@ nav {
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+#left-column .checkbox:hover {
+    color: blanchedalmond;
+}
+
+#recipeModal .checkbox:hover {
+    color: #363636;
+}
+
 main {
     text-align: center;
     height: 100%;

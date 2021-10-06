@@ -314,11 +314,10 @@ const ingredientToGroceryListener = () => {
             // if checked add to grocerylist
             groceryList.push(e.target.id);
 
-            console.log('added');
+            // console.log('added');
 
             // remove duplicates
             //code here
-
             $(groceryList).each((idx, item) => {
                 //console.log(item)
                 //duplicateArray.push(item.name || item)
@@ -343,6 +342,8 @@ const ingredientToGroceryListener = () => {
                 //console.log(groceryList);
                 //*** ABOVE NOT WORKING GOOD */
                 /* REMOVES ALL INSTANCES WHEN DUP FOUND */
+                /* the auto check feature should make a duplicate 
+                from clicking ingredients a thing of the past but i user can still enter a custom duplicate*/
 
             //save list to local storage
             localStorage.setItem("grocerylist", JSON.stringify(groceryList));
