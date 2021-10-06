@@ -572,6 +572,8 @@ document.addEventListener('click', (e) => {
         document.body.style.position = '';
         document.body.style.top = '';
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    } else if (e.target.id === 'pop-modal-close') {
+        $('#popModal').remove();
     } else {
         //DO NOTHING
         //alert(e.target.id);

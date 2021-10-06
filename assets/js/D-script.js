@@ -231,3 +231,39 @@ const searchByRecipe = (searchString) => {
             console.error(err);
         });
 }
+
+/***  MODAL ALERTS */
+
+const displayModal = (msg) => {
+    // will display a pop up modal takes a string or an object containing a strings: 'head' and 'body'
+    // HTML is permitted and I believe jQuery elements can allso be passed to body
+
+    if (jQuery.type(msg) === "string") {
+        let bdmsg = msg;
+        msg = {
+            head: 'Alert',
+            body: bdmsg
+        }
+    }
+
+
+    let modalContent = $('<section>').attr('id', 'newModal').addClass('modal-card-body');
+
+    modalContent.append(msg.body);
+
+    let modal = $('<div>').addClass('modal is-active').attr('id', 'popModal');
+    let modalBG = $('<div>').addClass('modal-background')
+    let modalCard = $('<div>').addClass('modal-card big-modal').append(
+
+        $('<div>').addClass('modal-card-head').append(
+            $('<p>').addClass('modal-card-title').text(msg.head),
+            $('<button>').attr('id', 'pop-modal-close').addClass('delete').attr('aria-label', 'close')
+        ),
+        modalContent
+    )
+
+    modal.append(modalBG, modalCard);
+
+    $('body').append(modal);
+
+}
