@@ -554,7 +554,7 @@ document.addEventListener('click', (e) => {
         /*  */
     } else if (e.target.id === "grocery-nav") {
 
-        if (parseInt($("#grocerylist").style.left) > -1)
+        if (parseInt($("#grocerylist").css('left')) > -1)
             closeNav();
         else
             openNav();

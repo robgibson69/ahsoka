@@ -44,13 +44,13 @@ const listenForIngredientClicks = () => {
 //opens sidebar from main nav
 function openNav() {
     displayGroceryList();
-    $("#grocerylist").style.left = "0";
+    $("#grocerylist").css({ 'left': '0' });
 
 }
 
 //close sidebar
 function closeNav() {
-    $("#grocerylist").style.left = "-250px";
+    $("#grocerylist").css({ 'left': '-250px' });
 }
 
 
