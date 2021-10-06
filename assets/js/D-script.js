@@ -154,6 +154,7 @@ $('#grocerylist-list').on('click', 'input.checkbox', (e) => {
         groceryList.splice(idx, 1);
         localStorage.setItem("grocerylist", JSON.stringify(groceryList));
         displayGroceryList();
+        outputIngredients(lastMeal);
 
     } else if (e.target.closest('.cont').style.order == '0') {
         e.target.closest('.cont').style.order = '2';
@@ -191,6 +192,7 @@ $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
     };
 
     localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+    outputIngredients(lastMeal);
 
 });
 
@@ -311,10 +313,12 @@ const ingredientToGroceryListener = () => {
 
     $('.addList').click(function() {
         // displayModal('add all to list!!')
-        $.each($("input.checkbox"), function() {
+        $.each($(".ingredient-checklist-holder input.checkbox"), function() {
 
-            this.checked = true;
-            $(this).change(); // trigger change event listener
+            if (!this.checked) {
+                this.checked = true;
+                $(this).change(); // trigger change event listener
+            }
         });
     })
 
@@ -324,7 +328,11 @@ const ingredientToGroceryListener = () => {
             // if checked add to grocerylist
             groceryList.push(e.target.id);
 
-            // console.log('added');
+            // console.log('added ' + e.target.id);
+
+            if (e.target.id == 0) {
+                console.log(e.target)
+            }
 
             // remove duplicates
             //code here
@@ -334,8 +342,7 @@ const ingredientToGroceryListener = () => {
                 $(groceryList).each((x, ite) => {
                     if (((item.name || item) === (ite.name || ite)) && x != idx) {
                         //console.log((item.name || item) + idx + " == " + (ite.name || ite) + x);
-                        //groceryList.splice(x, 1)
-                        removeList.push(x);
+                        groceryList[x] = '';
 
                     } else if (x != idx) {
                         //console.log((item.name || item) + " ne " + (ite.name || ite))
@@ -343,24 +350,23 @@ const ingredientToGroceryListener = () => {
                 });
             });
 
-            $(removeList).each((idx, item) => {
-                    // go through the remove list and remove the corresponding entry from grocerylist  
-                    // keeping in mind that the index will shift down with each item removed
-                    groceryList.splice(item - idx, 1);
-                    console.log(item - idx);
-                })
-                //console.log(groceryList);
-                //*** ABOVE NOT WORKING GOOD */
-                /* REMOVES ALL INSTANCES WHEN DUP FOUND */
-                /* the auto check feature should make a duplicate 
-                from clicking ingredients a thing of the past but i user can still enter a custom duplicate*/
+            for (let i = 0; i < groceryList.length; i++) {
+
+                if (groceryList[i] === '') {
+                    groceryList.splice(i, 1);
+                    i--;
+                }
+
+            };
+            //*** ABOVE NOW WORKING GOOD */
+
 
             //save list to local storage
             localStorage.setItem("grocerylist", JSON.stringify(groceryList));
 
         } else { //else remove from grocerylist 
             /*   IS NOW WORKING ?? YES **/
-            console.log('removing ')
+            //console.log('removing ')
             removeList = [];
             //search list for item
 
