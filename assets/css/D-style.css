@@ -128,6 +128,15 @@ label.grocery-list-item::before {
 
 /**
 
+/*** POP MODAL STYLING ***/
+
+#popModal footer.modal-card-foot {
+    justify-content: flex-end;
+}
+
+
+/***
+
 
 /***  FAV ICON IN RECIPE MODAL CARD */
 

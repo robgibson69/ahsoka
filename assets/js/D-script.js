@@ -236,15 +236,27 @@ const searchByRecipe = (searchString) => {
 
 const displayModal = (msg) => {
     // will display a pop up modal takes a string or an object containing a strings: 'head' and 'body'
+    // and button string containing the buttons to display (ok) or (yes/no)
     // HTML is permitted and I believe jQuery elements can allso be passed to body
 
     if (jQuery.type(msg) === "string") {
         let bdmsg = msg;
         msg = {
             head: 'Alert',
-            body: bdmsg
+            body: bdmsg,
+            button: 'alert'
         }
     }
+
+    let alertBtn = $('<button>').attr('id', 'newModal-alertBtn').addClass('button is-warning').text('Ok');
+    let cancelBtn = $('<button>').attr('id', 'newModal-cancelBtn').addClass('button is-pink').text('Cancel');
+    let okBtn = $('<button>').attr('id', 'newModal-okBtn').addClass('button is-success').text('Ok');
+
+    let modalFoot = $("<footer class='modal-card-foot'>");
+
+    msg.button === 'alert' ?
+        modalFoot.append(alertBtn) :
+        modalFoot.append(cancelBtn, okBtn);
 
 
     let modalContent = $('<section>').attr('id', 'newModal').addClass('modal-card-body');
@@ -257,13 +269,28 @@ const displayModal = (msg) => {
 
         $('<div>').addClass('modal-card-head').append(
             $('<p>').addClass('modal-card-title').text(msg.head),
-            $('<button>').attr('id', 'pop-modal-close').addClass('delete').attr('aria-label', 'close')
+            // $('<button>').attr('id', 'pop-modal-close').addClass('delete').attr('aria-label', 'close')
         ),
         modalContent
     )
 
-    modal.append(modalBG, modalCard);
+    if (msg.button) {
+        modal.append(modalBG, modalCard.append(modalFoot));
+    } else {
+        modal.append(modalBG, modalCard);
+    }
 
     $('body').append(modal);
 
+
+    /*** Event listener created for modal buttons */
+
+    $('footer.modal-card-foot button').on('click', (e) => {
+        if (e.target.id === 'newModal-alertBtn') {
+            $('#popModal').remove();
+        }
+    });
 }
+
+
+/**** END OF MODAL ALERTS */
