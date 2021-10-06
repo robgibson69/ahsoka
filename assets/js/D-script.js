@@ -53,7 +53,7 @@ const listenForIngredientClicks = () => {
             // check grocerylist for target.val()
             $(groceryList).each((i, item) => {
                 if (item.name === $(e.target).val()) {
-                    alert('found in list');
+                    displayModal('found in list');
                     //remove if found
                     groceryList.splice(i, 1); // remove
 
@@ -215,12 +215,12 @@ const searchByRecipe = (searchString) => {
                 response.json()
                     .then((data) => {
 
-                        if (!data.meals) { alert('No Results Found'); return; }
+                        if (!data.meals) { displayModal('No Results Found'); return; }
                         // console.log(data);
                         if (data.meals) {
                             displayMeals(data.meals);
                         } else {
-                            alert('No matches Found');
+                            displayModal('No matches Found');
                         }
                     })
             } else {

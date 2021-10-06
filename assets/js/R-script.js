@@ -1,8 +1,7 @@
 var drinkContainerEl = document.querySelector('#modal');
 
 const data = {
-    "drinks": [
-        {
+    "drinks": [{
         "idDrink": "11936",
         "strAlcoholic": "Alcoholic",
         "strCategory": "Ordinary Drink",
@@ -43,8 +42,7 @@ const data = {
         "strMeasure14": null,
         "strMeasure15": null,
         "strVideo": null
-        }
-    ]
+    }]
 }
 
 
@@ -64,55 +62,55 @@ var get10RandCocktail = function() {
 //  ****** GET THE COCKTAIL(S)  ******  //
 var getCocktails = function(fetchURL) {
     fetch(fetchURL, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
-            "x-rapidapi-key": "9fbe0f4555msh10b0fd4cdc4f9abp142f2djsn3d0f0dff927e"
-        }
-    })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
+                "x-rapidapi-key": "9fbe0f4555msh10b0fd4cdc4f9abp142f2djsn3d0f0dff927e"
+            }
+        })
         // if repsonse is ok send data to displayCocktailData(drink)
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                parseCocktailData(data.drinks);
-                })
-            // if there is a response error
+                        parseCocktailData(data.drinks);
+                    })
+                    // if there is a response error
             } else {
                 console.error("Response Failed");
-                alert("Bad Response");
+                displayModal("Bad Response");
             }
         })
-        
-        // if there is a fetch error
-        .catch(err => {
-            console.error("Fetch Failed");
-            alert("Failed to get information. Make sure you are connected to the internet.");
-        });
+
+    // if there is a fetch error
+    .catch(err => {
+        console.error("Fetch Failed");
+        displayModal("Failed to get information. Make sure you are connected to the internet.");
+    });
 };
 
 
 //  ****** DISPLAY COCKTAIL DATA  ****** //
 var parseCocktailData = function(drinks) {
-    const myDrinks = data.drinks.map(el => {  // create new array 'myDrinks' and remap old JSON data
+    const myDrinks = data.drinks.map(el => { // create new array 'myDrinks' and remap old JSON data
         let details = { // default object
-            "strIngredients": [],   // array in array
-            "strMeasures": []       // array in array
+            "strIngredients": [], // array in array
+            "strMeasures": [] // array in array
         }
         Object.keys(el).forEach(key => {
-           if(key.startsWith('strIngredient')){     // search for keys that start with strIngredient and put them in new array 'strIngredients'
-               if(el[key]) // prevent ""
-                   details.strIngredients.push(el[key])
-           } else if(key.startsWith('strMeasure')) {    // search for keys that start with strMeasures and put them in new array 'strMeasures'
-               if(el[key]) // prevent ""
-                   details.strMeasures.push(el[key])
-           } else {
-               details[key]=el[key]     // add the rest of the keys/values to the new myDrinks array
-           }
+            if (key.startsWith('strIngredient')) { // search for keys that start with strIngredient and put them in new array 'strIngredients'
+                if (el[key]) // prevent ""
+                    details.strIngredients.push(el[key])
+            } else if (key.startsWith('strMeasure')) { // search for keys that start with strMeasures and put them in new array 'strMeasures'
+                if (el[key]) // prevent ""
+                    details.strMeasures.push(el[key])
+            } else {
+                details[key] = el[key] // add the rest of the keys/values to the new myDrinks array
+            }
         })
-        
+
         return details
     })
-    
+
     // console.log(myDrinks);
     // console.log(myDrinks[0].strDrink);
     // console.log(myDrinks[0]);
@@ -142,9 +140,9 @@ const displayCocktails = (myDrinks) => {
             $('<button>').attr('id', 'drink-modal-close').addClass('button is-link').text('Close'),
         )
     )
-    
+
     $(this).data("target");
-            $("html").addClass("is-clipped");
+    $("html").addClass("is-clipped");
 
 
 
@@ -156,6 +154,3 @@ const displayCocktails = (myDrinks) => {
     //$('body').append(drinkModal);
 
 };
-
-
-

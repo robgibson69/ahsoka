@@ -1,5 +1,5 @@
 /* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
-makeAPICalls = true; //switch to true to make API calls
+makeAPICalls = false; //switch to true to make API calls
 
 const meals = [{
             strMeal: 'Burger',
@@ -131,12 +131,12 @@ const searchByIngredient = (searchString) => {
                 response.json()
                     .then((data) => {
                         //console.log(data);
-                        if (!data.meals) { alert('No Results Found'); return }
+                        if (!data.meals) { displayModal('No Results Found'); return }
                         //  console.log(data);
                         if (data.meals) {
                             displayMeals(data.meals);
                         } else {
-                            alert('No matches Found');
+                            displayModal('No matches Found');
                         }
                     })
             } else {
@@ -576,7 +576,7 @@ document.addEventListener('click', (e) => {
         $('#popModal').remove();
     } else {
         //DO NOTHING
-        //alert(e.target.id);
+        //displayModal(e.target.id);
     }
 
 
