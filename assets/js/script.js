@@ -98,6 +98,7 @@ const mealRecipe = {
     }
     /****************** */
 var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
+//var ingredientArray = [];
 
 const searchByIngredient = (searchString) => {
 
@@ -238,7 +239,7 @@ const calcMaxMealSize = (availableHeight) => {
 const displayMeals = (meals, size) => {
     $('#searchOutput').empty();
 
-    console.log(meals)
+    //console.log(meals)
 
     if (meals) {
         let oneMeal = true;
@@ -357,10 +358,12 @@ const outputIngredients = (meal) => {
         }
     }
 
+    ////ingredientArray = ingredient;
+    //console.log(ingredientArray);
+
     let ingredientList = $('<div>').addClass('ingredient-list').append(
         $('<span>').text('Ingredients:'),
         $('<button>').text('Select All').addClass('addList').attr('id', 'select-all-btn')
-
     );
 
     for (let i = 0; i < ingredient.length; i++) {
@@ -382,19 +385,28 @@ const outputIngredients = (meal) => {
             .text(measure[i])
         );
 
+        //console.log(groceryList)
+        $(groceryList).each((idx, item) => {
+            if (ingredient[i] === (item.name || item)) {
+                //console.log(ingredient[i] + " checked")
+                chkBoxItem.attr('checked', '')
+            }
+        });
+
         box.append(item);
         ingredientList.append(box);
     }
 
     /******* CALCULATE WHAT THE HEIGHT OF LEFT-COLUMN CONTAINER IS */
-    container = document.getElementById('left-column').getBoundingClientRect(),
+    container = document.getElementById('left-column').getBoundingClientRect();
 
-        $('#left-column').empty();
+    $('#left-column').empty();
     $('#left-column')
         .append(ingredientList)
         // keep height consitent it will change even though it should be locked in with the flexbox settings
         .css('max-height', (container.bottom - container.top));
 
+    ingredientToGroceryListener();
 
 }
 
@@ -422,10 +434,13 @@ const displayRecipe = (meal) => {
         }
     }
 
+    ingredientArray = ingredient;
+    //console.log(ingredientArray);
+
     /****** OUTPUT DATA TO MODAL */
     // Disable body scroll
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${window.scrollY}px`;
+    //document.body.style.position = 'fixed';
+    //document.body.style.top = `-${window.scrollY}px`;
 
     let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
 

@@ -11,7 +11,6 @@ $('#header-logo')
     .css("img{ height:80px;}")
 
 
-
 // ADD NAV BUTTONS TO LOWER RIGHT COLUMN
 const addRightCol = (elOut) => {
 
@@ -29,7 +28,7 @@ const addRightCol = (elOut) => {
     $("<div class='nav-item button is-warning'>").text('Grocery List').attr('id', 'grocery-nav').appendTo(elOut);
 
 
-}
+};
 addRightCol();
 /*   END OF CHANGES TO PAGE */
 
@@ -64,7 +63,7 @@ const listenForIngredientClicks = () => {
         localStorage.setItem("grocerylist", JSON.stringify(groceryList));
     })
 
-}
+};
 
 const displayGroceryList = () => {
 
@@ -116,7 +115,7 @@ const displayGroceryList = () => {
     } else {
         $('#grocerylist-list').append("EMPTY");
     }
-}
+};
 
 const addGroceryItem = () => {
     if ($('#add-grocery-item').val()) {
@@ -128,7 +127,7 @@ const addGroceryItem = () => {
     } else {
         $('#add-grocery-item').val('').css('opacity', '0').hide();
     }
-}
+};
 
 $('#add-grocery-item').on('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -230,7 +229,7 @@ const searchByRecipe = (searchString) => {
         .catch(err => {
             console.error(err);
         });
-}
+};
 
 /***  MODAL ALERTS */
 
@@ -290,7 +289,76 @@ const displayModal = (msg) => {
             $('#popModal').remove();
         }
     });
-}
-
+};
 
 /**** END OF MODAL ALERTS */
+
+
+/**** INGREDIENT LIST */
+
+const ingredientToGroceryListener = () => {
+    $('input.checkbox').on('change', (e) => {
+        let removeList = [];
+        if (e.target.checked) {
+            // if checked add to grocerylist
+            groceryList.push(e.target.id);
+
+            // remove duplicates
+            //code here
+
+            $(groceryList).each((idx, item) => {
+                //console.log(item)
+                //duplicateArray.push(item.name || item)
+                $(groceryList).each((x, ite) => {
+                    if (((item.name || item) === (ite.name || ite)) && x != idx) {
+                        //console.log((item.name || item) + idx + " == " + (ite.name || ite) + x);
+                        //groceryList.splice(x, 1)
+                        removeList.push(x);
+
+                    } else if (x != idx) {
+                        //console.log((item.name || item) + " ne " + (ite.name || ite))
+                    }
+                });
+            });
+
+            $(removeList).each((idx, item) => {
+                    // go through the remove list and remove the corresponding entry from grocerylist  
+                    // keeping in mind that the index will shift down with each item removed
+                    groceryList.splice(item - idx, 1);
+                    console.log(item - idx);
+                })
+                //console.log(groceryList);
+                //*** ABOVE NOT WORKING GOOD */
+                /* REMOVES ALL INSTANCES WHEN DUP FOUND */
+
+            //save list to local storage
+            localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+
+        } else { //else remove from grocerylist 
+            /*   IS NOW WORKING ?? YES **/
+            //console.log('removing ')
+            removeList = [];
+            //search list for item
+
+            $(groceryList).each((idx, item) => {
+                if (e.target.id === (item.name || item)) {
+                    //add to a list of indexes to be remove if found
+                    removeList.push(idx)
+                }
+            });
+
+            $(removeList).each((idx, item) => {
+                // go through the remove list and remove the corresponding entry from grocerylist  
+                // keeping in mind that the index will shift down with each item removed
+                groceryList.splice(item - idx, 1);
+            })
+
+
+
+            //update localStorage
+            localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+        }
+    });
+};
+
+/**** END OF INGREDIENT *****/
