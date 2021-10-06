@@ -176,11 +176,21 @@ $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
         if (el.style.order == '2') {
             let idx = $(el).children('input').attr('id');
             $(el).remove();
-            groceryList.splice(idx, 1);
-            localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+            groceryList[idx] = '';
         }
 
     });
+
+    for (let i = 0; i < groceryList.length; i++) {
+
+        if (groceryList[i] === '') {
+            groceryList.splice(i, 1);
+            i--;
+        }
+
+    };
+
+    localStorage.setItem("grocerylist", JSON.stringify(groceryList));
 
 });
 
