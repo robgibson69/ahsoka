@@ -1,5 +1,6 @@
 var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
-// var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
+//var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
+
 /*const displayGroceryList = () => {
 
     //clear existing list
@@ -53,13 +54,12 @@ function closeNav() {
 }
 
 
-const addFavourite = (meal) => {   
-    $('.fave').click(function(){
-        
-        faveList.push(meal);
-        console.log(faveList); 
-        localStorage.setItem('favourites',JSON.stringify(faveList));
-    
-    })
-    };
+const addFavourite = (meal) => {
+    $('.fave').click(function() {
 
+        faveList.push(meal);
+        console.log(faveList);
+        localStorage.setItem('favourites', JSON.stringify(faveList));
+
+    })
+};
