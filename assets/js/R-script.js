@@ -1,4 +1,5 @@
 var drinkContainerEl = document.querySelector('#modal');
+var drinkContainerMainEl = document.querySelector('main');
 
 const data = {
     "drinks": [
@@ -123,9 +124,42 @@ var parseCocktailData = function(drinks) {
 
 const displayCocktails = (myDrinks) => {
 
-    let modalDetails = $('<div>').attr('id', 'drinkDetails').addClass('modal-card-body').text("This is my text");
+    // details of drink for modal
 
+    let modalDrinkDetails = $('<div>').attr('id', 'drinkDetails').addClass('modal-card-body').text("This is my text");
 
+    let pic = $('<img>').attr('scr', myDrinks[0].strDrinkThumb);
+    let videoDiv = $('<div>').append($('<a>').attr('href', myDrinks[0].strVideo).text('Video Link'));
+    // let video = $('<a>').attr('id', 'player');
+    let instructions = $('<p>').text(myDrinks[0].strInstructions);
+    let ingredientList = $('<div>').addClass('ingredient-list');
+
+    let myIngredients = myDrinks[0].strIngredients;
+    let myMeasurments = myDrinks[0].strMeasures;
+
+    for (let i = 0; i < myIngredients.length; i++) {
+        let ingredientListBox = $("<div class='ingredient-checklist-holder'>");
+        let chkBoxItem = $('<input>').addClass('checkbox')
+            .attr('type', 'checkbox')
+            .attr('name', 'food')
+            .attr('id', myIngredients[i])
+            .attr('value', myIngredients[i]);
+
+        let item = $('<label>')
+            .attr('for', myIngredients[i])
+            .addClass('ingredient-item')
+            .addClass('checkbox')
+            .text(myIngredients[i])
+            .append(
+                $('<span>')
+                .addClass('ingredient-measure')
+                .text(myMeasurments[i])
+            );
+        ingredientListBox.append(chkBoxItem, item);
+        ingredientList.append(ingredientListBox);
+    }
+
+    modalDrinkDetails.append(pic, ingredientList, instructions);
 
     // put together header, footer and the card for the modal and append the above content.
     let drinkModal = $('<div>').addClass('modal is-active').attr('id', 'drinkModal');
@@ -136,24 +170,18 @@ const displayCocktails = (myDrinks) => {
             $('<button>').attr('id', 'drink-modal-close').addClass('delete').attr('aria-label', 'close')
         ),
 
-        modalDetails,
+        modalDrinkDetails,
 
         $('<div>').addClass('modal-card-foot').append(
             $('<button>').attr('id', 'drink-modal-close').addClass('button is-link').text('Close'),
         )
     )
     
-    $(this).data("target");
-            $("html").addClass("is-clipped");
-
-
-
     modalBack.append(modalCard);
     drinkModal.append(modalBack);
-    // drinkContainerEl.addClass('is-active');
-    // drinkContainerEl.append(drinkModal);
-
-    //$('body').append(drinkModal);
+    //drinkContainerEl.addClass('is-active');
+    //drinkContainerMainEl.append(drinkModal);
+    $('body').append(drinkModal);
 
 };
 
