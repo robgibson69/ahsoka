@@ -497,8 +497,8 @@ $('#ingredientSearch').on('keypress', (e) => {
         $('#searchBtn').click();
     }
 });
-
-document.addEventListener('click', (e) => {
+logoHomeBtn();
+document.addEventListener('click', (e) => { 
 
     if ($('#add-grocery-item').css('opacity') == 1) {
         $('#add-grocery-item').val('').css('opacity', '0').hide();
@@ -512,7 +512,7 @@ document.addEventListener('click', (e) => {
             searchByIngredient() :
             searchByRecipe();
 
-    } else if (e.target.id === "randoBtn") {
+    }else if (e.target.id === "randoBtn") {
         //hide the searchbar
         $('#searchBar').hide();
         //reset output

@@ -63,3 +63,9 @@ const addFavourite = (meal) => {
 
     })
 };
+
+const logoHomeBtn = () =>{
+    $('#header-logo').click(function(){
+        $('#ingredient-nav').click();
+    })
+}
