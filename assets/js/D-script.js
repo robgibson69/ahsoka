@@ -37,13 +37,13 @@ addRightCol();
 const listenForIngredientClicks = () => {
 
     $('.addList').click(function() {
-
+        displayModal('add all to list!!')
         $.each($("input[class='food']"), function() {
-            groceryList.push($(this).val());
+            // groceryList.push($(this).val());
             this.checked = true;
         });
         //console.log(groceryList)
-        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+        // localStorage.setItem("grocerylist", JSON.stringify(groceryList));
     })
 
     /* $('.food').click((e) => {
@@ -296,26 +296,18 @@ const displayModal = (msg) => {
 
 
 /**** INGREDIENT LIST */
-const updateChecks = () => {
-    $('#recipeModal .ingredient-checklist-holder input').each((idx, chk) => {
-
-        //console.log('checking')
-
-        $(groceryList).each((idx, item) => {
-
-            if ((item.name || item) === chk.id) {
-                chk.checked ? $(item).prop('checked', true) :
-                    $(item).prop('checked', false)
-            }
-
-        });
-
-    });
-
-
-};
 
 const ingredientToGroceryListener = () => {
+
+    $('.addList').click(function() {
+        // displayModal('add all to list!!')
+        $.each($("input.checkbox"), function() {
+
+            this.checked = true;
+            $(this).change(); // trigger change event listener
+        });
+    })
+
     $('input.checkbox').on('change', (e) => {
         let removeList = [];
         if (e.target.checked) {
@@ -379,7 +371,7 @@ const ingredientToGroceryListener = () => {
             //update localStorage
             localStorage.setItem("grocerylist", JSON.stringify(groceryList));
         }
-        //updateChecks(); // fixes recipe modal... only it doesnt
+
     });
 };
 
