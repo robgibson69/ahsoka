@@ -46,22 +46,23 @@ const listenForIngredientClicks = () => {
         localStorage.setItem("grocerylist", JSON.stringify(groceryList));
     })
 
-    $('.food').click((e) => {
-        if (e.target.checked) groceryList.push($(e.target).val());
-        else {
-            // check grocerylist for target.val()
-            $(groceryList).each((i, item) => {
-                if (item.name === $(e.target).val()) {
-                    displayModal('found in list');
-                    //remove if found
-                    groceryList.splice(i, 1); // remove
+    /* $('.food').click((e) => {
+         if (e.target.checked) groceryList.push($(e.target).val());
+         else {
+             // check grocerylist for target.val()
+             $(groceryList).each((i, item) => {
+                 if (item.name === $(e.target).val()) {
+                     displayModal('found in list');
+                     //remove if found
+                     groceryList.splice(i, 1); // remove
 
-                }
-            });
+                 }
+             });
 
-        }
-        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
-    })
+         }
+         localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+     })
+     */
 
 };
 
@@ -295,6 +296,24 @@ const displayModal = (msg) => {
 
 
 /**** INGREDIENT LIST */
+const updateChecks = () => {
+    $('#recipeModal .ingredient-checklist-holder input').each((idx, chk) => {
+
+        //console.log('checking')
+
+        $(groceryList).each((idx, item) => {
+
+            if ((item.name || item) === chk.id) {
+                chk.checked ? $(item).prop('checked', true) :
+                    $(item).prop('checked', false)
+            }
+
+        });
+
+    });
+
+
+};
 
 const ingredientToGroceryListener = () => {
     $('input.checkbox').on('change', (e) => {
@@ -302,6 +321,8 @@ const ingredientToGroceryListener = () => {
         if (e.target.checked) {
             // if checked add to grocerylist
             groceryList.push(e.target.id);
+
+            console.log('added');
 
             // remove duplicates
             //code here
@@ -336,7 +357,7 @@ const ingredientToGroceryListener = () => {
 
         } else { //else remove from grocerylist 
             /*   IS NOW WORKING ?? YES **/
-            //console.log('removing ')
+            console.log('removing ')
             removeList = [];
             //search list for item
 
@@ -358,6 +379,7 @@ const ingredientToGroceryListener = () => {
             //update localStorage
             localStorage.setItem("grocerylist", JSON.stringify(groceryList));
         }
+        //updateChecks(); // fixes recipe modal... only it doesnt
     });
 };
 
