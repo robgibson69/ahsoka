@@ -269,7 +269,7 @@ const displayModal = (msg) => {
 
         $('<div>').addClass('modal-card-head').append(
             $('<p>').addClass('modal-card-title').text(msg.head),
-            // $('<button>').attr('id', 'pop-modal-close').addClass('delete').attr('aria-label', 'close')
+            $('<button>').attr('id', 'pop-modal-close').addClass('delete').attr('aria-label', 'close')
         ),
         modalContent
     )
