@@ -313,10 +313,6 @@ const ingredientToGroceryListener = () => {
 
             // console.log('added ' + e.target.id);
 
-            if (e.target.id == 0) {
-                console.log(e.target)
-            }
-
             // remove duplicates
             //code here
             $(groceryList).each((idx, item) => {

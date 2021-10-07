@@ -282,8 +282,8 @@ const displayMeals = (meals, size) => {
         /** SET THE SIZE OF THE MEAL CONTAINERS */
         if (size) { // if size is provided set the size to that %width
             $('.meal-container')
-                .css('width', size + 'vw')
-                .css('height', size + 'vw');
+                .css('width', calcMaxMealSize(maxHeight) / size + 'px')
+                .css('height', calcMaxMealSize(maxHeight) / size + 'px');
 
         } else { // calc max available size in px
             size = calcMaxMealSize(maxHeight);
@@ -449,12 +449,17 @@ const displayRecipe = (meal) => {
     let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
 
     let pic = $('<img>').attr('src', image);
-    let link = $('<a>').attr('href', source).text(source);
+    let link = $('<a>').attr('href', source);
     let tube = $('<div>').attr('id', 'player');
 
-    let instructions = $('<p>').text(recipe);
+    let instructions = $('<p>').append("<hr>" + recipe);
 
-    let ingredientList = $('<div>').addClass('ingredient-list');
+    let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
+    let addFavouriteBtn = $('<button>').text('Add To Favourites').addClass('fave');
+
+    let ingredientList = $('<div>').addClass('ingredient-list')
+        .append("Ingredients:")
+        .append(addIngredientBtn, addFavouriteBtn);
 
     for (let i = 0; i < ingredient.length; i++) {
         let box = $("<div class='ingredient-checklist-holder'>")
@@ -487,10 +492,9 @@ const displayRecipe = (meal) => {
         ingredientList.append(box);
     }
 
-    let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
-    let addFavouriteBtn = $('<button>').text('Add To Favourites').addClass('fave');
 
-    modalContent.append(link, pic, ingredientList, addIngredientBtn, addFavouriteBtn, instructions);
+
+    modalContent.append(link.append(pic), ingredientList, instructions);
 
     let modal = $('<div>').addClass('modal is-active').attr('id', 'recipeModal');
     let modalBG = $('<div>').addClass('modal-background')
@@ -518,7 +522,7 @@ const displayFavRecipes = () => {
     // if(faveList ===! ''){
     $('#searchOutput').empty();
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
-    displayMeals(faveList); // at size 46% width of screen // aka 2 per row with some spacing
+    displayMeals(faveList, 2); // 3 per row with some spacing
 }
 
 $('#ingredientSearch').on('keypress', (e) => {
