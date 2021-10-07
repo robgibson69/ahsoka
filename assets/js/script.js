@@ -746,7 +746,6 @@ const displayModal = (msg) => {
     });
 };
 
-
 const addFavourite = (meal) => {
     $('.fave').click(function() {
 
