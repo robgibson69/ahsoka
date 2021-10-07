@@ -118,9 +118,11 @@ nav {
     color: #363636;
 }
 
+header,
 #main,
 #main-col-div,
-#info-columns {
+#info-columns,
+footer {
     width: 100%;
     max-width: 75vh;
     margin: 0 auto;
