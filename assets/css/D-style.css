@@ -9,12 +9,12 @@
 }
 
 #grocerylist-list {
-    margin-top: .2rem;
+    margin-top: 1rem;
     width: 100%;
-    height: 95vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #grocerylist-list div.div {
@@ -46,7 +46,7 @@ label.grocery-list-item::before {
     content: '⛔ ';
 }
 
-input:checked+label::before {
+#grocerylist-list input:checked+label::before {
     /* content: url('https://www.svgrepo.com/show/48638/check.svg'); */
     content: '✅ ';
 }
@@ -115,23 +115,55 @@ input:checked+label::before {
 }
 
 #LOGO {
-    max-width: 800px;
-    max-height: 800px;
+    max-width: 600px;
     width: 100%;
-    height: 100%;
+    /*   max-height: 800px; */
+    /*  height: 100%; */
     margin-top: 3rem;
     background-image: url('../images/logo1.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
+header,
+#main-col-div,
+#mid-col-div,
+footer {
+    border-radius: .23rem;
+}
+
 
 /**
 
+/*** POP MODAL STYLING ***/
 
-/***  FAV ICON IN RECIPE MODAL CARD */
+#popModal footer.modal-card-foot {
+    justify-content: flex-end;
+}
 
 
-/** COMMING SOON
+/***
 
-/** END OF FAV RECIPE ICON
+
+/***  RECIPE MODAL CARD */
+
+#recipeModal .ingredient-list button {
+    margin-left: 1.5rem;
+}
+
+#recipeModal img {
+    width: 45%;
+    margin-left: 0%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.ingredient-list {
+    display: inline-block;
+    margin-left: .5rem;
+}
+
+
+/** COMMING SOON FAV ICON
+
+/** END OF RECIPE MODAL ***/
