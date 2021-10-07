@@ -63,3 +63,25 @@ const addFavourite = (meal) => {
 
     })
 };
+
+const logoHomeBtn = () => {
+    $('#header-logo').click(function(){
+        $('#ingredient-nav').click();
+    })
+}
+
+const displayFavHomepge = () =>{
+    
+    for (let i = 0; i < faveList.length; i++) {
+        let favMealName = faveList[i].strMeal
+        // console.log(faveList[i]);
+        let fave = $("<button>").text(favMealName).addClass('favMealName button is-primary').css({'display':'block', 'margin':'10px'});
+        $('#left-column').append(fave);
+        
+        $('.favMealName').click(function() {
+        //    console.log(faveList[i]);
+           displayRecipe(faveList[i]);
+        });
+    };
+    
+}

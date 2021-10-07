@@ -98,6 +98,8 @@ const mealRecipe = {
     }
     /****************** */
 var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
+displayFavHomepge(faveList);
+
 var lastMeal = {};
 
 const searchByIngredient = (searchString) => {
@@ -530,8 +532,9 @@ $('#ingredientSearch').on('keypress', (e) => {
         $('#searchBtn').click();
     }
 });
+logoHomeBtn();
 
-document.addEventListener('click', (e) => {
+document.addEventListener('click', (e) => { 
 
     if ($('#add-grocery-item').css('opacity') == 1) {
         $('#add-grocery-item').val('').css('opacity', '0').hide();
@@ -545,7 +548,7 @@ document.addEventListener('click', (e) => {
             searchByIngredient() :
             searchByRecipe();
 
-    } else if (e.target.id === "randoBtn") {
+    }else if (e.target.id === "randoBtn") {
         //hide the searchbar
         $('#searchBar').hide();
         //reset output
