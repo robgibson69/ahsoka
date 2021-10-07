@@ -98,6 +98,7 @@ const mealRecipe = {
     }
     /****************** */
 var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
+var lastMeal = {};
 
 const searchByIngredient = (searchString) => {
 
@@ -238,7 +239,7 @@ const calcMaxMealSize = (availableHeight) => {
 const displayMeals = (meals, size) => {
     $('#searchOutput').empty();
 
-    console.log(meals)
+    //console.log(meals)
 
     if (meals) {
         let oneMeal = true;
@@ -343,6 +344,7 @@ const fetchIngredients = (idNum) => {
 }
 
 const outputIngredients = (meal) => {
+    lastMeal = meal;
     let ingredient = [];
     let measure = [];
 
@@ -357,10 +359,12 @@ const outputIngredients = (meal) => {
         }
     }
 
+    ////ingredientArray = ingredient;
+    //console.log(ingredientArray);
+
     let ingredientList = $('<div>').addClass('ingredient-list').append(
         $('<span>').text('Ingredients:'),
         $('<button>').text('Select All').addClass('addList').attr('id', 'select-all-btn')
-
     );
 
     for (let i = 0; i < ingredient.length; i++) {
@@ -382,19 +386,28 @@ const outputIngredients = (meal) => {
             .text(measure[i])
         );
 
+        //console.log(groceryList)
+        $(groceryList).each((idx, item) => {
+            if (ingredient[i] === (item.name || item)) {
+                //console.log(ingredient[i] + " checked")
+                chkBoxItem.attr('checked', '')
+            }
+        });
+
         box.append(item);
         ingredientList.append(box);
     }
 
     /******* CALCULATE WHAT THE HEIGHT OF LEFT-COLUMN CONTAINER IS */
-    container = document.getElementById('left-column').getBoundingClientRect(),
+    container = document.getElementById('left-column').getBoundingClientRect();
 
-        $('#left-column').empty();
+    $('#left-column').empty();
     $('#left-column')
         .append(ingredientList)
         // keep height consitent it will change even though it should be locked in with the flexbox settings
         .css('max-height', (container.bottom - container.top));
 
+    ingredientToGroceryListener();
 
 }
 
@@ -422,10 +435,13 @@ const displayRecipe = (meal) => {
         }
     }
 
+    //ingredientArray = ingredient;
+    //console.log(ingredientArray);
+
     /****** OUTPUT DATA TO MODAL */
     // Disable body scroll
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${window.scrollY}px`;
+    //document.body.style.position = 'fixed';
+    //document.body.style.top = `-${window.scrollY}px`;
 
     let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
 
@@ -438,24 +454,31 @@ const displayRecipe = (meal) => {
     let ingredientList = $('<div>').addClass('ingredient-list');
 
     for (let i = 0; i < ingredient.length; i++) {
-        let box = $("<div class='ingredient-checklist-holder'>");
+        let box = $("<div class='ingredient-checklist-holder'>")
         let chkBoxItem = $('<input>')
-            .addClass('checkbox')
+            .addClass('checkbox food')
             .attr('type', 'checkbox')
-            .attr('id', ingredient[i])
-            .attr('class', 'food')
-            .attr('value', ingredient[i]);
-
+            .attr('id', ingredient[i]);
         let item = $('<label>')
             .attr('for', ingredient[i])
             .addClass('ingredient-item')
             .addClass('checkbox')
-            .text(ingredient[i])
-            .append(
-                $('<span>')
-                .addClass('ingredient-measure')
-                .text(measure[i])
-            );
+            .append(chkBoxItem)
+            .append(ingredient[i])
+
+        .append(
+            $("<div style='display:inline-block'>")
+            .addClass('ingredient-measure')
+            .text(measure[i])
+        );
+
+        //console.log(groceryList)
+        $(groceryList).each((idx, item) => {
+            if (ingredient[i] === (item.name || item)) {
+                //console.log(ingredient[i] + " checked")
+                chkBoxItem.attr('checked', '')
+            }
+        });
 
         box.append(chkBoxItem, item);
         ingredientList.append(box);
@@ -481,7 +504,9 @@ const displayRecipe = (meal) => {
 
     $('body').append(modal);
 
-    listenForIngredientClicks();
+    //listenForIngredientClicks();
+    $('#left-column').empty();
+    ingredientToGroceryListener();
     addFavourite(meal);
 }
 
@@ -567,11 +592,13 @@ document.addEventListener('click', (e) => {
 
     } else if (e.target.id === 'meal-modal-close') {
         $('#recipeModal').remove();
-        //enable body scroll
-        const scrollY = document.body.style.top;
-        document.body.style.position = '';
-        document.body.style.top = '';
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        if ($('#left-column .ingredient-list')) { outputIngredients(lastMeal); }
+        /* //enable body scroll
+         const scrollY = document.body.style.top;
+         document.body.style.position = '';
+         document.body.style.top = '';
+         window.scrollTo(0, parseInt(scrollY || '0') * -1);
+         */
     } else if (e.target.id === 'pop-modal-close') {
         $('#popModal').remove();
     } else {
