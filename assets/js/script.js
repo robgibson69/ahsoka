@@ -102,10 +102,13 @@ var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
 
 const displayFavHomepge = () => {
 
+    $('#left-column').empty();
+    let container = document.getElementById('right-column').getBoundingClientRect();
+
     for (let i = 0; i < faveList.length; i++) {
         let favMealName = faveList[i].strMeal
             // console.log(faveList[i]);
-        let fave = $("<button>").text(favMealName).attr('data-idx', i).addClass('favMealName button is-primary').css({ 'display': 'block', 'margin': '10px' });
+        let fave = $("<button>").text(favMealName).attr('data-idx', i).addClass('favMealName button is-pink').css({ 'display': 'block', 'margin': '10px' });
         $('#left-column').append(fave);
     };
 
@@ -113,6 +116,11 @@ const displayFavHomepge = () => {
         //    console.log(faveList[i]);
         displayRecipe(faveList[$(e.target).attr('data-idx')]);
     });
+
+
+    $('#left-column')
+        // keep height consitent it will change even though it should be locked in with the flexbox settings
+        .css('max-height', (container.bottom - container.top));
 
 }
 
@@ -880,7 +888,7 @@ const addRightCol = (elOut) => {
     */
     $("<div class='nav-item button is-primary'>").text('Search Ingredients').attr('id', 'ingredient-nav').appendTo(elOut);
     $("<div class='nav-item button is-info'>").text('Search Recipe').attr('id', 'recipe-nav').appendTo(elOut);
-    $("<div class='nav-item button is-pink'>").text('Random').attr('id', 'randoBtn').appendTo(elOut);
+    $("<div class='nav-item button is-purple'>").text('Random').attr('id', 'randoBtn').appendTo(elOut);
     $("<div class='nav-item button is-warning'>").text('Grocery List').attr('id', 'grocery-nav').appendTo(elOut);
 
 

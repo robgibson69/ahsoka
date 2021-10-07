@@ -324,6 +324,11 @@ label.grocery-list-item::before {
     border-color: transparent;
 }
 
+.is-purple {
+    background-color: rgb(145, 92, 206);
+    border-color: transparent;
+}
+
 
 /*** END OF NAV TO RIGHT COLUMN */
 
