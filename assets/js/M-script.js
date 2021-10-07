@@ -76,12 +76,12 @@ const displayFavHomepge = () =>{
         let favMealName = faveList[i].strMeal
         // console.log(faveList[i]);
         let fave = $("<button>").text(favMealName).addClass('favMealName button is-primary').css({'display':'block', 'margin':'10px'});
-        $('#left-column').append(fave);
+        $('#left-column').append(fave).css({'max-height':('container.bottom' - 'container.top'), 'overflow':'scroll'});
         
         $('.favMealName').click(function() {
         //    console.log(faveList[i]);
            displayRecipe(faveList[i]);
-        });
+        })
     };
     
 }
