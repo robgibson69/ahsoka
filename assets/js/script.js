@@ -592,7 +592,7 @@ document.addEventListener('click', (e) => {
 
     } else if (e.target.id === 'meal-modal-close') {
         $('#recipeModal').remove();
-        outputIngredients(lastMeal);
+        if ($('#left-column .ingredient-list')) { outputIngredients(lastMeal); }
         /* //enable body scroll
          const scrollY = document.body.style.top;
          document.body.style.position = '';
