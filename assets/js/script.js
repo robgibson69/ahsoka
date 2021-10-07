@@ -2,102 +2,120 @@
 makeAPICalls = false; //switch to true to make API calls
 
 const meals = [{
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69421'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69422'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69423'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69424'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69425'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69426'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69427'
-        },
-    ]
-    /************ */
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69420'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69421'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69422'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69423'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69424'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69425'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69426'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69427'
+},
+]
+/************ */
 const mealRecipe = {
 
-        strMeal: 'Burger',
-        strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-        strSource: 'www.not_a_real_recipe_dot_com.org',
-        strYoutube: 'www.not_a_real_youTube_dot_com.org',
-        idMeal: '69421',
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    strSource: 'www.not_a_real_recipe_dot_com.org',
+    strYoutube: 'www.not_a_real_youTube_dot_com.org',
+    idMeal: '69421',
 
-        strInstructions: "Cook the patty and then put it between two half buns",
+    strInstructions: "Cook the patty and then put it between two half buns",
 
-        strIngredient1: "Hamburger Buns",
-        strIngredient2: "Ground Beef",
-        strIngredient3: "Mustard",
-        strIngredient4: "Ketchup",
-        strIngredient5: "Lettuce",
-        strIngredient6: "Tomato",
-        strIngredient7: "Pickles",
-        strIngredient8: "Onion",
-        strIngredient9: '',
-        strIngredient10: '',
-        strIngredient11: '',
-        strIngredient12: '',
-        strIngredient13: '',
-        strIngredient14: '',
-        strIngredient15: '',
-        strIngredient16: '',
-        strIngredient17: '',
-        strIngredient18: '',
-        strIngredient19: '',
-        strIngredient20: '',
+    strIngredient1: "Hamburger Buns",
+    strIngredient2: "Ground Beef",
+    strIngredient3: "Mustard",
+    strIngredient4: "Ketchup",
+    strIngredient5: "Lettuce",
+    strIngredient6: "Tomato",
+    strIngredient7: "Pickles",
+    strIngredient8: "Onion",
+    strIngredient9: '',
+    strIngredient10: '',
+    strIngredient11: '',
+    strIngredient12: '',
+    strIngredient13: '',
+    strIngredient14: '',
+    strIngredient15: '',
+    strIngredient16: '',
+    strIngredient17: '',
+    strIngredient18: '',
+    strIngredient19: '',
+    strIngredient20: '',
 
-        strMeasure1: "1 bag",
-        strMeasure2: "1 pound",
-        strMeasure3: "1 tblspoon",
-        strMeasure4: "1 tblspoon",
-        strMeasure5: "3 leaves",
-        strMeasure6: "1 ripe one",
-        strMeasure7: "2 should do",
-        strMeasure8: "1/2 chopped",
-        strMeasure9: '',
-        strMeasure10: '',
-        strMeasure11: '',
-        strMeasure12: '',
-        strMeasure13: '',
-        strMeasure14: '',
-        strMeasure15: '',
-        strMeasure16: '',
-        strMeasure17: '',
-        strMeasure18: '',
-        strMeasure19: '',
-        strMeasure20: '',
+    strMeasure1: "1 bag",
+    strMeasure2: "1 pound",
+    strMeasure3: "1 tblspoon",
+    strMeasure4: "1 tblspoon",
+    strMeasure5: "3 leaves",
+    strMeasure6: "1 ripe one",
+    strMeasure7: "2 should do",
+    strMeasure8: "1/2 chopped",
+    strMeasure9: '',
+    strMeasure10: '',
+    strMeasure11: '',
+    strMeasure12: '',
+    strMeasure13: '',
+    strMeasure14: '',
+    strMeasure15: '',
+    strMeasure16: '',
+    strMeasure17: '',
+    strMeasure18: '',
+    strMeasure19: '',
+    strMeasure20: '',
 
-    }
-    /****************** */
+}
+/****************** */
+var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
 var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
+
+const displayFavHomepge = () => {
+
+    for (let i = 0; i < faveList.length; i++) {
+        let favMealName = faveList[i].strMeal
+        // console.log(faveList[i]);
+        let fave = $("<button>").text(favMealName).addClass('favMealName button is-primary').css({ 'display': 'block', 'margin': '10px' });
+        $('#left-column').append(fave);
+
+        $('.favMealName').click(function () {
+            //    console.log(faveList[i]);
+            displayRecipe(faveList[i]);
+        });
+    };
+
+}
+
 displayFavHomepge(faveList);
 
 var lastMeal = {};
@@ -124,12 +142,12 @@ const searchByIngredient = (searchString) => {
     searchString = encodeURI(searchString);
 
     fetch("https://themealdb.p.rapidapi.com/filter.php?i=" + searchString, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-            }
-        })
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "themealdb.p.rapidapi.com",
+            "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+        }
+    })
         .then(response => {
             if (response.ok) {
                 response.json()
@@ -166,12 +184,12 @@ const searchRandomMeal = () => {
     /***** */
 
     fetch("https://themealdb.p.rapidapi.com/random.php", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-            }
-        })
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "themealdb.p.rapidapi.com",
+            "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+        }
+    })
         .then(response => {
             if (response.ok) {
                 response.json()
@@ -205,12 +223,12 @@ const fetchRecipe = (idNum) => {
     if (idNum !== '') {
 
         fetch("https://themealdb.p.rapidapi.com/lookup.php?i=" + idNum, {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                    "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-                }
-            })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
             .then(response => {
                 if (response.ok) {
                     response.json()
@@ -324,12 +342,12 @@ const fetchIngredients = (idNum) => {
     if (idNum !== '') {
 
         fetch("https://themealdb.p.rapidapi.com/lookup.php?i=" + idNum, {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                    "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-                }
-            })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
             .then(response => {
                 if (response.ok) {
                     response.json()
@@ -385,11 +403,11 @@ const outputIngredients = (meal) => {
             .append(chkBoxItem)
             .append(ingredient[i])
 
-        .append(
-            $("<div style='display:inline-block'>")
-            .addClass('ingredient-measure')
-            .text(measure[i])
-        );
+            .append(
+                $("<div style='display:inline-block'>")
+                    .addClass('ingredient-measure')
+                    .text(measure[i])
+            );
 
         //console.log(groceryList)
         $(groceryList).each((idx, item) => {
@@ -471,11 +489,11 @@ const displayRecipe = (meal) => {
             .append(chkBoxItem)
             .append(ingredient[i])
 
-        .append(
-            $("<div style='display:inline-block'>")
-            .addClass('ingredient-measure')
-            .text(measure[i])
-        );
+            .append(
+                $("<div style='display:inline-block'>")
+                    .addClass('ingredient-measure')
+                    .text(measure[i])
+            );
 
         //console.log(groceryList)
         $(groceryList).each((idx, item) => {
@@ -514,7 +532,15 @@ const displayRecipe = (meal) => {
     ingredientToGroceryListener();
     addFavourite(meal);
 }
+const addFavourite = (meal) => {
+    $('.fave').click(function () {
 
+        faveList.push(meal);
+        console.log(faveList);
+        localStorage.setItem('favourites', JSON.stringify(faveList));
+
+    })
+};
 
 const displayFavRecipes = () => {
     // if(faveList ===! ''){
@@ -528,9 +554,16 @@ $('#ingredientSearch').on('keypress', (e) => {
         $('#searchBtn').click();
     }
 });
+
+const logoHomeBtn = () => {
+    $('#header-logo').click(function () {
+        $('#ingredient-nav').click();
+    })
+}
 logoHomeBtn();
 
-document.addEventListener('click', (e) => { 
+
+document.addEventListener('click', (e) => {
 
     if ($('#add-grocery-item').css('opacity') == 1) {
         $('#add-grocery-item').val('').css('opacity', '0').hide();
@@ -544,7 +577,7 @@ document.addEventListener('click', (e) => {
             searchByIngredient() :
             searchByRecipe();
 
-    }else if (e.target.id === "randoBtn") {
+    } else if (e.target.id === "randoBtn") {
         //hide the searchbar
         $('#searchBar').hide();
         //reset output
@@ -615,3 +648,15 @@ document.addEventListener('click', (e) => {
 
 
 });
+
+//opens sidebar from main nav
+function openNav() {
+    displayGroceryList();
+    $("#grocerylist").css({ 'left': '0' });
+
+}
+
+//close sidebar
+function closeNav() {
+    $("#grocerylist").css({ 'left': '-250px' });
+}

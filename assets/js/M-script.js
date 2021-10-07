@@ -1,4 +1,4 @@
-var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
+// var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
 //var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
 
 /*const displayGroceryList = () => {
@@ -41,47 +41,47 @@ const listenForIngredientClicks = () => {
 
 */
 
-//opens sidebar from main nav
-function openNav() {
-    displayGroceryList();
-    $("#grocerylist").css({ 'left': '0' });
+// //opens sidebar from main nav
+// function openNav() {
+//     displayGroceryList();
+//     $("#grocerylist").css({ 'left': '0' });
 
-}
+// }
 
-//close sidebar
-function closeNav() {
-    $("#grocerylist").css({ 'left': '-250px' });
-}
+// //close sidebar
+// function closeNav() {
+//     $("#grocerylist").css({ 'left': '-250px' });
+// }
 
 
-const addFavourite = (meal) => {
-    $('.fave').click(function() {
+// const addFavourite = (meal) => {
+//     $('.fave').click(function() {
 
-        faveList.push(meal);
-        console.log(faveList);
-        localStorage.setItem('favourites', JSON.stringify(faveList));
+//         faveList.push(meal);
+//         console.log(faveList);
+//         localStorage.setItem('favourites', JSON.stringify(faveList));
 
-    })
-};
+//     })
+// };
 
-const logoHomeBtn = () => {
-    $('#header-logo').click(function(){
-        $('#ingredient-nav').click();
-    })
-}
+// const logoHomeBtn = () => {
+//     $('#header-logo').click(function(){
+//         $('#ingredient-nav').click();
+//     })
+// }
 
-const displayFavHomepge = () =>{
+// const displayFavHomepge = () =>{
     
-    for (let i = 0; i < faveList.length; i++) {
-        let favMealName = faveList[i].strMeal
-        // console.log(faveList[i]);
-        let fave = $("<button>").text(favMealName).addClass('favMealName button is-primary').css({'display':'block', 'margin':'10px'});
-        $('#left-column').append(fave);
+//     for (let i = 0; i < faveList.length; i++) {
+//         let favMealName = faveList[i].strMeal
+//         // console.log(faveList[i]);
+//         let fave = $("<button>").text(favMealName).addClass('favMealName button is-primary').css({'display':'block', 'margin':'10px'});
+//         $('#left-column').append(fave);
         
-        $('.favMealName').click(function() {
-        //    console.log(faveList[i]);
-           displayRecipe(faveList[i]);
-        });
-    };
+//         $('.favMealName').click(function() {
+//         //    console.log(faveList[i]);
+//            displayRecipe(faveList[i]);
+//         });
+//     };
     
-}
+// }
