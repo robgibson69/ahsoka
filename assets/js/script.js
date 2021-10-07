@@ -98,7 +98,7 @@ const mealRecipe = {
     }
     /****************** */
 var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
-
+displayFavHomepge(faveList);
 const searchByIngredient = (searchString) => {
 
     /****** */
@@ -498,6 +498,7 @@ $('#ingredientSearch').on('keypress', (e) => {
     }
 });
 logoHomeBtn();
+
 document.addEventListener('click', (e) => { 
 
     if ($('#add-grocery-item').css('opacity') == 1) {

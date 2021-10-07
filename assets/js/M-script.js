@@ -64,8 +64,24 @@ const addFavourite = (meal) => {
     })
 };
 
-const logoHomeBtn = () =>{
+const logoHomeBtn = () => {
     $('#header-logo').click(function(){
         $('#ingredient-nav').click();
     })
+}
+
+const displayFavHomepge = (faveList) =>{
+    
+    for (let i = 0; i < faveList.length; i++) {
+        let favMealName = faveList[i].strMeal
+        console.log(favMealName);
+        let fave = $("<button>").text(favMealName).addClass('favMealName button is-primary').css({'display':'block', 'margin':'10px'}).attr('for', faveList[i]); 
+        $('#left-column').append(fave);
+        
+
+    };
+    $('.favMealName').click(function() {
+        console.log(faveList);
+        displayRecipe('.favMealName');
+    });
 }
