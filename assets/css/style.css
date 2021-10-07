@@ -454,6 +454,10 @@ button.favMealName {
     margin-left: .5rem;
 }
 
+button.drink-pairing {
+    float: right;
+}
+
 
 /** COMMING SOON FAV ICON
 
