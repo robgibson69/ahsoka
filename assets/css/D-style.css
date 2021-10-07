@@ -145,9 +145,25 @@ footer {
 /***
 
 
-/***  FAV ICON IN RECIPE MODAL CARD */
+/***  RECIPE MODAL CARD */
+
+#recipeModal .ingredient-list button {
+    margin-left: 1.5rem;
+}
+
+#recipeModal img {
+    width: 45%;
+    margin-left: 0%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.ingredient-list {
+    display: inline-block;
+    margin-left: .5rem;
+}
 
 
-/** COMMING SOON
+/** COMMING SOON FAV ICON
 
-/** END OF FAV RECIPE ICON
+/** END OF RECIPE MODAL ***/
