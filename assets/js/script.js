@@ -244,7 +244,7 @@ const displayMeals = (meals, size) => {
 
     //console.log(meals)
 
-    if (meals) {
+    if (meals.length) {
         let oneMeal = true;
         if (meals.length > 1) {
             oneMeal = false;
