@@ -70,18 +70,18 @@ const logoHomeBtn = () => {
     })
 }
 
-const displayFavHomepge = (faveList) =>{
+const displayFavHomepge = () =>{
     
     for (let i = 0; i < faveList.length; i++) {
         let favMealName = faveList[i].strMeal
-        console.log(favMealName);
-        let fave = $("<button>").text(favMealName).addClass('favMealName button is-primary').css({'display':'block', 'margin':'10px'}).attr('for', faveList[i]); 
+        // console.log(faveList[i]);
+        let fave = $("<button>").text(favMealName).addClass('favMealName button is-primary').css({'display':'block', 'margin':'10px'});
         $('#left-column').append(fave);
         
-
+        $('.favMealName').click(function() {
+        //    console.log(faveList[i]);
+           displayRecipe(faveList[i]);
+        });
     };
-    $('.favMealName').click(function() {
-        console.log(faveList);
-        displayRecipe('.favMealName');
-    });
+    
 }
