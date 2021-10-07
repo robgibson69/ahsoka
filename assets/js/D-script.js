@@ -86,8 +86,9 @@ const displayGroceryList = () => {
         let removeBtn = $('<button>')
             .addClass('button is-danger is-small')
             .text('Remove Collected')
-            .css('order', '3')
-            .css('margin-top', 'auto');
+            .css({ 'position': 'fixed', 'bottom': '0', 'width': '250px' })
+            // .css('order', '3')
+            // .css('margin-top', 'auto');
         $('#grocerylist-list').append(
             $("<div class='div'>").text('Collected Items').css('order', '1'),
             removeBtn
@@ -184,6 +185,7 @@ const searchByRecipe = (searchString) => {
     /****** */
     // testing without api call
     if (!makeAPICalls) {
+        $('#searchOutput').empty();
         displayMeals(meals);
         return;
     }
@@ -210,6 +212,7 @@ const searchByRecipe = (searchString) => {
                         if (!data.meals) { displayModal('No Results Found'); return; }
                         // console.log(data);
                         if (data.meals) {
+                            $('#searchOutput').empty();
                             displayMeals(data.meals);
                         } else {
                             displayModal('No matches Found');

@@ -105,6 +105,7 @@ const searchByIngredient = (searchString) => {
     /****** */
     // testing without api call
     if (!makeAPICalls) {
+        $('#searchOutput').empty();
         displayMeals(meals);
         return;
     }
@@ -135,6 +136,7 @@ const searchByIngredient = (searchString) => {
                         if (!data.meals) { displayModal('No Results Found'); return }
                         //  console.log(data);
                         if (data.meals) {
+                            $('#searchOutput').empty();
                             displayMeals(data.meals);
                         } else {
                             displayModal('No matches Found');
@@ -154,6 +156,7 @@ const searchRandomMeal = () => {
     /****** */
     // testing without api call
     if (!makeAPICalls) {
+        $('#searchOutput').empty();
         displayMeals([meals[0]]);
         return;
     }
@@ -172,6 +175,7 @@ const searchRandomMeal = () => {
                 response.json()
                     .then((data) => {
                         //console.log(data);
+                        $('#searchOutput').empty();
                         displayMeals(data.meals);
                     })
             } else {
@@ -237,7 +241,6 @@ const calcMaxMealSize = (availableHeight) => {
 }
 
 const displayMeals = (meals, size) => {
-    $('#searchOutput').empty();
 
     //console.log(meals)
 
@@ -513,8 +516,9 @@ const displayRecipe = (meal) => {
 
 const displayFavRecipes = () => {
     // if(faveList ===! ''){
+    $('#searchOutput').empty();
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
-    displayMeals(faveList, 46); // at size 46% width of screen // aka 2 per row with some spacing
+    displayMeals(faveList); // at size 46% width of screen // aka 2 per row with some spacing
 }
 
 $('#ingredientSearch').on('keypress', (e) => {
