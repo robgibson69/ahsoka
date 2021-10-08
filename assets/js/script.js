@@ -691,7 +691,9 @@ const displayRecipe = (meal) => {
     $('body').append(modal);
 
     //listenForIngredientClicks();
-    $('#left-column').empty();
+    if ($('#left-column .ingredient-list').length) {
+        $('#left-column').empty().text('refill');
+    }
     ingredientToGroceryListener();
     addFavourite(meal);
 }
@@ -874,14 +876,10 @@ document.addEventListener('click', (e) => {
         $('#add-grocery-item').css('opacity', 1).show().focus();
 
     } else if (e.target.id === 'meal-modal-close') {
+
         $('#recipeModal').remove();
-        if ($('#left-column .ingredient-list')) { outputIngredients(lastMeal); }
-        /* //enable body scroll
-         const scrollY = document.body.style.top;
-         document.body.style.position = '';
-         document.body.style.top = '';
-         window.scrollTo(0, parseInt(scrollY || '0') * -1);
-         */
+        if ($('#left-column').text() == 'refill') { outputIngredients(lastMeal); }
+
     } else if (e.target.id === 'pop-modal-close') {
         $('#popModal').remove();
     } else {
