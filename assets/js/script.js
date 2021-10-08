@@ -623,7 +623,17 @@ const displayRecipe = (meal) => {
     let instructions = $('<p>').append("<hr>" + recipe);
 
     let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
-    let addFavouriteBtn = $('<button>').text('Add To Favourites').addClass('fave');
+
+    let addFavouriteBtn = $('<button>').text(' ').addClass('fave');
+    //check if this recipe is in the fav list and iff so add is-fav class
+    $(faveList).each((idx, item) => {
+        item.idMeal === id ?
+            addFavouriteBtn.addClass('is-fav') :
+            null;
+    });
+
+
+
     let pairWithDrinkBtn = $('<button>').text('Suggested Drink Pairing').addClass('drink-pairing');
 
     let ingredientList = $('<div>').addClass('ingredient-list')
@@ -747,7 +757,27 @@ const displayModal = (msg) => {
 const addFavourite = (meal) => {
     $('.fave').click(function() {
 
-        faveList.push(meal);
+        let removeFav = false;
+        //if meal is in favelist remove it and update recipe modal
+        $(faveList).each((idx, item) => {
+            item.idMeal === meal.idMeal ?
+                removeFav = idx :
+                null;
+        });
+
+        if (parseInt(removeFav) > -1) {
+            // console.log('removing fav ' + meal.idMeal)
+            faveList.splice(removeFav, 1);
+        }
+        //else add it it to the favelist
+        else {
+            // console.log('adding fav ' + meal.idMeal)
+            faveList.push(meal);
+        }
+
+        //update recipieModal Favicon
+        $('.ingredient-list button.fave').toggleClass('is-fav');
+
         console.log(faveList);
         localStorage.setItem('favourites', JSON.stringify(faveList));
 

@@ -335,6 +335,21 @@ label.grocery-list-item::before {
 
 /* ADD SOME LOVE */
 
+.ingredient-list button.fave {
+    background-image: url('../images/favicon-blank.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    background-color: transparent;
+}
+
+.ingredient-list button.fave.is-fav {
+    background-image: url('../images/favicon.png');
+}
+
 .favMealName {
     margin: .3rem .2rem;
 }
