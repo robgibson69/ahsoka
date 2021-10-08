@@ -108,7 +108,7 @@ const displayFavHomepge = () => {
     for (let i = 0; i < faveList.length; i++) {
         let favMealName = faveList[i].strMeal
             // console.log(faveList[i]);
-        let fave = $("<button>").text(favMealName).attr('data-idx', i).addClass('favMealName button is-pink').css({ 'display': 'block', 'margin': '10px' });
+        let fave = $("<button>").text(favMealName).attr('data-idx', i).addClass('favMealName button is-pink');
         $('#left-column').append(fave);
     };
 
@@ -804,12 +804,13 @@ document.addEventListener('click', (e) => {
         $('#searchBar').show()
         $('#ingredientSearch').focus();
         // clear out previous results
-        $('#searchOutput').empty();
+        $('#searchOutput').empty().text(' ');
         addLogoToIngSearch();
 
         $('#info-columns').show();
         addRightCol();
         $('#left-column').empty();
+        displayFavHomepge(faveList);
 
         if (e.target.id === "recipe-nav") {
             $('#ingredientSearch').attr('placeholder', 'search for recipe').removeClass('is-primary').addClass('is-info');
