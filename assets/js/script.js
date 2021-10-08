@@ -900,7 +900,7 @@ const displayGroceryList = () => {
     $('#grocerylist-list').empty();
     $('#add-grocery-item').val('').css('opacity', '0').hide();
 
-    if (groceryList) {
+    if (groceryList.length) {
 
         for (let i = 0; i < groceryList.length; i++) {
 
