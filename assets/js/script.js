@@ -1,5 +1,5 @@
 /* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
-makeAPICalls = true; //switch to true to make API calls
+makeAPICalls = false; //switch to true to make API calls
 
 const meals = [{
             strMeal: 'Burger',
@@ -108,7 +108,7 @@ const displayFavHomepge = () => {
     for (let i = 0; i < faveList.length; i++) {
         let favMealName = faveList[i].strMeal
             // console.log(faveList[i]);
-        let fave = $("<button>").text(favMealName).attr('data-idx', i).addClass('favMealName button is-pink').css({ 'display': 'block', 'margin': '10px' });
+        let fave = $("<button>").text(favMealName).attr('data-idx', i).addClass('favMealName button is-pink');
         $('#left-column').append(fave);
     };
 
@@ -123,8 +123,6 @@ const displayFavHomepge = () => {
         .css('max-height', (container.bottom - container.top));
 
 }
-
-displayFavHomepge(faveList);
 
 var lastMeal = {};
 
@@ -625,7 +623,17 @@ const displayRecipe = (meal) => {
     let instructions = $('<p>').append("<hr>" + recipe);
 
     let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
-    let addFavouriteBtn = $('<button>').text('Add To Favourites').addClass('fave');
+
+    let addFavouriteBtn = $('<button>').text(' ').addClass('fave');
+    //check if this recipe is in the fav list and iff so add is-fav class
+    $(faveList).each((idx, item) => {
+        item.idMeal === id ?
+            addFavouriteBtn.addClass('is-fav') :
+            null;
+    });
+
+
+
     let pairWithDrinkBtn = $('<button>').text('Suggested Drink Pairing').addClass('drink-pairing');
 
     let ingredientList = $('<div>').addClass('ingredient-list')
@@ -683,7 +691,9 @@ const displayRecipe = (meal) => {
     $('body').append(modal);
 
     //listenForIngredientClicks();
-    $('#left-column').empty();
+    if ($('#left-column .ingredient-list').length) {
+        $('#left-column').empty().text('refill');
+    }
     ingredientToGroceryListener();
     addFavourite(meal);
 }
@@ -749,7 +759,27 @@ const displayModal = (msg) => {
 const addFavourite = (meal) => {
     $('.fave').click(function() {
 
-        faveList.push(meal);
+        let removeFav = false;
+        //if meal is in favelist remove it and update recipe modal
+        $(faveList).each((idx, item) => {
+            item.idMeal === meal.idMeal ?
+                removeFav = idx :
+                null;
+        });
+
+        if (parseInt(removeFav) > -1) {
+            // console.log('removing fav ' + meal.idMeal)
+            faveList.splice(removeFav, 1);
+        }
+        //else add it it to the favelist
+        else {
+            // console.log('adding fav ' + meal.idMeal)
+            faveList.push(meal);
+        }
+
+        //update recipieModal Favicon
+        $('.ingredient-list button.fave').toggleClass('is-fav');
+
         console.log(faveList);
         localStorage.setItem('favourites', JSON.stringify(faveList));
 
@@ -806,12 +836,13 @@ document.addEventListener('click', (e) => {
         $('#searchBar').show()
         $('#ingredientSearch').focus();
         // clear out previous results
-        $('#searchOutput').empty();
+        $('#searchOutput').empty().text(' ');
         addLogoToIngSearch();
 
         $('#info-columns').show();
         addRightCol();
         $('#left-column').empty();
+        displayFavHomepge(faveList);
 
         if (e.target.id === "recipe-nav") {
             $('#ingredientSearch').attr('placeholder', 'search for recipe').removeClass('is-primary').addClass('is-info');
@@ -845,14 +876,10 @@ document.addEventListener('click', (e) => {
         $('#add-grocery-item').css('opacity', 1).show().focus();
 
     } else if (e.target.id === 'meal-modal-close') {
+
         $('#recipeModal').remove();
-        if ($('#left-column .ingredient-list')) { outputIngredients(lastMeal); }
-        /* //enable body scroll
-         const scrollY = document.body.style.top;
-         document.body.style.position = '';
-         document.body.style.top = '';
-         window.scrollTo(0, parseInt(scrollY || '0') * -1);
-         */
+        if ($('#left-column').text() == 'refill') { outputIngredients(lastMeal); }
+
     } else if (e.target.id === 'pop-modal-close') {
         $('#popModal').remove();
     } else {
@@ -893,7 +920,7 @@ const addRightCol = (elOut) => {
 
 };
 addRightCol();
-
+displayFavHomepge(faveList);
 
 const displayGroceryList = () => {
 
@@ -901,7 +928,7 @@ const displayGroceryList = () => {
     $('#grocerylist-list').empty();
     $('#add-grocery-item').val('').css('opacity', '0').hide();
 
-    if (groceryList) {
+    if (groceryList.length) {
 
         for (let i = 0; i < groceryList.length; i++) {
 
