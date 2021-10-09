@@ -254,6 +254,8 @@ footer {
     padding: 0 0 0 .3rem;
     width: 100%;
     color: #333;
+    padding-left: 2.1rem;
+    text-indent: -2.1rem;
 }
 
 input.grocery-list-item {
@@ -337,18 +339,22 @@ label.grocery-list-item::before {
 
 /* ADD SOME LOVE */
 
-.ingredient-list button.fave {
+button.fave {
     background-image: url('../images/favicon-blank.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 1rem;
-    height: 1rem;
+    width: 1.6rem;
+    height: 1.5rem;
+    float: right;
+    position: relative;
+    top: .1rem;
+    right: 1rem;
     border: none;
     background-color: transparent;
 }
 
-.ingredient-list button.fave.is-fav {
+button.fave.is-fav {
     background-image: url('../images/favicon.png');
 }
 
@@ -395,13 +401,6 @@ footer {
 
 /***
 
-
-/***  FAV ICON IN RECIPE MODAL CARD */
-
-
-/** COMMING SOON
-
-/** END OF FAV RECIPE ICON
 
 /* BELOW HERE IS FLEXBOX SETTINGS FOR MAKING THE PAGE TAKE UP THE VERTICAL CONTENT OF THE SCREEN  */
 
@@ -464,11 +463,16 @@ button.favMealName {
 
 /***  RECIPE MODAL CARD */
 
+/*#recipeModal * {
+    /*  border: 1px solid black;*/
+/*}*/
+
 #recipeModal .ingredient-list button {
-    margin-left: 1.5rem;
+    margin-left: 1.1rem;
 }
 
-#recipeModal img {
+#recipeModal img,
+#drinkDetails img {
     width: 45%;
     margin-left: 0%;
     display: inline-block;
@@ -480,9 +484,14 @@ button.favMealName {
     margin-left: .5rem;
 }
 
-button.drink-pairing {
-    float: right;
+#recipeModal .ingredient-list {
+    margin-left: .5rem;
+    width: 53%;
 }
+
+/* button#drink-pairing {
+    /* float: right; */
+/*}*/
 
 
 /** COMING SOON FAV ICON
@@ -495,5 +504,23 @@ button.drink-pairing {
     #info-columns,
     #footer {
         max-width: 75vh; 
+    }
+}
+/** END OF RECIPE MODAL ***/
+
+
+/* smallest of screens need smaller font size*/
+
+@media screen and (max-width: 550px) {
+    #recipeModal .ingredient-list,
+    #drinkModal .ingredient-list {
+        margin-top: .3rem;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+     :root {
+        font-size: 89%;
     }
 }

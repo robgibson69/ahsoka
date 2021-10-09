@@ -357,6 +357,8 @@ const displayMeals = (meals) => {
         /******* SET HEIGHT OF OUTPUT CONTAINER */
         $('#searchOutput').css('max-height', maxHeight + 'px');
         /** SET THE SIZE OF THE MEAL CONTAINERS */
+
+        //no need for if statement because you dont need to pass size
         // if (size) { // if size is provided set the size to that %width
         //     $('.meal-container')
         //         .css('width', calcMaxMealSize(maxHeight) / size + 'px')
@@ -531,7 +533,7 @@ const outputIngredients = (meal) => {
     }
 
     /******* CALCULATE WHAT THE HEIGHT OF LEFT-COLUMN CONTAINER IS */
-    container = document.getElementById('left-column').getBoundingClientRect();
+    container = document.getElementById('right-column').getBoundingClientRect();
 
     $('#left-column').empty();
     $('#left-column')
@@ -652,13 +654,6 @@ const displayRecipe = (meal) => {
         }
     }
 
-    //ingredientArray = ingredient;
-    //console.log(ingredientArray);
-
-    /****** OUTPUT DATA TO MODAL */
-    // Disable body scroll
-    //document.body.style.position = 'fixed';
-    //document.body.style.top = `-${window.scrollY}px`;
 
     let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
 
@@ -682,12 +677,12 @@ const displayRecipe = (meal) => {
 
 
     //to add a random drink with your recipe
-    let pairWithDrinkBtn = $('<button>').text('Suggested Drink Pairing').addClass('drink-pairing');
+    let pairWithDrinkBtn = $('<button>').text('Drink Pairing').attr('id', 'drink-pairing');
 
     //displaying the ingredients and measurments
     let ingredientList = $('<div>').addClass('ingredient-list')
         .append("Ingredients:")
-        .append(addIngredientBtn, addFavouriteBtn);
+        .append(addIngredientBtn, pairWithDrinkBtn);
 
     for (let i = 0; i < ingredient.length; i++) {
         let box = $("<div class='ingredient-checklist-holder'>")
@@ -723,14 +718,14 @@ const displayRecipe = (meal) => {
 
 
     //putting all the info in a modal display
-    modalContent.append(link.append(pic), ingredientList, pairWithDrinkBtn, instructions);
+    modalContent.append(link.append(pic), ingredientList, instructions);
 
     let modal = $('<div>').addClass('modal is-active').attr('id', 'recipeModal');
     let modalBG = $('<div>').addClass('modal-background')
     let modalCard = $('<div>').addClass('modal-card big-modal').append(
 
         $('<div>').addClass('modal-card-head').append(
-            $('<p>').addClass('modal-card-title').text(name),
+            $('<p>').addClass('modal-card-title').append(name, addFavouriteBtn),
             $('<button>').attr('id', 'meal-modal-close').addClass('delete').attr('aria-label', 'close')
         ),
         modalContent
@@ -831,9 +826,9 @@ const addFavourite = (meal) => {
         }
 
         //update recipieModal Favicon
-        $('.ingredient-list button.fave').toggleClass('is-fav');
+        $('button.fave').toggleClass('is-fav');
 
-        console.log(faveList);
+        //console.log(faveList);
         localStorage.setItem('favourites', JSON.stringify(faveList));
 
     })
@@ -844,7 +839,7 @@ const displayFavRecipes = () => {
     // if(faveList ===! ''){
     $('#searchOutput').empty();
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
-    displayMeals(faveList, 2); // 3 per row with some spacing
+    displayMeals(faveList, 2); // 2 per row with some spacing
 }
 
 //displaying the grocerylist from a pop out
@@ -986,10 +981,17 @@ document.addEventListener('click', (e) => {
     } else if (e.target.id === 'meal-modal-close') {
 
         $('#recipeModal').remove();
-        if ($('#left-column').text() == 'refill') { outputIngredients(lastMeal); }
+        if ($('#left-column').text() == 'refill') {
+            outputIngredients(lastMeal);
+        } else { displayFavHomepge(faveList); }
 
     } else if (e.target.id === 'pop-modal-close') {
         $('#popModal').remove();
+    } else if (e.target.id === 'drink-pairing') {
+        getRandCocktail();
+    } else {
+        //DO NOTHING
+        //displayModal(e.target.id);
     }
 
 

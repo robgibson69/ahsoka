@@ -1,5 +1,5 @@
-var drinkContainerEl = document.querySelector('#modal');
-var drinkContainerMainEl = document.querySelector('main');
+//var drinkContainerEl = document.querySelector('#modal');
+//var drinkContainerMainEl = document.querySelector('main');
 
 
 // const data = {
@@ -49,50 +49,7 @@ var drinkContainerMainEl = document.querySelector('main');
 //     ]
 // }
 
-const data = {
-    "drinks": [{
-        "idDrink": "11936",
-        "strAlcoholic": "Alcoholic",
-        "strCategory": "Ordinary Drink",
-        "strDrink": "Pink Gin",
-        "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/qyr51e1504888618.jpg",
-        "strGlass": "White wine glass",
-        "strImageAttribution": null,
-        "strImageSource": null,
-        "strIngredient1": "Bitters",
-        "strIngredient2": "Gin",
-        "strIngredient3": null,
-        "strIngredient4": null,
-        "strIngredient5": null,
-        "strIngredient6": null,
-        "strIngredient7": null,
-        "strIngredient8": null,
-        "strIngredient9": null,
-        "strIngredient10": null,
-        "strIngredient11": null,
-        "strIngredient12": null,
-        "strIngredient13": null,
-        "strIngredient14": null,
-        "strIngredient15": null,
-        "strInstructions": "Pour the bitters into a wine glass. Swirl the glass to coat the inside with the bitters, shake out the excess. Pour the gin into the glass. Do not add ice.",
-        "strMeasure1": "3 dashes ",
-        "strMeasure2": "2 oz ",
-        "strMeasure3": null,
-        "strMeasure4": null,
-        "strMeasure5": null,
-        "strMeasure6": null,
-        "strMeasure7": null,
-        "strMeasure8": null,
-        "strMeasure9": null,
-        "strMeasure10": null,
-        "strMeasure11": null,
-        "strMeasure12": null,
-        "strMeasure13": null,
-        "strMeasure14": null,
-        "strMeasure15": null,
-        "strVideo": null
-    }]
-}
+
 
 
 
@@ -123,9 +80,9 @@ var getCocktails = function(fetchURL) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                parseCocktailData(data.drinks);
-                })
-            // if there is a response error
+                        parseCocktailData(data.drinks);
+                    })
+                    // if there is a response error
             } else {
                 console.error("Response Failed");
                 displayModal("Bad Response");
@@ -142,8 +99,8 @@ var getCocktails = function(fetchURL) {
 
 //  ****** DISPLAY COCKTAIL DATA  ****** //
 var parseCocktailData = function(drinks) {
-    console.log(drinks)
-    const myDrinks = data.drinks.map(el => { // create new array 'myDrinks' and remap old JSON data
+    //console.log(drinks)
+    const myDrinks = drinks.map(el => { // create new array 'myDrinks' and remap old JSON data
 
         let details = { // default object
             "strIngredients": [], // array in array
@@ -181,8 +138,8 @@ const displayCocktails = (myDrinks) => {
     let pic = $('<img>').attr('src', myDrinks[0].strDrinkThumb);
     let videoDiv = $('<div>').append($('<a>').attr('href', myDrinks[0].strVideo).text('Video Link'));
     // let video = $('<a>').attr('id', 'player');
-    let instructions = $('<p>').text(myDrinks[0].strInstructions);
-    let ingredientList = $('<div>').addClass('ingredient-list');
+    let instructions = $('<p>').append("<hr>" + myDrinks[0].strInstructions);
+    let ingredientList = $('<div>').addClass('ingredient-list').append("Ingredients:");
 
     let myIngredients = myDrinks[0].strIngredients;
     let myMeasurments = myDrinks[0].strMeasures;
@@ -211,6 +168,9 @@ const displayCocktails = (myDrinks) => {
 
     modalDrinkDetails.append(pic, ingredientList, instructions);
 
+    displayModal({ head: myDrinks[0].strDrink, body: modalDrinkDetails, button: 'alert' });
+
+    /*
     // put together header, footer and the card for the modal and append the above content.
     let drinkModal = $('<div>').addClass('modal is-active').attr('id', 'drinkModal');
     let modalBack = $('<div>').addClass('modal-background');
@@ -233,11 +193,12 @@ const displayCocktails = (myDrinks) => {
     //drinkContainerMainEl.append(drinkModal);
     $('body').append(drinkModal);
 
+    */
 
     //let closeDrinks = $('#drink-modal-close');
 
     //closeDrinks.on('click', () => {
-    $('[id^="drink-modal-close"]').click(function () {
+    $('[id^="drink-modal-close"]').click(function() {
         //alert("Hello");
 
         $('#drinkModal').remove();
@@ -245,9 +206,3 @@ const displayCocktails = (myDrinks) => {
     })
 
 };
-
-
-
-
-
-
