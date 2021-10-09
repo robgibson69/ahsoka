@@ -1,5 +1,5 @@
 /* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
-makeAPICalls = false; //switch to true to make API calls
+makeAPICalls = true; //switch to true to make API calls
 
 const meals = [{
             strMeal: 'Burger',
