@@ -670,6 +670,7 @@ const ingredientToGroceryListener = () => {
     });
 };
 
+// dermine if a string is more then white space / for recipe ingredient
 function isBlank(str) {
     return (!str || /^\s*$/.test(str));
 }

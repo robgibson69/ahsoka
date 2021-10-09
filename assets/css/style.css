@@ -430,6 +430,10 @@ label.grocery-list-item::before {
 
 /* Modal styling */
 
+.modal-card-title {
+    flex-shrink: 1;
+}
+
 #recipeModal .ingredient-list button {
     margin-left: 1.1rem;
 }
