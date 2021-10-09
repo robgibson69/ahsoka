@@ -306,7 +306,7 @@ const displayMeals = (meals, size) => {
         /******* SET HEIGHT OF OUTPUT CONTAINER */
         $('#searchOutput').css('max-height', maxHeight + 'px');
         /** SET THE SIZE OF THE MEAL CONTAINERS */
-        if (size) { // if size is provided set the size to that %width
+        if (size) { // if size is provided set the size to allow for that number of items per row
             $('.meal-container')
                 .css('width', calcMaxMealSize(maxHeight) / size + 'px')
                 .css('height', calcMaxMealSize(maxHeight) / size + 'px');
@@ -606,13 +606,6 @@ const displayRecipe = (meal) => {
         }
     }
 
-    //ingredientArray = ingredient;
-    //console.log(ingredientArray);
-
-    /****** OUTPUT DATA TO MODAL */
-    // Disable body scroll
-    //document.body.style.position = 'fixed';
-    //document.body.style.top = `-${window.scrollY}px`;
 
     let modalContent = $('<section>').attr('id', 'recipeModal').addClass('modal-card-body');
 
@@ -625,20 +618,18 @@ const displayRecipe = (meal) => {
     let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
 
     let addFavouriteBtn = $('<button>').text(' ').addClass('fave');
-    //check if this recipe is in the fav list and iff so add is-fav class
+    //check if this recipe is in the fav list and if so add is-fav class
     $(faveList).each((idx, item) => {
         item.idMeal === id ?
             addFavouriteBtn.addClass('is-fav') :
             null;
     });
 
-
-
-    let pairWithDrinkBtn = $('<button>').text('Suggested Drink Pairing').addClass('drink-pairing');
+    let pairWithDrinkBtn = $('<button>').text('Drink Pairing').attr('id', 'drink-pairing');
 
     let ingredientList = $('<div>').addClass('ingredient-list')
         .append("Ingredients:")
-        .append(addIngredientBtn, addFavouriteBtn);
+        .append(addIngredientBtn, pairWithDrinkBtn);
 
     for (let i = 0; i < ingredient.length; i++) {
         let box = $("<div class='ingredient-checklist-holder'>")
@@ -673,14 +664,14 @@ const displayRecipe = (meal) => {
 
 
 
-    modalContent.append(link.append(pic), ingredientList, pairWithDrinkBtn, instructions);
+    modalContent.append(link.append(pic), ingredientList, instructions);
 
     let modal = $('<div>').addClass('modal is-active').attr('id', 'recipeModal');
     let modalBG = $('<div>').addClass('modal-background')
     let modalCard = $('<div>').addClass('modal-card big-modal').append(
 
         $('<div>').addClass('modal-card-head').append(
-            $('<p>').addClass('modal-card-title').text(name),
+            $('<p>').addClass('modal-card-title').append(name, addFavouriteBtn),
             $('<button>').attr('id', 'meal-modal-close').addClass('delete').attr('aria-label', 'close')
         ),
         modalContent
@@ -778,9 +769,9 @@ const addFavourite = (meal) => {
         }
 
         //update recipieModal Favicon
-        $('.ingredient-list button.fave').toggleClass('is-fav');
+        $('button.fave').toggleClass('is-fav');
 
-        console.log(faveList);
+        //console.log(faveList);
         localStorage.setItem('favourites', JSON.stringify(faveList));
 
     })
@@ -790,7 +781,7 @@ const displayFavRecipes = () => {
     // if(faveList ===! ''){
     $('#searchOutput').empty();
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
-    displayMeals(faveList, 2); // 3 per row with some spacing
+    displayMeals(faveList, 2); // 2 per row with some spacing
 }
 
 $('#ingredientSearch').on('keypress', (e) => {
@@ -878,10 +869,14 @@ document.addEventListener('click', (e) => {
     } else if (e.target.id === 'meal-modal-close') {
 
         $('#recipeModal').remove();
-        if ($('#left-column').text() == 'refill') { outputIngredients(lastMeal); }
+        if ($('#left-column').text() == 'refill') {
+            outputIngredients(lastMeal);
+        } else { displayFavHomepge(faveList); }
 
     } else if (e.target.id === 'pop-modal-close') {
         $('#popModal').remove();
+    } else if (e.target.id === 'drink-pairing') {
+        getRandCocktail();
     } else {
         //DO NOTHING
         //displayModal(e.target.id);
