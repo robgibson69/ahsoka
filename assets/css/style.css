@@ -252,6 +252,8 @@ footer {
     padding: 0 0 0 .3rem;
     width: 100%;
     color: #333;
+    padding-left: 2.1rem;
+    text-indent: -2.1rem;
 }
 
 input.grocery-list-item {
@@ -478,6 +480,10 @@ button.favMealName {
 .ingredient-list {
     display: inline-block;
     margin-left: .5rem;
+}
+
+#recipeModal .ingredient-list {
+    margin-left: .5rem;
     width: 53%;
 }
 
@@ -487,3 +493,20 @@ button#drink-pairing {
 
 
 /** END OF RECIPE MODAL ***/
+
+
+/* smallest of screens need smaller font size*/
+
+@media screen and (max-width: 550px) {
+    #recipeModal .ingredient-list,
+    #drinkModal .ingredient-list {
+        margin-top: .3rem;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+     :root {
+        font-size: 89%;
+    }
+}

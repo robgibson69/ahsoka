@@ -428,7 +428,7 @@ const outputIngredients = (meal) => {
     }
 
     /******* CALCULATE WHAT THE HEIGHT OF LEFT-COLUMN CONTAINER IS */
-    container = document.getElementById('left-column').getBoundingClientRect();
+    container = document.getElementById('right-column').getBoundingClientRect();
 
     $('#left-column').empty();
     $('#left-column')
