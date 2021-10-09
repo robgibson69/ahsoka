@@ -124,7 +124,7 @@ header,
 #info-columns,
 #footer {
     width: 100%;
-    max-width: 75vh;
+    /* max-width: 75vh; */
     margin: 0 auto;
 }
 
@@ -189,7 +189,9 @@ footer {
     padding: 0 .3rem;
 }
 
-
+/* #header-logo img{
+     height:80px;
+} */
 /* SIDE BAR STYLING */
 
 #grocerylist {
@@ -483,6 +485,15 @@ button.drink-pairing {
 }
 
 
-/** COMMING SOON FAV ICON
+/** COMING SOON FAV ICON
 
 /** END OF RECIPE MODAL ***/
+@media screen and (max-width: 980px){
+    header,
+    #main,
+    #main-col-div,
+    #info-columns,
+    #footer {
+        max-width: 75vh; 
+    }
+}

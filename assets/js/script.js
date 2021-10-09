@@ -1,132 +1,175 @@
 /* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
-makeAPICalls = false; //switch to true to make API calls
-
-const meals = [{
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69420'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69421'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69422'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69423'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69424'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69425'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69426'
-        },
-        {
-            strMeal: 'Burger',
-            strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-            idMeal: '69427'
-        },
-    ]
-    /************ */
-const mealRecipe = {
-
-        strMeal: 'Burger',
-        strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
-        strSource: 'www.not_a_real_recipe_dot_com.org',
-        strYoutube: 'www.not_a_real_youTube_dot_com.org',
-        idMeal: '69421',
-
-        strInstructions: "Cook the patty and then put it between two half buns",
-
-        strIngredient1: "Hamburger Buns",
-        strIngredient2: "Ground Beef",
-        strIngredient3: "Mustard",
-        strIngredient4: "Ketchup",
-        strIngredient5: "Lettuce",
-        strIngredient6: "Tomato",
-        strIngredient7: "Pickles",
-        strIngredient8: "Onion",
-        strIngredient9: '',
-        strIngredient10: '',
-        strIngredient11: '',
-        strIngredient12: '',
-        strIngredient13: '',
-        strIngredient14: '',
-        strIngredient15: '',
-        strIngredient16: '',
-        strIngredient17: '',
-        strIngredient18: '',
-        strIngredient19: '',
-        strIngredient20: '',
-
-        strMeasure1: "1 bag",
-        strMeasure2: "1 pound",
-        strMeasure3: "1 tblspoon",
-        strMeasure4: "1 tblspoon",
-        strMeasure5: "3 leaves",
-        strMeasure6: "1 ripe one",
-        strMeasure7: "2 should do",
-        strMeasure8: "1/2 chopped",
-        strMeasure9: '',
-        strMeasure10: '',
-        strMeasure11: '',
-        strMeasure12: '',
-        strMeasure13: '',
-        strMeasure14: '',
-        strMeasure15: '',
-        strMeasure16: '',
-        strMeasure17: '',
-        strMeasure18: '',
-        strMeasure19: '',
-        strMeasure20: '',
-
-    }
-    /****************** */
+let makeAPICalls = false; //switch to true to make API calls
 var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
 var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
+var lastMeal = {};
 
+//local api data for testing due to limited free api calls
+const meals = [{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69420'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69421'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69422'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69423'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69424'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69425'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69426'
+},
+{
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    idMeal: '69427'
+},
+]
+/************ */
+const mealRecipe = {
+
+    strMeal: 'Burger',
+    strMealThumb: 'https://westcoastfood.ca/wp-content/uploads/2019/04/Ulis1.jpg',
+    strSource: 'www.not_a_real_recipe_dot_com.org',
+    strYoutube: 'www.not_a_real_youTube_dot_com.org',
+    idMeal: '69421',
+
+    strInstructions: "Cook the patty and then put it between two half buns",
+
+    strIngredient1: "Hamburger Buns",
+    strIngredient2: "Ground Beef",
+    strIngredient3: "Mustard",
+    strIngredient4: "Ketchup",
+    strIngredient5: "Lettuce",
+    strIngredient6: "Tomato",
+    strIngredient7: "Pickles",
+    strIngredient8: "Onion",
+    strIngredient9: '',
+    strIngredient10: '',
+    strIngredient11: '',
+    strIngredient12: '',
+    strIngredient13: '',
+    strIngredient14: '',
+    strIngredient15: '',
+    strIngredient16: '',
+    strIngredient17: '',
+    strIngredient18: '',
+    strIngredient19: '',
+    strIngredient20: '',
+
+    strMeasure1: "1 bag",
+    strMeasure2: "1 pound",
+    strMeasure3: "1 tblspoon",
+    strMeasure4: "1 tblspoon",
+    strMeasure5: "3 leaves",
+    strMeasure6: "1 ripe one",
+    strMeasure7: "2 should do",
+    strMeasure8: "1/2 chopped",
+    strMeasure9: '',
+    strMeasure10: '',
+    strMeasure11: '',
+    strMeasure12: '',
+    strMeasure13: '',
+    strMeasure14: '',
+    strMeasure15: '',
+    strMeasure16: '',
+    strMeasure17: '',
+    strMeasure18: '',
+    strMeasure19: '',
+    strMeasure20: '',
+
+}
+/****************** */
+
+//HOME PAGE SETUP
+//generates a logo in the search output container on page load
+const addLogoToIngSearch = () => {
+    $('#searchOutput').append($("<div id='LOGO'>").text(' '));
+
+};
+addLogoToIngSearch();
+
+// adds logo dynamically to control the size of the changin nav
+$('#header-logo')
+    .empty()
+    .append("<img src='./assets/images/logo1.png'>")
+    .css("img{ height:80px;}")
+
+
+// ADD NAV BUTTONS TO LOWER RIGHT COLUMN
+const addRightCol = (elOut) => {
+
+    elOut ? null : elOut = $('#right-column');
+    elOut.empty();
+    /*
+        $('nav .nav-item').each((i, el) => {
+            //console.log(el)
+            $(el).clone().addClass('button is-info').appendTo(elOut);
+        });
+    */
+    $("<div class='nav-item button is-primary'>").text('Search Ingredients').attr('id', 'ingredient-nav').appendTo(elOut);
+    $("<div class='nav-item button is-info'>").text('Search Recipe').attr('id', 'recipe-nav').appendTo(elOut);
+    $("<div class='nav-item button is-purple'>").text('Random').attr('id', 'randoBtn').appendTo(elOut);
+    $("<div class='nav-item button is-warning'>").text('Grocery List').attr('id', 'grocery-nav').appendTo(elOut);
+
+
+};
+addRightCol();
+
+//display favourite recipe button on home page
 const displayFavHomepge = () => {
 
     $('#left-column').empty();
+    //jquery needed to add
     let container = document.getElementById('right-column').getBoundingClientRect();
-
+    //goes through favourite list to create buttons
     for (let i = 0; i < faveList.length; i++) {
         let favMealName = faveList[i].strMeal
-            // console.log(faveList[i]);
+        // console.log(faveList[i]);
         let fave = $("<button>").text(favMealName).attr('data-idx', i).addClass('favMealName button is-pink');
         $('#left-column').append(fave);
     };
-
-    $('.favMealName').click(function(e) {
+    //display meal on click
+    $('.favMealName').click(function (e) {
         //    console.log(faveList[i]);
         displayRecipe(faveList[$(e.target).attr('data-idx')]);
     });
 
-
+    //creating css style for left column 
     $('#left-column')
         // keep height consitent it will change even though it should be locked in with the flexbox settings
         .css('max-height', (container.bottom - container.top));
 
 }
 
-var lastMeal = {};
+displayFavHomepge(faveList);
 
-const searchByIngredient = (searchString) => {
+//primary functions
+//to be able to search by ingredient and fetching meal info from the API
+const searchByIngredient = () => {
+
+    let searchString;
 
     /****** */
     // testing without api call
@@ -146,14 +189,15 @@ const searchByIngredient = (searchString) => {
     }
 
     searchString = encodeURI(searchString);
-
+    //getting API info
     fetch("https://themealdb.p.rapidapi.com/filter.php?i=" + searchString, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-            }
-        })
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "themealdb.p.rapidapi.com",
+            "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+        }
+    })
+        //checking doe meal data
         .then(response => {
             if (response.ok) {
                 response.json()
@@ -163,6 +207,7 @@ const searchByIngredient = (searchString) => {
                         //  console.log(data);
                         if (data.meals) {
                             $('#searchOutput').empty();
+                            //display meals that match search
                             displayMeals(data.meals);
                         } else {
                             displayModal('No matches Found');
@@ -178,6 +223,7 @@ const searchByIngredient = (searchString) => {
 
 }
 
+//get a random recipe from the API
 const searchRandomMeal = () => {
     /****** */
     // testing without api call
@@ -190,12 +236,12 @@ const searchRandomMeal = () => {
     /***** */
 
     fetch("https://themealdb.p.rapidapi.com/random.php", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-            }
-        })
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "themealdb.p.rapidapi.com",
+            "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+        }
+    })
         .then(response => {
             if (response.ok) {
                 response.json()
@@ -214,6 +260,7 @@ const searchRandomMeal = () => {
 
 }
 
+//getting the recipe from the idNum that is provided in the API
 const fetchRecipe = (idNum) => {
 
     /****** */
@@ -229,12 +276,12 @@ const fetchRecipe = (idNum) => {
     if (idNum !== '') {
 
         fetch("https://themealdb.p.rapidapi.com/lookup.php?i=" + idNum, {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                    "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-                }
-            })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
             .then(response => {
                 if (response.ok) {
                     response.json()
@@ -266,9 +313,12 @@ const calcMaxMealSize = (availableHeight) => {
     return maxSize;
 }
 
-const displayMeals = (meals, size) => {
+//this takes meals from the API and displays it with DOM
+const displayMeals = (meals) => {
+    //variable to store size of the meal display depending on how many meals it has
+    let size;
 
-    //console.log(meals)
+    //console.log(meals) for testing if we recieve meals
 
     if (meals.length) {
         let oneMeal = true;
@@ -286,6 +336,7 @@ const displayMeals = (meals, size) => {
             maxHeight = (botOffset - topOffset);
         /****** END OF CALC */
 
+        //taking meals and adding it to page using the DOM m
         meals.forEach(meal => {
 
             let name = meal.strMeal;
@@ -306,17 +357,17 @@ const displayMeals = (meals, size) => {
         /******* SET HEIGHT OF OUTPUT CONTAINER */
         $('#searchOutput').css('max-height', maxHeight + 'px');
         /** SET THE SIZE OF THE MEAL CONTAINERS */
-        if (size) { // if size is provided set the size to that %width
-            $('.meal-container')
-                .css('width', calcMaxMealSize(maxHeight) / size + 'px')
-                .css('height', calcMaxMealSize(maxHeight) / size + 'px');
+        // if (size) { // if size is provided set the size to that %width
+        //     $('.meal-container')
+        //         .css('width', calcMaxMealSize(maxHeight) / size + 'px')
+        //         .css('height', calcMaxMealSize(maxHeight) / size + 'px');
 
-        } else { // calc max available size in px
-            size = calcMaxMealSize(maxHeight);
-            $('.meal-container')
-                .css('width', size + 'px')
-                .css('height', size + 'px');
-        }
+        // } else { // calc max available size in px
+        size = calcMaxMealSize(maxHeight);
+        $('.meal-container')
+            .css('width', size + 'px')
+            .css('height', size + 'px');
+        // }
 
         /********* */
         /*  */
@@ -334,8 +385,59 @@ const displayMeals = (meals, size) => {
     }
 }
 
+//search recipes using the recipe name and not the ingredient which is a different api call
+const searchByRecipe = () => {
+    let searchString;
+    /****** */
+    // testing without api call
+    if (!makeAPICalls) {
+        $('#searchOutput').empty();
+        displayMeals(meals);
+        return;
+    }
+    // testing without api call
+    /***** */
+
+    if (!searchString) {
+        searchString = $('#ingredientSearch').val() //get a value from the searchbar
+        $('#ingredientSearch').val('');
+    }
+
+    fetch("https://themealdb.p.rapidapi.com/search.php?s=" + searchString, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "themealdb.p.rapidapi.com",
+            "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                response.json()
+                    .then((data) => {
+
+                        if (!data.meals) { displayModal('No Results Found'); return; }
+                        // console.log(data);
+                        if (data.meals) {
+                            $('#searchOutput').empty();
+                            displayMeals(data.meals);
+                        } else {
+                            displayModal('No matches Found');
+                        }
+                    })
+            } else {
+                console.error(err);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+        });
+};
+
+
+//calling API for ingredientsusing the IDNum that matches 
 const fetchIngredients = (idNum) => {
 
+    // console.log(idNum) testing idNum
     /****** */
     // testing without api call
     if (!makeAPICalls) {
@@ -348,12 +450,12 @@ const fetchIngredients = (idNum) => {
     if (idNum !== '') {
 
         fetch("https://themealdb.p.rapidapi.com/lookup.php?i=" + idNum, {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                    "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-                }
-            })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
             .then(response => {
                 if (response.ok) {
                     response.json()
@@ -372,6 +474,7 @@ const fetchIngredients = (idNum) => {
     }
 }
 
+//displays ingredients, measurments and meal picture icon for the random recipe function
 const outputIngredients = (meal) => {
     lastMeal = meal;
     let ingredient = [];
@@ -409,11 +512,11 @@ const outputIngredients = (meal) => {
             .append(chkBoxItem)
             .append(ingredient[i])
 
-        .append(
-            $("<div style='display:inline-block'>")
-            .addClass('ingredient-measure')
-            .text(measure[i])
-        );
+            .append(
+                $("<div style='display:inline-block'>")
+                    .addClass('ingredient-measure')
+                    .text(measure[i])
+            );
 
         //console.log(groceryList)
         $(groceryList).each((idx, item) => {
@@ -436,15 +539,16 @@ const outputIngredients = (meal) => {
         // keep height consitent it will change even though it should be locked in with the flexbox settings
         .css('max-height', (container.bottom - container.top));
 
+    //calling function to listen for users adding ingredients to grocery list
     ingredientToGroceryListener();
-
 }
 
+//checking for ingredient clicks to add to gorcery list using local storage 
 const ingredientToGroceryListener = () => {
 
-    $('.addList').click(function() {
+    $('.addList').click(function () {
         // displayModal('add all to list!!')
-        $.each($(".ingredient-checklist-holder input.checkbox"), function() {
+        $.each($(".ingredient-checklist-holder input.checkbox"), function () {
 
             if (!this.checked) {
                 this.checked = true;
@@ -523,71 +627,13 @@ const ingredientToGroceryListener = () => {
     });
 };
 
-const listenForIngredientClicks = () => {
-
-    $('.addList').click(function() {
-        displayModal('add all to list!!')
-        $.each($("input[class='food']"), function() {
-            // groceryList.push($(this).val());
-            this.checked = true;
-        });
-    })
-
-};
-
-const searchByRecipe = (searchString) => {
-
-    /****** */
-    // testing without api call
-    if (!makeAPICalls) {
-        $('#searchOutput').empty();
-        displayMeals(meals);
-        return;
-    }
-    // testing without api call
-    /***** */
-
-    if (!searchString) {
-        searchString = $('#ingredientSearch').val() //get a value from the searchbar
-        $('#ingredientSearch').val('');
-    }
-
-    fetch("https://themealdb.p.rapidapi.com/search.php?s=" + searchString, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                response.json()
-                    .then((data) => {
-
-                        if (!data.meals) { displayModal('No Results Found'); return; }
-                        // console.log(data);
-                        if (data.meals) {
-                            $('#searchOutput').empty();
-                            displayMeals(data.meals);
-                        } else {
-                            displayModal('No matches Found');
-                        }
-                    })
-            } else {
-                console.error(err);
-            }
-        })
-        .catch(err => {
-            console.error(err);
-        });
-};
-
+//displaying the full recipe using a modal and getting the information needed from meal
 const displayRecipe = (meal) => {
 
     let name = meal.strMeal;
     let image = meal.strMealThumb;
     let source = meal.strSource;
-    let video = meal.strYoutube;
+    // let video = meal.strYoutube; for future development
     let id = meal.idMeal
 
     let recipe = meal.strInstructions;
@@ -622,10 +668,12 @@ const displayRecipe = (meal) => {
 
     let instructions = $('<p>').append("<hr>" + recipe);
 
+    //to add all the ingredients to the grocery list using this button
     let addIngredientBtn = $('<button>').text('Select All').addClass('addList');
 
+    //button to add recipe to favourites list
     let addFavouriteBtn = $('<button>').text(' ').addClass('fave');
-    //check if this recipe is in the fav list and iff so add is-fav class
+    //check if this recipe is in the fav list and if so add is-fav class
     $(faveList).each((idx, item) => {
         item.idMeal === id ?
             addFavouriteBtn.addClass('is-fav') :
@@ -633,9 +681,10 @@ const displayRecipe = (meal) => {
     });
 
 
-
+    //to add a random drink with your recipe
     let pairWithDrinkBtn = $('<button>').text('Suggested Drink Pairing').addClass('drink-pairing');
 
+    //displaying the ingredients and measurments
     let ingredientList = $('<div>').addClass('ingredient-list')
         .append("Ingredients:")
         .append(addIngredientBtn, addFavouriteBtn);
@@ -653,12 +702,13 @@ const displayRecipe = (meal) => {
             .append(chkBoxItem)
             .append(ingredient[i])
 
-        .append(
-            $("<div style='display:inline-block'>")
-            .addClass('ingredient-measure')
-            .text(measure[i])
-        );
+            .append(
+                $("<div style='display:inline-block'>")
+                    .addClass('ingredient-measure')
+                    .text(measure[i])
+            );
 
+        //to check if individual ingredeients were added to the grocerylist
         //console.log(groceryList)
         $(groceryList).each((idx, item) => {
             if (ingredient[i] === (item.name || item)) {
@@ -672,7 +722,7 @@ const displayRecipe = (meal) => {
     }
 
 
-
+    //putting all the info in a modal display
     modalContent.append(link.append(pic), ingredientList, pairWithDrinkBtn, instructions);
 
     let modal = $('<div>').addClass('modal is-active').attr('id', 'recipeModal');
@@ -690,14 +740,16 @@ const displayRecipe = (meal) => {
 
     $('body').append(modal);
 
-    //listenForIngredientClicks();
     if ($('#left-column .ingredient-list').length) {
         $('#left-column').empty().text('refill');
     }
+
+    //grocerylist lisner and favourite list lis
     ingredientToGroceryListener();
     addFavourite(meal);
 }
 
+//creating the modal for the recipe using bulma classes
 const displayModal = (msg) => {
     // will display a pop up modal takes a string or an object containing a strings: 'head' and 'body'
     // and button string containing the buttons to display (ok) or (yes/no)
@@ -756,8 +808,9 @@ const displayModal = (msg) => {
     });
 };
 
+//checking if the meal was added to the favourite list
 const addFavourite = (meal) => {
-    $('.fave').click(function() {
+    $('.fave').click(function () {
 
         let removeFav = false;
         //if meal is in favelist remove it and update recipe modal
@@ -786,6 +839,7 @@ const addFavourite = (meal) => {
     })
 };
 
+//displaying the favourite reciepes when going to the favourite page
 const displayFavRecipes = () => {
     // if(faveList ===! ''){
     $('#searchOutput').empty();
@@ -793,20 +847,74 @@ const displayFavRecipes = () => {
     displayMeals(faveList, 2); // 3 per row with some spacing
 }
 
-$('#ingredientSearch').on('keypress', (e) => {
-    if (e.key === 'Enter') {
-        $('#searchBtn').click();
+//displaying the grocerylist from a pop out
+const displayGroceryList = () => {
+
+    // clear existing list
+    $('#grocerylist-list').empty();
+    $('#add-grocery-item').val('').css('opacity', '0').hide();
+
+    if (groceryList.length) {
+
+        for (let i = 0; i < groceryList.length; i++) {
+
+            //makes the grocery item into an object with a status for collected 
+            if (groceryList[i].status === undefined) {
+                let tmp = groceryList[i];
+                groceryList[i] = {
+                    name: tmp,
+                    status: 0
+                }
+            }
+
+            let chkBox = $('<input>').addClass('checkbox grocery-list-item').attr('type', 'checkbox').attr('id', i);
+            let label = $('<label>')
+                .addClass('grocery-list-item checkbox')
+                .attr('for', i)
+                .text(groceryList[i].name);
+
+            let itemOrder = 0;
+            if (groceryList[i].status) {
+                itemOrder = 2;
+                chkBox.attr('checked', '')
+            }
+
+            $('#grocerylist-list').append(
+                $("<div class='cont'>").append(chkBox, label).css('order', itemOrder)
+            );
+
+
+        }
+        let removeBtn = $('<button>')
+            .addClass('button is-danger is-small')
+            .text('Remove Collected')
+            .css({ 'position': 'fixed', 'bottom': '0', 'width': '250px' })
+        // .css('order', '3')
+        // .css('margin-top', 'auto');
+        $('#grocerylist-list').append(
+            $("<div class='div'>").text('Collected Items').css('order', '1'),
+            removeBtn
+        );
+
+    } else {
+        $('#grocerylist-list').append("EMPTY");
     }
-});
+};
 
-const logoHomeBtn = () => {
-    $('#header-logo').click(function() {
-        $('#ingredient-nav').click();
-    })
-}
-logoHomeBtn();
+//adding items to the grocery list in local storage
+const addGroceryItem = () => {
+    if ($('#add-grocery-item').val()) {
 
+        let item = $('#add-grocery-item').val();
+        groceryList.push(item);
+        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
+        displayGroceryList();
+    } else {
+        $('#add-grocery-item').val('').css('opacity', '0').hide();
+    }
+};
 
+//eventlisteners for the main nav bar
 document.addEventListener('click', (e) => {
 
     if ($('#add-grocery-item').css('opacity') == 1) {
@@ -882,110 +990,23 @@ document.addEventListener('click', (e) => {
 
     } else if (e.target.id === 'pop-modal-close') {
         $('#popModal').remove();
-    } else {
-        //DO NOTHING
-        //displayModal(e.target.id);
     }
 
 
 });
-const addLogoToIngSearch = () => {
-    $('#searchOutput').append($("<div id='LOGO'>").text(' '));
 
-};
-addLogoToIngSearch();
-
-$('#header-logo')
-    .empty()
-    .append("<img src='./assets/images/logo1.png'>")
-    .css("img{ height:80px;}")
-
-
-// ADD NAV BUTTONS TO LOWER RIGHT COLUMN
-const addRightCol = (elOut) => {
-
-    elOut ? null : elOut = $('#right-column');
-    elOut.empty();
-    /*
-        $('nav .nav-item').each((i, el) => {
-            //console.log(el)
-            $(el).clone().addClass('button is-info').appendTo(elOut);
-        });
-    */
-    $("<div class='nav-item button is-primary'>").text('Search Ingredients').attr('id', 'ingredient-nav').appendTo(elOut);
-    $("<div class='nav-item button is-info'>").text('Search Recipe').attr('id', 'recipe-nav').appendTo(elOut);
-    $("<div class='nav-item button is-purple'>").text('Random').attr('id', 'randoBtn').appendTo(elOut);
-    $("<div class='nav-item button is-warning'>").text('Grocery List').attr('id', 'grocery-nav').appendTo(elOut);
-
-
-};
-addRightCol();
-displayFavHomepge(faveList);
-
-const displayGroceryList = () => {
-
-    // clear existing list
-    $('#grocerylist-list').empty();
-    $('#add-grocery-item').val('').css('opacity', '0').hide();
-
-    if (groceryList.length) {
-
-        for (let i = 0; i < groceryList.length; i++) {
-
-            //makes the grocery item into an object with a status for collected 
-            if (groceryList[i].status === undefined) {
-                let tmp = groceryList[i];
-                groceryList[i] = {
-                    name: tmp,
-                    status: 0
-                }
-            }
-
-            let chkBox = $('<input>').addClass('checkbox grocery-list-item').attr('type', 'checkbox').attr('id', i);
-            let label = $('<label>')
-                .addClass('grocery-list-item checkbox')
-                .attr('for', i)
-                .text(groceryList[i].name);
-
-            let itemOrder = 0;
-            if (groceryList[i].status) {
-                itemOrder = 2;
-                chkBox.attr('checked', '')
-            }
-
-            $('#grocerylist-list').append(
-                $("<div class='cont'>").append(chkBox, label).css('order', itemOrder)
-            );
-
-
-        }
-        let removeBtn = $('<button>')
-            .addClass('button is-danger is-small')
-            .text('Remove Collected')
-            .css({ 'position': 'fixed', 'bottom': '0', 'width': '250px' })
-            // .css('order', '3')
-            // .css('margin-top', 'auto');
-        $('#grocerylist-list').append(
-            $("<div class='div'>").text('Collected Items').css('order', '1'),
-            removeBtn
-        );
-
-    } else {
-        $('#grocerylist-list').append("EMPTY");
+$('#ingredientSearch').on('keypress', (e) => {
+    if (e.key === 'Enter') {
+        $('#searchBtn').click();
     }
-};
-const addGroceryItem = () => {
-    if ($('#add-grocery-item').val()) {
+});
 
-        let item = $('#add-grocery-item').val();
-        groceryList.push(item);
-        localStorage.setItem("grocerylist", JSON.stringify(groceryList));
-        displayGroceryList();
-    } else {
-        $('#add-grocery-item').val('').css('opacity', '0').hide();
-    }
-};
+//making the logo a homebutton
+$('#header-logo').click(function () {
+    $('#ingredient-nav').click();
+})
 
+//adding ingredient that was typed out
 $('#add-grocery-item').on('keypress', (e) => {
     if (e.key === 'Enter') {
         addGroceryItem();
@@ -1002,6 +1023,7 @@ $('#grocery-list-remove').on('click', (e) => {
 
 });
 
+//gorcery list event listener within the list itself
 $('#grocerylist-list').on('click', 'input.checkbox', (e) => {
 
     let idx = $(e.target).attr('id');
@@ -1026,6 +1048,7 @@ $('#grocerylist-list').on('click', 'input.checkbox', (e) => {
     localStorage.setItem("grocerylist", JSON.stringify(groceryList));
 });
 
+//deleting items from grocery list event listener
 $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
 
     $("div.cont").each((idx, el) => {
@@ -1037,7 +1060,7 @@ $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
         }
 
     });
-
+    //removing ingredeient from the array
     for (let i = 0; i < groceryList.length; i++) {
 
         if (groceryList[i] === '') {
@@ -1046,7 +1069,7 @@ $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
         }
 
     };
-
+    //updating the localstorage
     localStorage.setItem("grocerylist", JSON.stringify(groceryList));
     outputIngredients(lastMeal);
 

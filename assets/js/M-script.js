@@ -20,6 +20,18 @@
 
 }*/
 
+// const listenForIngredientClicks = () => {
+
+//     $('.addList').click(function () {
+//         displayModal('add all to list!!')
+//         $.each($("input[class='food']"), function () {
+//             // groceryList.push($(this).val());
+//             this.checked = true;
+//         });
+//     })
+
+// };
+
 /*
 const listenForIngredientClicks = () => {
 
