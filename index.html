@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pantry Remover : clear your cupboards!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- WE EACH GET OUR OWN STYLESHEETS SO NO CONFLICTS-->
+    <!-- <link rel="stylesheet" href="./assets/css/M-style.css"> -->
+    <!-- <link rel="stylesheet" href="./assets/css/R-style.css"> -->
+    <!-- <link rel="stylesheet" href="./assets/css/L-style.css"> -->
+    <!-- <link rel="stylesheet" href="./assets/css/D-style.css"> -->
+    <!-- WE CAN MERGE THEM ALL IN THE END OR LEAVE SEPERATE-->
+
+</head>
+
+<body>
+    <header>
+        <div id="header-logo">
+            LOGO
+        </div>
+        <nav>
+            <span class='nav-item' id='ingredient-nav'>
+                        Search
+                    </span>
+            <span class='nav-item' id='randoBtn'>
+                        Random
+                    </span>
+            <span class='nav-item' id='fav-nav'>
+                        Favourite
+                    </span>
+            <span class='nav-item' id='grocery-nav'>
+                        Grocery List
+                    </span>
+        </nav>
+    </header>
+
+    <!-- SEARCH RESULTS / MAIN CONTENT -->
+
+    <main id='main'>
+        <!-- DUMMY DATA GOES HERE -->
+        <!-- REAL DATA WILL BE GENERATED DYNAMICALLY THROUGH API CALLS-->
+
+        <div id='searchBar' class="container">
+            <div class="flex-container">
+                <input id="ingredientSearch" class="input is-primary" type="text" placeholder="list your ingredient(s)">
+                <button id="searchBtn" class="button is-primary">
+                    Search
+                  </button>
+            </div>
+        </div>
+
+        <div id="searchOutput" class='container'>
+            <!-- DATA GOES HERE -->
+            <!-- DATA WILL BE GENERATED DYNAMICALLY THROUGH API CALLS-->
+            <!-- CLEAR CONTENT::  $('#searchOutput').empty()   -->
+            <!-- INSERT DATA WITH::  $('#searchOutput').append( createdElement )   -->
+        </div>
+
+
+        <!-- END OF DUMMY DATA -->
+    </main>
+
+    <!-- JUST A BORDER ELEMENT -->
+    <div id='main-col-div'>
+        line
+    </div>
+    <!-- END OF BORDER ELEMENT -->
+
+    <!-- END OF RESULTS / MAIN CONTENT -->
+
+
+
+    <!-- EXTRA INFO COLUMNS -->
+
+    <section id='info-columns'>
+
+        <!-- LEFT COLUMN -->
+        <div id='left-column'>
+
+
+
+        </div>
+
+        <!-- END OF LEFT COLUMN -->
+
+        <!-- ANOTHER BORDER ELEMENT -->
+        <div id='mid-col-div'>
+            line
+        </div>
+        <!-- END OF BORDER ELEMENT -->
+
+        <!-- RIGHT COLUMN -->
+
+        <div id='right-column'>
+
+
+
+        </div>
+
+        <!-- END OF RIGHT COLUMN -->
+
+    </section>
+
+    <!-- END OF EXTRA INFO COLUMNS-->
+
+
+
+    <!-- FOOTER -->
+    <footer id='footer'>
+        MADE WITH
+        <div class='love'> &nbsp; </div> by TEAM AHSOKA
+    </footer>
+
+
+    <!-- SIDEBAR GROCERY LIST -->
+    <!-- THIS WILL BE POSITIONED WITH CSS AND SHOULD GO AT THE END -->
+    <!-- HOPEFULLY THIS STOPS IT FROM MOVING OTHER ELEMENTS AROUND-->
+    <div id="grocerylist" class="grocerylist">
+
+
+        <button id='grocery-list-remove' class='button is-danger is-small'>➖</button>
+        <button id='grocery-list-add' class='button is-success is-small'>➕</button>
+
+        <input class="input is-info" type='text' id='add-grocery-item'>
+
+
+        <button id='grocery-list-close' class='button is-warning is-small' onclick="closeNav()">X</button>
+        <div id='grocerylist-list'></div>
+
+    </div>
+    <!-- END OF SIDEBAR GROCERY LIST -->
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!-- WE EACH GET OUR OWN SCRIPTS SO NO CONFLICTS-->
+    <!-- <script src="./assets/js/M-script.js"></script> -->
+    <script src="./assets/js/R-script.js"></script>
+    <!-- <script src="./assets/js/L-script.js"></script> -->
+    <!-- <script src="./assets/js/D-script.js"></script> -->
+    <!-- WE CAN MERGE THEM ALL IN THE END OR LEAVE SEPERATE-->
+
+    <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>
