@@ -63,6 +63,7 @@ nav {
     height: 80%;
     margin-top: 2rem;
     background-image: url('../images/logo1.png');
+    background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -218,6 +219,7 @@ input.checkbox {
 }
 
 .is-purple {
+    color: #FFF;
     background-color: rgb(145, 92, 206);
     border-color: transparent;
 }
@@ -366,13 +368,15 @@ button.favMealName {
 }
 
 
-/* #grocerylist label {
+/* auto indents long named multi line grocery items */
+
+#grocerylist label {
     padding: 0 0 0 .3rem;
     width: 100%;
     color: #333;
     padding-left: 2.1rem;
     text-indent: -2.1rem;
-} */
+}
 
 input.grocery-list-item {
     opacity: 0;
@@ -449,15 +453,51 @@ label.grocery-list-item::before {
 }
 
 
+/** Contrast in button text for accessability */
+
+.button.is-primary,
+.button.is-info,
+.button.is-warning,
+.button.is-pink {
+    color: #1F1F1F;
+}
+
+.button.is-purple {
+    color: #000;
+}
+
+
+/* */
+
+
 /* Responsive styling */
 
-@media screen and (max-width: 980px) {
-    header,
-    #main,
-    #main-col-div,
-    #info-columns,
-    #footer {
-        max-width: 75vh;
+
+/* for better formatting in a landscape aspect ratio */
+
+@media screen and (max-height: 550px) {
+     :root {
+        font-size: 89%;
+    }
+    #searchBar.container * {
+        font-size: .6rem;
+    }
+    #LOGO {
+        margin-top: .2rem;
+    }
+    .nav-item.button,
+    button.favMealName {
+        font-size: .6rem !important;
+        margin: .1rem .1rem !important;
+    }
+}
+
+@media screen and (min-width: 980px) {
+    header nav .nav-item {
+        font-size: 1rem;
+    }
+    header nav .nav-item:last-child {
+        margin-right: 1rem;
     }
 }
 
