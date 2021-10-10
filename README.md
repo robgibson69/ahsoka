@@ -24,7 +24,7 @@ We used:
       *  https://rapidapi.com/thecocktaildb/api/the-cocktail-db/
 
 ## Deployed Link
-here is the link to the deployed project https://maks-pixel.github.io/ahsoka/
+here is the link to the deployed project https://robgibson69.github.io/ahsoka/
 
 ## File links
 to open [index.html](index.html) file to view the code
