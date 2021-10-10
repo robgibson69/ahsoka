@@ -13,15 +13,15 @@ As a person who goes shopping I want an interactive list i can use to help me ke
 
 ## Technologies 
 We used: 
-    HTML 
-    CSS 
-    Bulma 
-    Javascript
-    Jquery
-    RapidAPI with two APIS
-        https://rapidapi.com/thecocktaildb/api/themealdb/
+   * HTML 
+   * CSS 
+   * Bulma 
+   * Javascript
+   * Jquery
+   * RapidAPI with two APIS
+      *  https://rapidapi.com/thecocktaildb/api/themealdb/
         
-        https://rapidapi.com/thecocktaildb/api/the-cocktail-db/
+      *  https://rapidapi.com/thecocktaildb/api/the-cocktail-db/
 
 ## Deployed Link
 here is the link to the deployed project https://maks-pixel.github.io/ahsoka/
