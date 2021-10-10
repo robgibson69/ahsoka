@@ -102,6 +102,7 @@ main::-webkit-scrollbar {
     overflow: hidden;
 }
 
+/* searchbar desohn */
 #searchBar.container {
     margin: 0 auto;
 }
@@ -110,6 +111,7 @@ main::-webkit-scrollbar {
     margin-left: .3rem;
 }
 
+/* search result area */
 #searchOutput {
     display: flex;
     flex-wrap: wrap;
@@ -118,6 +120,7 @@ main::-webkit-scrollbar {
     height: 80%;
 }
 
+/* meal recipe popout in modal */
 .meal-container {
     margin-top: 1rem;
     background-repeat: no-repeat;
@@ -144,6 +147,7 @@ main::-webkit-scrollbar {
     z-index: -2;
 }
 
+/* checklist button for ingredients */
 .ingredient-list #select-all-btn {
     margin-left: 1rem;
 }
@@ -171,6 +175,7 @@ input.checkbox {
     color: #363636;
 }
 
+/* bottom columns in main page */
 #left-column,
 #right-column {
     flex: 1 1 50%;
