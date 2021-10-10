@@ -9,11 +9,97 @@
     display: flex;
 }
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: rgb(56, 56, 116);
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
 header {
     background-color: lightblue;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 .2rem;
+    flex: 0 1 auto;
+}
+
+
+/* Navigation style  */
+
+#header-logo img {
+    padding-top: .2rem;
+    height: 40px;
+}
+
+nav {
+    width: moz-fit-content;
+    width: fit-content;
+    float: right;
+    text-align: right;
+}
+
+.nav-item {
+    margin: 0 .2rem;
+    cursor: pointer;
+    font-size: .7rem;
+}
+
+.nav-item:hover {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#LOGO {
+    max-width: 600px;
+    width: 100%;
+    /*   max-height: 800px; */
+    height: 80%;
+    margin-top: 2rem;
+    background-image: url('../images/logo1.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+main {
+    text-align: center;
+    height: 100%;
+    color: black;
+    padding-top: .2rem;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    flex: 1 0 32%;
+    /*fill % of space or grow*/
+}
+
+main::-webkit-scrollbar {
+    display: none;
+}
+
+#main-col-div {
+    margin: 0 auto;
+    width: 98%;
+    height: .3rem;
+    background-color: #333;
+    color: #333;
+    overflow: hidden;
+}
+
+#mid-col-div {
+    width: .3rem;
+    height: 96%;
+    margin-top: .3rem;
+    background-color: #333;
+    color: #333;
+    overflow: hidden;
 }
 
 #searchBar.container {
@@ -74,86 +160,15 @@ input.checkbox {
     line-break: strict;
 }
 
-
-/***** ALL NEW BELOW HERE *****/
-
-body {
-    background-color: rgb(56, 56, 116);
+#info-columns {
     display: flex;
-    flex-flow: column;
     height: 100%;
-}
-
-header {
-    padding: 0 .2rem;
-}
-
-#header-logo img {
-    padding-top: .2rem;
-    height: 40px;
-}
-
-nav {
-    width: moz-fit-content;
-    width: fit-content;
-    float: right;
-    text-align: right;
-}
-
-.nav-item {
-    margin: 0 .2rem;
-    cursor: pointer;
-    font-size: .7rem;
-}
-
-.nav-item:hover {
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-#left-column .checkbox:hover {
-    color: blanchedalmond;
+    flex: 0 1 20%;
+    /*fill 20% space or shrink/ no grow */
 }
 
 #recipeModal .checkbox:hover {
     color: #363636;
-}
-
-header,
-#main,
-#main-col-div,
-#info-columns,
-#footer {
-    width: 100%;
-    max-width: 75vh;
-    margin: 0 auto;
-}
-
-main {
-    text-align: center;
-    height: 100%;
-    color: black;
-    padding-top: .2rem;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-main::-webkit-scrollbar {
-    display: none;
-}
-
-#main-col-div {
-    margin: 0 auto;
-    width: 98%;
-    height: .3rem;
-    background-color: #333;
-    color: #333;
-    overflow: hidden;
-}
-
-#info-columns {
-    display: flex;
-    height: 100%;
 }
 
 #left-column,
@@ -174,20 +189,124 @@ main::-webkit-scrollbar {
     display: none;
 }
 
-#mid-col-div {
-    width: .3rem;
-    height: 96%;
-    margin-top: .3rem;
-    background-color: #333;
-    color: #333;
-    overflow: hidden;
+#right-column .nav-item {
+    margin: .3rem .2rem;
+    font-size: 1rem;
+    width: 100%
+}
+
+#left-column .checkbox:hover {
+    color: blanchedalmond;
+}
+
+#right-column .nav-item:hover {
+    text-shadow: none;
+}
+
+#right-column #fav-nav:hover {
+    background-image: url('../images/favicon.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+/* button styling */
+
+.is-pink {
+    background-color: rgb(222, 163, 226);
+    border-color: transparent;
+}
+
+.is-purple {
+    color: #FFF;
+    background-color: rgb(145, 92, 206);
+    border-color: transparent;
 }
 
 footer {
     background-color: cornflowerblue;
     position: static;
     padding: 0 .3rem;
+    flex: 0 1 auto;
+    /*fit to content*/
 }
+
+header,
+#main-col-div,
+#mid-col-div,
+footer {
+    border-radius: .23rem;
+}
+
+header,
+#main,
+#main-col-div,
+#info-columns,
+#footer {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+/* favelist button styling */
+
+.favMealName {
+    margin: .3rem .2rem;
+}
+
+
+/* ADD SOME LOVE */
+
+.love {
+    background-image: url('../images/favicon.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 1rem;
+}
+
+button.fave {
+    background-image: url('../images/favicon-blank.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1.6rem;
+    height: 1.5rem;
+    float: right;
+    position: relative;
+    top: .1rem;
+    right: 1rem;
+    border: none;
+    background-color: transparent;
+}
+
+button.fave.is-fav {
+    background-image: url('../images/favicon.png');
+}
+
+button.favMealName {
+    width: 95%;
+    height: auto;
+    white-space: pre-wrap;
+    /* CSS3 */
+    white-space: -moz-pre-wrap;
+    /* Firefox */
+    white-space: -pre-wrap;
+    /* Opera <7 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    /* IE */
+    background-image: url('../images/favicon.png');
+    background-position: 97%;
+    background-repeat: no-repeat;
+    background-size: 30px;
+}
+
+
+/* gocery list */
 
 
 /* SIDE BAR STYLING */
@@ -210,10 +329,10 @@ footer {
     /* Black*/
     overflow-x: hidden;
     /* Disable horizontal scroll */
-    padding-top: 60px;
-    /* Place content 60px from the top */
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidenav */
+    padding-top: 0;
+    background-color: rgb(245, 240, 167);
 }
 
 #grocerylist label {
@@ -221,11 +340,11 @@ footer {
     font-size: 25px;
     color: white;
     display: block;
-}
-
-#grocerylist {
-    padding-top: 0;
-    background-color: rgb(245, 240, 167);
+    padding: 0 0 0 .3rem;
+    width: 100%;
+    color: #333;
+    padding-left: 2.1rem;
+    text-indent: -2.1rem;
 }
 
 #grocery-list-close {
@@ -248,10 +367,15 @@ footer {
     margin-top: .4rem;
 }
 
+
+/* auto indents long named multi line grocery items */
+
 #grocerylist label {
     padding: 0 0 0 .3rem;
     width: 100%;
     color: #333;
+    padding-left: 2.1rem;
+    text-indent: -2.1rem;
 }
 
 input.grocery-list-item {
@@ -297,93 +421,6 @@ label.grocery-list-item::before {
 }
 
 
-/****** END OF GROCERY LIST */
-
-
-/*** Add NAV to Right Column */
-
-#right-column .nav-item {
-    margin: .3rem .2rem;
-    font-size: 1rem;
-    width: 100%
-}
-
-#right-column .nav-item:hover {
-    text-shadow: none;
-}
-
-#right-column #fav-nav:hover {
-    background-image: url('../images/favicon.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.is-pink {
-    background-color: rgb(222, 163, 226);
-    border-color: transparent;
-}
-
-.is-purple {
-    background-color: rgb(145, 92, 206);
-    border-color: transparent;
-}
-
-
-/*** END OF NAV TO RIGHT COLUMN */
-
-
-/* ADD SOME LOVE */
-
-.ingredient-list button.fave {
-    background-image: url('../images/favicon-blank.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1rem;
-    height: 1rem;
-    border: none;
-    background-color: transparent;
-}
-
-.ingredient-list button.fave.is-fav {
-    background-image: url('../images/favicon.png');
-}
-
-.favMealName {
-    margin: .3rem .2rem;
-}
-
-.love {
-    background-image: url('../images/favicon.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 1rem;
-}
-
-#LOGO {
-    max-width: 600px;
-    width: 100%;
-    /*   max-height: 800px; */
-    height: 80%;
-    margin-top: 2rem;
-    background-image: url('../images/logo1.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-header,
-#main-col-div,
-#mid-col-div,
-footer {
-    border-radius: .23rem;
-}
-
-
-/**
-
 /*** POP MODAL STYLING ***/
 
 #popModal footer.modal-card-foot {
@@ -391,82 +428,18 @@ footer {
 }
 
 
-/***
+/* Modal styling */
 
-
-/***  FAV ICON IN RECIPE MODAL CARD */
-
-
-/** COMMING SOON
-
-/** END OF FAV RECIPE ICON
-
-/* BELOW HERE IS FLEXBOX SETTINGS FOR MAKING THE PAGE TAKE UP THE VERTICAL CONTENT OF THE SCREEN  */
-
-html,
-body {
-    height: 100%;
-    margin: 0;
+.modal-card-title {
+    flex-shrink: 1;
 }
-
-body {
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-}
-
-header {
-    flex: 0 1 auto;
-    /* The above is shorthand for:
-  flex-grow: 0,
-  flex-shrink: 1,
-  flex-basis: auto
-  */
-    /*will shrink but fit to content*/
-}
-
-main {
-    flex: 1 0 32%;
-    /*fill % of space or grow*/
-}
-
-#info-columns {
-    flex: 0 1 20%;
-    /*fill 20% space or shrink/ no grow */
-}
-
-footer {
-    flex: 0 1 auto;
-    /*fit to content*/
-}
-
-button.favMealName {
-    width: 95%;
-    height: auto;
-    white-space: pre-wrap;
-    /* CSS3 */
-    white-space: -moz-pre-wrap;
-    /* Firefox */
-    white-space: -pre-wrap;
-    /* Opera <7 */
-    white-space: -o-pre-wrap;
-    /* Opera 7 */
-    word-wrap: break-word;
-    /* IE */
-    background-image: url('../images/favicon.png');
-    background-position: 97%;
-    background-repeat: no-repeat;
-    background-size: 30px;
-}
-
-
-/***  RECIPE MODAL CARD */
 
 #recipeModal .ingredient-list button {
-    margin-left: 1.5rem;
+    margin-left: 1.1rem;
 }
 
-#recipeModal img {
+#recipeModal img,
+#drinkDetails img {
     width: 45%;
     margin-left: 0%;
     display: inline-block;
@@ -478,11 +451,78 @@ button.favMealName {
     margin-left: .5rem;
 }
 
-button.drink-pairing {
-    float: right;
+#recipeModal .ingredient-list {
+    margin-left: .5rem;
+    width: 53%;
 }
 
 
-/** COMMING SOON FAV ICON
+/** Contrast in button text for accessability */
 
-/** END OF RECIPE MODAL ***/
+.button.is-primary,
+.button.is-info,
+.button.is-warning,
+.button.is-pink {
+    color: #1F1F1F;
+}
+
+.button.is-purple {
+    color: #000;
+}
+
+
+/* */
+
+
+/* Responsive styling */
+
+
+/* for better formatting in a landscape aspect ratio */
+
+@media screen and (max-height: 550px) {
+     :root {
+        font-size: 89%;
+    }
+    #searchBar.container * {
+        font-size: .6rem;
+    }
+    #LOGO {
+        margin-top: .2rem;
+    }
+    .nav-item.button,
+    button.favMealName {
+        font-size: .6rem !important;
+        margin: .1rem .1rem !important;
+    }
+}
+
+@media screen and (min-width: 980px) {
+    header nav .nav-item {
+        font-size: 1rem;
+    }
+    header nav .nav-item:last-child {
+        margin-right: 1rem;
+    }
+}
+
+
+/* smaller screens no room for pic and ingredients side by side*/
+
+@media screen and (max-width: 550px) {
+    #recipeModal .ingredient-list,
+    #drinkModal .ingredient-list {
+        /* add space on the top of ingredients */
+        margin-top: .3rem;
+        /* make wider to take up it's own line */
+        width: 90%;
+    }
+}
+
+
+/* smallest of screens need smaller font size*/
+
+@media screen and (max-width: 425px) {
+     :root {
+        font-size: 89%;
+    }
+}
