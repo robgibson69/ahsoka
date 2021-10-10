@@ -20,6 +20,7 @@ We used:
     Jquery
     RapidAPI with two APIS
         https://rapidapi.com/thecocktaildb/api/themealdb/
+        
         https://rapidapi.com/thecocktaildb/api/the-cocktail-db/
 
 ## Deployed Link
