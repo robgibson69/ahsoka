@@ -146,12 +146,12 @@ const displayFavHomepge = () => {
     //goes through favourite list to create buttons
     for (let i = 0; i < faveList.length; i++) {
         let favMealName = faveList[i].strMeal
-        // console.log(faveList[i]);
+            // console.log(faveList[i]);
         let fave = $("<button>").text(favMealName).attr('data-idx', i).addClass('favMealName button is-pink');
         $('#left-column').append(fave);
     };
     //display meal on click
-    $('.favMealName').click(function (e) {
+    $('.favMealName').click(function(e) {
         //    console.log(faveList[i]);
         displayRecipe(faveList[$(e.target).attr('data-idx')]);
     });
@@ -191,12 +191,12 @@ const searchByIngredient = () => {
     searchString = encodeURI(searchString);
     //getting API info
     fetch("https://themealdb.p.rapidapi.com/filter.php?i=" + searchString, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "themealdb.p.rapidapi.com",
-            "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-        }
-    })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
         //checking doe meal data
         .then(response => {
             if (response.ok) {
@@ -236,12 +236,12 @@ const searchRandomMeal = () => {
     /***** */
 
     fetch("https://themealdb.p.rapidapi.com/random.php", {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "themealdb.p.rapidapi.com",
-            "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-        }
-    })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
         .then(response => {
             if (response.ok) {
                 response.json()
@@ -276,12 +276,12 @@ const fetchRecipe = (idNum) => {
     if (idNum !== '') {
 
         fetch("https://themealdb.p.rapidapi.com/lookup.php?i=" + idNum, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-            }
-        })
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                    "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+                }
+            })
             .then(response => {
                 if (response.ok) {
                     response.json()
@@ -448,12 +448,12 @@ const searchByRecipe = () => {
     }
 
     fetch("https://themealdb.p.rapidapi.com/search.php?s=" + searchString, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "themealdb.p.rapidapi.com",
-            "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-        }
-    })
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+            }
+        })
         .then(response => {
             if (response.ok) {
                 response.json()
@@ -477,7 +477,6 @@ const searchByRecipe = () => {
         });
 };
 
-
 //calling API for ingredientsusing the IDNum that matches 
 const fetchIngredients = (idNum) => {
 
@@ -494,12 +493,12 @@ const fetchIngredients = (idNum) => {
     if (idNum !== '') {
 
         fetch("https://themealdb.p.rapidapi.com/lookup.php?i=" + idNum, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "themealdb.p.rapidapi.com",
-                "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
-            }
-        })
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "themealdb.p.rapidapi.com",
+                    "x-rapidapi-key": "c5d39432acmsh9d55200b1fddc5ap16e8f6jsn9b22759a0fe2"
+                }
+            })
             .then(response => {
                 if (response.ok) {
                     response.json()
@@ -556,11 +555,11 @@ const outputIngredients = (meal) => {
             .append(chkBoxItem)
             .append(ingredient[i])
 
-            .append(
-                $("<div style='display:inline-block'>")
-                    .addClass('ingredient-measure')
-                    .text(measure[i])
-            );
+        .append(
+            $("<div style='display:inline-block'>")
+            .addClass('ingredient-measure')
+            .text(measure[i])
+        );
 
         //console.log(groceryList)
         $(groceryList).each((idx, item) => {
@@ -590,9 +589,9 @@ const outputIngredients = (meal) => {
 //checking for ingredient clicks to add to gorcery list using local storage 
 const ingredientToGroceryListener = () => {
 
-    $('.addList').click(function () {
+    $('.addList').click(function() {
         // displayModal('add all to list!!')
-        $.each($(".ingredient-checklist-holder input.checkbox"), function () {
+        $.each($(".ingredient-checklist-holder input.checkbox"), function() {
 
             if (!this.checked) {
                 this.checked = true;
@@ -671,6 +670,11 @@ const ingredientToGroceryListener = () => {
     });
 };
 
+// dermine if a string is more then white space / for recipe ingredient
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+
 //displaying the full recipe using a modal and getting the information needed from meal
 const displayRecipe = (meal) => {
 
@@ -689,7 +693,7 @@ const displayRecipe = (meal) => {
     for (let c = 0; c < 2; c++) { //run a loop twice// once for ingredients and once for measure
         c ? opt = 'Measure' : opt = 'Ingredient' // when c is 1 opt = Measure/when c is 0 opt = ingredient
         for (let i = 1; i < 21; i++) {
-            if (meal['str' + opt + i] !== "") {
+            if (!isBlank(meal['str' + opt + i])) {
                 c ? measure.push(meal['str' + opt + i]) : ingredient.push(meal['str' + opt + i]);
                 // on first run builds ingredient aray on second it buids the measure array
             }
@@ -739,11 +743,11 @@ const displayRecipe = (meal) => {
             .append(chkBoxItem)
             .append(ingredient[i])
 
-            .append(
-                $("<div style='display:inline-block'>")
-                    .addClass('ingredient-measure')
-                    .text(measure[i])
-            );
+        .append(
+            $("<div style='display:inline-block'>")
+            .addClass('ingredient-measure')
+            .text(measure[i])
+        );
 
         //to check if individual ingredeients were added to the grocerylist
         //console.log(groceryList)
@@ -920,18 +924,11 @@ const displayCocktails = (myDrinks) => {
 
     displayModal({ head: myDrinks[0].strDrink, body: modalDrinkDetails, button: 'alert' });
 
-    $('[id^="drink-modal-close"]').click(function() {
-        //alert("Hello");
-
-        $('#drinkModal').remove();
-        $()
-    })
-
 };
 
 //checking if the meal was added to the favourite list
 const addFavourite = (meal) => {
-    $('.fave').click(function () {
+    $('.fave').click(function() {
 
         let removeFav = false;
         //if meal is in favelist remove it and update recipe modal
@@ -965,7 +962,7 @@ const displayFavRecipes = () => {
     // if(faveList ===! ''){
     $('#searchOutput').empty();
     $('#searchOutput').append($('<h2>').text('Favorite Recipes').css('width', '100%'));
-    displayMeals(faveList, 2); // 2 per row with some spacing
+    displayMeals(faveList, 2); // 2 per row with some spacing // function no longer accepts a size variable
 }
 
 //displaying the grocerylist from a pop out
@@ -997,21 +994,19 @@ const displayGroceryList = () => {
             let itemOrder = 0;
             if (groceryList[i].status) {
                 itemOrder = 2;
-                chkBox.attr('checked', '')
+                chkBox.prop('checked', true)
             }
 
             $('#grocerylist-list').append(
                 $("<div class='cont'>").append(chkBox, label).css('order', itemOrder)
             );
 
-
         }
         let removeBtn = $('<button>')
             .addClass('button is-danger is-small')
             .text('Remove Collected')
             .css({ 'position': 'fixed', 'bottom': '0', 'width': '250px' })
-        // .css('order', '3')
-        // .css('margin-top', 'auto');
+
         $('#grocerylist-list').append(
             $("<div class='div'>").text('Collected Items').css('order', '1'),
             removeBtn
@@ -1130,7 +1125,7 @@ $('#ingredientSearch').on('keypress', (e) => {
 });
 
 //making the logo a homebutton
-$('#header-logo').click(function () {
+$('#header-logo').click(function() {
     $('#ingredient-nav').click();
 })
 
@@ -1199,7 +1194,9 @@ $('#grocerylist-list').on('click', 'button.is-danger', (e) => {
     };
     //updating the localstorage
     localStorage.setItem("grocerylist", JSON.stringify(groceryList));
-    outputIngredients(lastMeal);
+    if ($('#left-column .ingredient-list').length) {
+        outputIngredients(lastMeal);
+    }
 
 });
 

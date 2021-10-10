@@ -20,7 +20,6 @@ body {
     display: flex;
     flex-flow: column;
     height: 100%;
-    
 }
 
 header {
@@ -32,7 +31,9 @@ header {
     flex: 0 1 auto;
 }
 
+
 /* Navigation style  */
+
 #header-logo img {
     padding-top: .2rem;
     height: 40px;
@@ -62,6 +63,7 @@ nav {
     height: 80%;
     margin-top: 2rem;
     background-image: url('../images/logo1.png');
+    background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -208,6 +210,7 @@ input.checkbox {
     background-repeat: no-repeat;
 }
 
+
 /* button styling */
 
 .is-pink {
@@ -216,6 +219,7 @@ input.checkbox {
 }
 
 .is-purple {
+    color: #FFF;
     background-color: rgb(145, 92, 206);
     border-color: transparent;
 }
@@ -246,11 +250,14 @@ header,
 
 
 /* favelist button styling */
+
 .favMealName {
     margin: .3rem .2rem;
 }
 
+
 /* ADD SOME LOVE */
+
 .love {
     background-image: url('../images/favicon.png');
     background-position: center;
@@ -298,7 +305,10 @@ button.favMealName {
     background-size: 30px;
 }
 
+
 /* gocery list */
+
+
 /* SIDE BAR STYLING */
 
 #grocerylist {
@@ -337,7 +347,6 @@ button.favMealName {
     text-indent: -2.1rem;
 }
 
-
 #grocery-list-close {
     float: right;
     margin: .2rem;
@@ -358,13 +367,16 @@ button.favMealName {
     margin-top: .4rem;
 }
 
-/* #grocerylist label {
+
+/* auto indents long named multi line grocery items */
+
+#grocerylist label {
     padding: 0 0 0 .3rem;
     width: 100%;
     color: #333;
     padding-left: 2.1rem;
     text-indent: -2.1rem;
-} */
+}
 
 input.grocery-list-item {
     opacity: 0;
@@ -408,13 +420,20 @@ label.grocery-list-item::before {
     transition: all .4s;
 }
 
+
 /*** POP MODAL STYLING ***/
 
 #popModal footer.modal-card-foot {
     justify-content: flex-end;
 }
 
+
 /* Modal styling */
+
+.modal-card-title {
+    flex-shrink: 1;
+}
+
 #recipeModal .ingredient-list button {
     margin-left: 1.1rem;
 }
@@ -437,25 +456,70 @@ label.grocery-list-item::before {
     width: 53%;
 }
 
+
+/** Contrast in button text for accessability */
+
+.button.is-primary,
+.button.is-info,
+.button.is-warning,
+.button.is-pink {
+    color: #1F1F1F;
+}
+
+.button.is-purple {
+    color: #000;
+}
+
+
+/* */
+
+
 /* Responsive styling */
-@media screen and (max-width: 980px){
-    header,
-    #main,
-    #main-col-div,
-    #info-columns,
-    #footer {
-        max-width: 75vh; 
+
+
+/* for better formatting in a landscape aspect ratio */
+
+@media screen and (max-height: 550px) {
+     :root {
+        font-size: 89%;
+    }
+    #searchBar.container * {
+        font-size: .6rem;
+    }
+    #LOGO {
+        margin-top: .2rem;
+    }
+    .nav-item.button,
+    button.favMealName {
+        font-size: .6rem !important;
+        margin: .1rem .1rem !important;
     }
 }
 
-/* smallest of screens need smaller font size*/
+@media screen and (min-width: 980px) {
+    header nav .nav-item {
+        font-size: 1rem;
+    }
+    header nav .nav-item:last-child {
+        margin-right: 1rem;
+    }
+}
+
+
+/* smaller screens no room for pic and ingredients side by side*/
+
 @media screen and (max-width: 550px) {
     #recipeModal .ingredient-list,
     #drinkModal .ingredient-list {
+        /* add space on the top of ingredients */
         margin-top: .3rem;
+        /* make wider to take up it's own line */
         width: 90%;
     }
 }
+
+
+/* smallest of screens need smaller font size*/
 
 @media screen and (max-width: 425px) {
      :root {
