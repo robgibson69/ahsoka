@@ -1,5 +1,5 @@
 /* FOR TESTING PURPOSES SO API CALL DO NOT NEED TO BE MADE EVERY TIME */
-let makeAPICalls = false; //switch to true to make API calls
+let makeAPICalls = true; //switch to true to make API calls
 var groceryList = JSON.parse(localStorage.getItem("grocerylist")) || [];
 var faveList = JSON.parse(localStorage.getItem("favourites")) || [];
 var lastMeal = {};
